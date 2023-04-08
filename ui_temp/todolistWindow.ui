@@ -29,7 +29,7 @@
    <string>Dialog</string>
   </property>
   <property name="autoFillBackground">
-   <bool>true</bool>
+   <bool>false</bool>
   </property>
   <property name="styleSheet">
    <string notr="true">*{
@@ -87,6 +87,62 @@
       <width>42</width>
       <height>42</height>
      </rect>
+    </property>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>42</width>
+       <height>42</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>logo_circle.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="btn_submit_2">
+    <property name="geometry">
+     <rect>
+      <x>6</x>
+      <y>14</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	padding: 5px 10px;
+	border-radius: 15px;
+	background: #3C6255;
+	color: #F7F3D7;
+	height: 40px;
+	width: 243px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	text-align: left;
+}
+
+QPushButton:hover {
+    background-color: #23493C;
+}</string>
+    </property>
+    <property name="text">
+     <string>&lt; Kembali</string>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>

@@ -20,7 +20,7 @@ class Ui_ToDoListWindow(object):
         sizePolicy.setHeightForWidth(ToDoListWindow.sizePolicy().hasHeightForWidth())
         ToDoListWindow.setSizePolicy(sizePolicy)
         ToDoListWindow.setMinimumSize(QtCore.QSize(0, 0))
-        ToDoListWindow.setAutoFillBackground(True)
+        ToDoListWindow.setAutoFillBackground(False)
         ToDoListWindow.setStyleSheet("*{\n"
 "    border: none;\n"
 "    background-color: transparent;\n"
@@ -55,6 +55,33 @@ class Ui_ToDoListWindow(object):
         self.frame_logo = QtWidgets.QFrame(parent=self.header)
         self.frame_logo.setGeometry(QtCore.QRect(459, 9, 42, 42))
         self.frame_logo.setObjectName("frame_logo")
+        self.label = QtWidgets.QLabel(parent=self.frame_logo)
+        self.label.setGeometry(QtCore.QRect(0, 0, 42, 42))
+        self.label.setText("")
+        self.label.setPixmap(QtGui.QPixmap("logo_circle.png"))
+        self.label.setScaledContents(True)
+        self.label.setObjectName("label")
+        self.btn_submit_2 = QtWidgets.QPushButton(parent=self.header)
+        self.btn_submit_2.setGeometry(QtCore.QRect(6, 14, 111, 31))
+        self.btn_submit_2.setStyleSheet("QPushButton {\n"
+"    padding: 5px 10px;\n"
+"    border-radius: 15px;\n"
+"    background: #3C6255;\n"
+"    color: #F7F3D7;\n"
+"    height: 40px;\n"
+"    width: 243px;\n"
+"    font-size: 16px;\n"
+"    font-weight: 600;\n"
+"    cursor: pointer;\n"
+"    text-align: left;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #23493C;\n"
+"}")
+        self.btn_submit_2.setDefault(False)
+        self.btn_submit_2.setFlat(False)
+        self.btn_submit_2.setObjectName("btn_submit_2")
         self.footer = QtWidgets.QWidget(parent=ToDoListWindow)
         self.footer.setEnabled(False)
         self.footer.setGeometry(QtCore.QRect(0, 540, 960, 60))
@@ -172,6 +199,7 @@ class Ui_ToDoListWindow(object):
     def retranslateUi(self, ToDoListWindow):
         _translate = QtCore.QCoreApplication.translate
         ToDoListWindow.setWindowTitle(_translate("ToDoListWindow", "Dialog"))
+        self.btn_submit_2.setText(_translate("ToDoListWindow", "< Kembali"))
         self.btn_submit.setText(_translate("ToDoListWindow", "Submit"))
         self.plainTextEdit.setPlainText(_translate("ToDoListWindow", "Tulis Deskripsi"))
 

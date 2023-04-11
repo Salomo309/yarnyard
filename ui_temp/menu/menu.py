@@ -139,6 +139,9 @@ class Ui_MainWindow(object):
         self.btn_tanaman.setDefault(False)
         self.btn_tanaman.setFlat(False)
         self.btn_tanaman.setObjectName("btn_tanaman")
+        self.btn_tanaman.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(xOffset = 0, yOffset=3, blurRadius=20))
+        
+        
         self.verticalLayout_4.addWidget(self.btn_tanaman, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.verticalLayout_3.addWidget(self.frame_tanaman)
         self.frame_tdl = QtWidgets.QFrame(parent=self.frame_btn)
@@ -152,6 +155,9 @@ class Ui_MainWindow(object):
         self.btn_tdl.setDefault(False)
         self.btn_tdl.setFlat(False)
         self.btn_tdl.setObjectName("btn_tdl")
+        # self.btn_tdl.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=25, xOffset = 0, yOffset=3))
+        self.btn_tdl.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(xOffset=0, yOffset=3, blurRadius=20))
+        
         self.verticalLayout_5.addWidget(self.btn_tdl, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.verticalLayout_3.addWidget(self.frame_tdl)
         self.frame_artikel = QtWidgets.QFrame(parent=self.frame_btn)

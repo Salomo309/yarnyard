@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\menuWindow.ui'
+# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\menu\menuWindow.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -12,6 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setEnabled(True)
         MainWindow.resize(960, 600)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -81,7 +82,7 @@ class Ui_MainWindow(object):
         self.logo = QtWidgets.QLabel(parent=self.frame_logo)
         self.logo.setMinimumSize(QtCore.QSize(0, 0))
         self.logo.setMaximumSize(QtCore.QSize(42, 42))
-        self.logo.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\printilan logo.png"))
+        self.logo.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\menu\\printilan logo.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
         self.horizontalLayout_3.addWidget(self.logo)
@@ -111,7 +112,7 @@ class Ui_MainWindow(object):
         self.logo_2 = QtWidgets.QLabel(parent=self.frame_logo_2)
         self.logo_2.setMaximumSize(QtCore.QSize(350, 190))
         self.logo_2.setText("")
-        self.logo_2.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\logo yanyard.png"))
+        self.logo_2.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\menu\\logo yanyard.png"))
         self.logo_2.setScaledContents(True)
         self.logo_2.setObjectName("logo_2")
         self.horizontalLayout_4.addWidget(self.logo_2)

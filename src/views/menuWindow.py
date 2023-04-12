@@ -251,7 +251,7 @@ class MenuWindow(QMainWindow):
         print("Artikel Clicked")
         # self.changePageToArtikel()
         self.channel.emit("artikel")
-
+        
     
     def changePageToArtikel(self):
         self.channel.emit("artikel")

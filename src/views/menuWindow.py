@@ -1,12 +1,14 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtGui import QGuiApplication, QCursor, QIcon, QFontDatabase
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, pyqtSignal
 import sys
 import os
 import pathlib
 
 class MenuWindow(QMainWindow):
+    channel = pyqtSignal(str)
+    
     def __init__(self):
         super().__init__()
         self.setUpMenuWindow()
@@ -29,7 +31,7 @@ class MenuWindow(QMainWindow):
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../assets/'
         
         # Logo
-        self.setWindowIcon(QIcon(path + 'logo.ico'))
+        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
         
         # Fonts
         fonts_folder_path = path + 'fonts/'
@@ -114,7 +116,7 @@ class MenuWindow(QMainWindow):
         self.logo = QtWidgets.QLabel(parent=self.frame_logo)
         self.logo.setMinimumSize(QtCore.QSize(0, 0))
         self.logo.setMaximumSize(QtCore.QSize(42, 42))
-        self.logo.setPixmap(QtGui.QPixmap(path + 'logo_circle.png'))
+        self.logo.setPixmap(QtGui.QPixmap(path + 'logo/logo_circle.png'))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
         self.horizontalLayout_3.addWidget(self.logo)
@@ -147,7 +149,7 @@ class MenuWindow(QMainWindow):
         self.logo_2 = QtWidgets.QLabel(parent=self.frame_logo_2)
         self.logo_2.setMaximumSize(QtCore.QSize(350, 190))
         self.logo_2.setText("")
-        self.logo_2.setPixmap(QtGui.QPixmap(path + 'logo_big.png'))
+        self.logo_2.setPixmap(QtGui.QPixmap(path + 'logo/logo_big.png'))
         self.logo_2.setScaledContents(True)
         self.logo_2.setObjectName("logo_2")
         self.horizontalLayout_4.addWidget(self.logo_2)
@@ -247,3 +249,9 @@ class MenuWindow(QMainWindow):
 
     def on_btn_artikel_clicked(self):
         print("Artikel Clicked")
+        # self.changePageToArtikel()
+        self.channel.emit("artikel")
+
+    
+    def changePageToArtikel(self):
+        self.channel.emit("artikel")

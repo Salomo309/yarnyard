@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>../../assets/icons/left_arrow_3.svg</file>
+    <file>right_arrow.svg</file>
+    <file>right_circle.svg</file>
+    <file>left_circle.svg</file>
+    <file>left_arrow3.svg</file>
+    <file>left__arrow2.svg</file>
+    <file>left__arrow.svg</file>
+  </qresource>
+</RCC>

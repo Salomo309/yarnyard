@@ -45,6 +45,9 @@ class Artikel():
     def getJudulArtikel(self):
         return self.judul
     
+    def getPenulisArtikel(self):
+        return self.penulis
+    
     def getTanggalArtikel(self):
         return self.tanggal_artikel
     

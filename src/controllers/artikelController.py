@@ -15,6 +15,7 @@ class ArtikelController:
                 for d in fetchedData:
                     res.append({"id_artikel": d.getIDArtikel(),
                                 "judul": d.getJudulArtikel(),
+                                "penulis": d.getPenulisArtikel(),
                                 "tanggal_artikel": d.getTanggalArtikel(),
                                 "isi_artikel": d.getIsiArtikel(),
                                 "gambar": d.getGambarArtikel()})

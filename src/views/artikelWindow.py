@@ -3,10 +3,7 @@ from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtGui import QGuiApplication, QCursor, QIcon, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal, QEvent
 from PyQt6.QtSvg import QSvgRenderer
-import sys
-import os
-import pathlib
-
+import sys, os, pathlib, requests, json, io
 
 class ArtikelWindow(QMainWindow):
     channel = pyqtSignal()
@@ -43,6 +40,7 @@ class ArtikelWindow(QMainWindow):
                 font_path = os.path.join(fonts_folder_path, filename)
                 QFontDatabase.addApplicationFont(font_path)
 
+        self.setArtikel()
         self.initializeWidgets(path)
 
     def initializeWidgets(self, path):
@@ -163,7 +161,7 @@ class ArtikelWindow(QMainWindow):
         self.logo = QtWidgets.QLabel(parent=self.frame_logo)
         self.logo.setMinimumSize(QtCore.QSize(0, 0))
         self.logo.setMaximumSize(QtCore.QSize(42, 42))
-        self.logo.setPixmap(QtGui.QPixmap(path + "logo_circle.png"))
+        self.logo.setPixmap(QtGui.QPixmap(path + "logo/logo_circle.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
         self.horizontalLayout_2.addWidget(self.logo)
@@ -252,12 +250,19 @@ class ArtikelWindow(QMainWindow):
         # Stacked Widget
         self.stackedWidget = QtWidgets.QStackedWidget(parent=self.widget_img)
         self.stackedWidget.setObjectName("stackedWidget")
-        self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
-        self.stackedWidget.addWidget(self.page)
-        self.page_2 = QtWidgets.QWidget()
-        self.page_2.setObjectName("page_2")
-        self.stackedWidget.addWidget(self.page_2)
+        # self.page = QtWidgets.QWidget()
+        # self.page.setObjectName("page")
+        # self.stackedWidget.addWidget(self.page)
+        # self.page_2 = QtWidgets.QWidget()
+        # self.page_2.setObjectName("page_2")
+        # self.stackedWidget.addWidget(self.page_2)
+        
+        # fetched_data is a list of items fetched from somewhere
+        for i, item in enumerate(self.listArtikel):
+            new_widget = QtWidgets.QWidget()
+            new_widget.setObjectName(f"page_{i+1}")
+            self.stackedWidget.addWidget(new_widget)
+        
         self.horizontalLayout_11.addWidget(self.stackedWidget)
         self.hboxlayout.addWidget(self.widget_img)
         self.horizontalLayout_5.addWidget(self.frame_img)
@@ -308,14 +313,20 @@ class ArtikelWindow(QMainWindow):
         self.stackedWidget.setCurrentIndex(0)
 
         current_index = self.stackedWidget.currentIndex()
-        print(current_index)
-        print(self.stackedWidget.count())
 
         self.change_background_img(current_index)
 
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
         self.btn_prev.clicked.connect(self.prev)
         self.btn_next.clicked.connect(self.next)
+        
+    def setArtikel(self):
+        response = requests.get('http://localhost:3000/artikel/')
+        
+        if response.status_code == 200:
+            self.listArtikel = json.loads(response.text)  
+        else:
+            print("failed")  
                     
     def on_btn_back_clicked(self):
         self.changePageToArtikel()
@@ -344,13 +355,10 @@ class ArtikelWindow(QMainWindow):
         self.change_background_img(index)
 
     def change_background_img(self, index):
-        if index == 0:
-            self.text_description_artikel.setText("Ini Raflesia")
-            self.widget_img.setStyleSheet(
-                "#widget_img {background-image: url(ui_temp/artikel/rafflesia.png); background-attachment: fixed;}")
-        elif index == 1:
-            # self.text_description_artikel.setPlainText("Ini Kaktus")
-            self.text_description_artikel.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at nibh volutpat, eleifend augue vel, hendrerit augue. Fusce egestas ipsum dolor, id convallis nulla cursus eleifend. Aliquam erat volutpat. Suspendisse facilisis quis ex non vestibulum. In ultricies porta dapibus. Praesent in arcu vel risus auctor elementum id at ex. Vestibulum gravida, odio ac dapibus convallis, erat lacus molestie turpis, in tristique urna mauris vitae ligula.")
-            self.widget_img.setStyleSheet(
-                "#widget_img {background-image: url(ui_temp/artikel/kaktus.png); background-attachment: fixed;}")
+        self.text_description_artikel.setText(self.listArtikel[index]["isi_artikel"])
+        image = self.listArtikel[index]["gambar"]
+        
+        self.widget_img.setStyleSheet(
+            f"#widget_img {{background-image: url({image}); background-attachment: fixed;}}")
+
         self.text_description_artikel.setAlignment(Qt.AlignmentFlag.AlignJustify)

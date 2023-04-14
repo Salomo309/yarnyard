@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\todolistWindow.ui'
+# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\form\jurnalForm.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -9,19 +9,21 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_ToDoListWindow(object):
-    def setupUi(self, ToDoListWindow):
-        ToDoListWindow.setObjectName("ToDoListWindow")
-        ToDoListWindow.setEnabled(True)
-        ToDoListWindow.resize(960, 600)
+class Ui_JurnalForm(object):
+    def setupUi(self, JurnalForm):
+        JurnalForm.setObjectName("JurnalForm")
+        JurnalForm.resize(960, 600)
+        self.header = QtWidgets.QWidget(parent=JurnalForm)
+        self.header.setEnabled(True)
+        self.header.setGeometry(QtCore.QRect(0, 0, 960, 60))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(ToDoListWindow.sizePolicy().hasHeightForWidth())
-        ToDoListWindow.setSizePolicy(sizePolicy)
-        ToDoListWindow.setMinimumSize(QtCore.QSize(0, 0))
-        ToDoListWindow.setAutoFillBackground(False)
-        ToDoListWindow.setStyleSheet("*{\n"
+        sizePolicy.setHeightForWidth(self.header.sizePolicy().hasHeightForWidth())
+        self.header.setSizePolicy(sizePolicy)
+        self.header.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
+        self.header.setAutoFillBackground(False)
+        self.header.setStyleSheet("*{\n"
 "    border: none;\n"
 "    background-color: transparent;\n"
 "    background: transparent;\n"
@@ -39,30 +41,21 @@ class Ui_ToDoListWindow(object):
 "\n"
 "#footer {\n"
 "    background-color: #F7F4D9;\n"
-"}")
-        ToDoListWindow.setSizeGripEnabled(True)
-        self.header = QtWidgets.QWidget(parent=ToDoListWindow)
-        self.header.setEnabled(True)
-        self.header.setGeometry(QtCore.QRect(0, 0, 960, 60))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.header.sizePolicy().hasHeightForWidth())
-        self.header.setSizePolicy(sizePolicy)
-        self.header.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
-        self.header.setAutoFillBackground(False)
+"}\n"
+"")
         self.header.setObjectName("header")
         self.frame_logo = QtWidgets.QFrame(parent=self.header)
         self.frame_logo.setGeometry(QtCore.QRect(459, 9, 42, 42))
         self.frame_logo.setObjectName("frame_logo")
         self.label = QtWidgets.QLabel(parent=self.frame_logo)
-        self.label.setGeometry(QtCore.QRect(0, 0, 42, 42))
+        self.label.setGeometry(QtCore.QRect(0, 0, 41, 41))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\logo_circle.png"))
+        self.label.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\form\\../assets/logo_circle.png"))
         self.label.setScaledContents(True)
+        self.label.setWordWrap(False)
         self.label.setObjectName("label")
         self.btn_submit_2 = QtWidgets.QPushButton(parent=self.header)
-        self.btn_submit_2.setGeometry(QtCore.QRect(6, 14, 111, 31))
+        self.btn_submit_2.setGeometry(QtCore.QRect(10, 15, 111, 31))
         self.btn_submit_2.setStyleSheet("QPushButton {\n"
 "    padding: 5px 10px;\n"
 "    border-radius: 15px;\n"
@@ -82,7 +75,7 @@ class Ui_ToDoListWindow(object):
         self.btn_submit_2.setDefault(False)
         self.btn_submit_2.setFlat(False)
         self.btn_submit_2.setObjectName("btn_submit_2")
-        self.footer = QtWidgets.QWidget(parent=ToDoListWindow)
+        self.footer = QtWidgets.QWidget(parent=JurnalForm)
         self.footer.setEnabled(False)
         self.footer.setGeometry(QtCore.QRect(0, 540, 960, 60))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
@@ -101,7 +94,7 @@ class Ui_ToDoListWindow(object):
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
-        self.body = QtWidgets.QWidget(parent=ToDoListWindow)
+        self.body = QtWidgets.QWidget(parent=JurnalForm)
         self.body.setGeometry(QtCore.QRect(0, 60, 960, 480))
         self.body.setStyleSheet("#body {\n"
 "    background-color: #F7F4D9;\n"
@@ -113,7 +106,7 @@ class Ui_ToDoListWindow(object):
         self.content.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.content.setObjectName("content")
         self.submit = QtWidgets.QFrame(parent=self.content)
-        self.submit.setGeometry(QtCore.QRect(0, 310, 961, 80))
+        self.submit.setGeometry(QtCore.QRect(0, 410, 960, 61))
         self.submit.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.submit.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.submit.setObjectName("submit")
@@ -137,13 +130,13 @@ class Ui_ToDoListWindow(object):
         self.btn_submit.setDefault(False)
         self.btn_submit.setFlat(False)
         self.btn_submit.setObjectName("btn_submit")
-        self.deskripsi = QtWidgets.QFrame(parent=self.content)
-        self.deskripsi.setGeometry(QtCore.QRect(0, 180, 961, 131))
-        self.deskripsi.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.deskripsi.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.deskripsi.setObjectName("deskripsi")
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(parent=self.deskripsi)
-        self.plainTextEdit.setGeometry(QtCore.QRect(310, 20, 331, 41))
+        self.frame_2 = QtWidgets.QFrame(parent=self.content)
+        self.frame_2.setGeometry(QtCore.QRect(-1, 9, 961, 401))
+        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.plainTextEdit = QtWidgets.QPlainTextEdit(parent=self.frame_2)
+        self.plainTextEdit.setGeometry(QtCore.QRect(150, 60, 661, 311))
         self.plainTextEdit.setStyleSheet("QPlainTextEdit {\n"
 "    padding: 7px 10px;\n"
 "    border-radius: 15px;\n"
@@ -158,47 +151,15 @@ class Ui_ToDoListWindow(object):
 "\n"
 "QPlainTextEdit:hover {\n"
 "    background-color: #23493C;\n"
-"}\n"
-"")
-        self.plainTextEdit.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.plainTextEdit.setMidLineWidth(0)
-        self.plainTextEdit.setMaximumBlockCount(1)
+"}")
         self.plainTextEdit.setObjectName("plainTextEdit")
-        self.frame_2 = QtWidgets.QFrame(parent=self.content)
-        self.frame_2.setGeometry(QtCore.QRect(-1, 90, 961, 91))
-        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_2.setObjectName("frame_2")
-        self.dateTimeEdit = QtWidgets.QDateTimeEdit(parent=self.frame_2)
-        self.dateTimeEdit.setGeometry(QtCore.QRect(380, 50, 201, 31))
-        self.dateTimeEdit.setStyleSheet("QDateTimeEdit {\n"
-"    padding: 7px 10px;\n"
-"    border-radius: 15px;\n"
-"    background: #61876E;\n"
-"    color: #F7F3D7;\n"
-"    height: 40px;\n"
-"    width: 243px;\n"
-"    font-size: 15px;\n"
-"    font-weight: 600;\n"
-"    cursor: pointer;\n"
-"}\n"
-"\n"
-"QDateTimeEdit:hover {\n"
-"    background-color: #23493C;\n"
-"}\n"
-"")
-        self.dateTimeEdit.setTime(QtCore.QTime(1, 0, 0))
-        self.dateTimeEdit.setCurrentSection(QtWidgets.QDateTimeEdit.Section.YearSection)
-        self.dateTimeEdit.setCalendarPopup(True)
-        self.dateTimeEdit.setCurrentSectionIndex(2)
-        self.dateTimeEdit.setObjectName("dateTimeEdit")
 
-        self.retranslateUi(ToDoListWindow)
-        QtCore.QMetaObject.connectSlotsByName(ToDoListWindow)
+        self.retranslateUi(JurnalForm)
+        QtCore.QMetaObject.connectSlotsByName(JurnalForm)
 
-    def retranslateUi(self, ToDoListWindow):
+    def retranslateUi(self, JurnalForm):
         _translate = QtCore.QCoreApplication.translate
-        ToDoListWindow.setWindowTitle(_translate("ToDoListWindow", "Dialog"))
-        self.btn_submit_2.setText(_translate("ToDoListWindow", "< Kembali"))
-        self.btn_submit.setText(_translate("ToDoListWindow", "Submit"))
-        self.plainTextEdit.setPlainText(_translate("ToDoListWindow", "Tulis Deskripsi"))
+        JurnalForm.setWindowTitle(_translate("JurnalForm", "Dialog"))
+        self.btn_submit_2.setText(_translate("JurnalForm", "< Kembali"))
+        self.btn_submit.setText(_translate("JurnalForm", "Submit"))
+        self.plainTextEdit.setPlainText(_translate("JurnalForm", "Tulis deskripsi jurnal"))

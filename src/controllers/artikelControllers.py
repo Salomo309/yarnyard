@@ -1,12 +1,12 @@
 from flask import jsonify, request
 
-from models.artikelModels import Artikel
+from models.artikelModels import ArtikelModels
 
-class ArtikelController:
+class ArtikelControllers:
     @staticmethod
     def getArtikel():
         try:
-            fetchedData = Artikel.getAllArtikel()
+            fetchedData = ArtikelModels.getAllArtikel()
                         
             if fetchedData is None:
                 return "No Artikel Found", 404
@@ -15,8 +15,6 @@ class ArtikelController:
                 for d in fetchedData:
                     res.append({"id_artikel": d.getIDArtikel(),
                                 "judul": d.getJudulArtikel(),
-                                "penulis": d.getPenulisArtikel(),
-                                "tanggal_artikel": d.getTanggalArtikel(),
                                 "isi_artikel": d.getIsiArtikel(),
                                 "gambar": d.getGambarArtikel()})
                     

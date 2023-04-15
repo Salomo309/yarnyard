@@ -106,13 +106,20 @@ class ArtikelWindow(QMainWindow):
             
             #text_description_artikel {
                 color: #F9F9F9;
-                padding: 10px 8px;
+                padding: 0px 8px 10px;
                 font-size: 14px;
             }
             
             #widget_img {
                 border-radius: 40px;
                 background-color: #3C6255;
+            }
+            
+            #text_title_artikel {
+                font-size: 18px;
+                color: #F9F9F9;
+                font-weight: 600;
+                padding: 10px 8px 0px;
             }
         ''')
         
@@ -297,14 +304,27 @@ class ArtikelWindow(QMainWindow):
         self.box_description_artikel = QtWidgets.QWidget(parent=self.frame_description)
         self.box_description_artikel.setMaximumSize(QtCore.QSize(600, 220))
         self.box_description_artikel.setObjectName("box_description_artikel")
-        self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.box_description_artikel)
-        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         
         # Deskripsi Artikel
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.box_description_artikel)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.text_title_artikel = QtWidgets.QTextEdit(parent=self.box_description_artikel)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.MinimumExpanding, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.text_title_artikel.sizePolicy().hasHeightForWidth())
+        self.text_title_artikel.setSizePolicy(sizePolicy)
+        self.text_title_artikel.setMaximumSize(QtCore.QSize(16777215, 45))
+
+        self.text_title_artikel.setReadOnly(True)
+        self.text_title_artikel.setObjectName("text_title_artikel")
+        self.verticalLayout_4.addWidget(self.text_title_artikel)
         self.text_description_artikel = QtWidgets.QTextEdit(parent=self.box_description_artikel)
         self.text_description_artikel.setReadOnly(True)
         self.text_description_artikel.setObjectName("text_description_artikel")
-        self.horizontalLayout_9.addWidget(self.text_description_artikel)
+        
+        self.verticalLayout_4.addWidget(self.text_description_artikel)
+        # self.horizontalLayout_9.addWidget(self.text_description_artikel)
         self.horizontalLayout_8.addWidget(self.box_description_artikel)
         self.verticalLayout_2.addWidget(self.frame_description)
         self.verticalLayout.addWidget(self.main)
@@ -355,10 +375,12 @@ class ArtikelWindow(QMainWindow):
         self.change_background_img(index)
 
     def change_background_img(self, index):
+        self.text_title_artikel.setText(self.listArtikel[index]["judul"])
         self.text_description_artikel.setText(self.listArtikel[index]["isi_artikel"])
         image = self.listArtikel[index]["gambar"]
         
         self.widget_img.setStyleSheet(
             f"#widget_img {{background-image: url({image}); background-attachment: fixed;}}")
 
+        self.text_title_artikel.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.text_description_artikel.setAlignment(Qt.AlignmentFlag.AlignJustify)

@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'artikelWindow.ui'
+# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\artikel\artikelWindow.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -122,7 +122,7 @@ class Ui_MainWindow(object):
         self.logo = QtWidgets.QLabel(parent=self.frame_logo)
         self.logo.setMinimumSize(QtCore.QSize(0, 0))
         self.logo.setMaximumSize(QtCore.QSize(42, 42))
-        self.logo.setPixmap(QtGui.QPixmap("logo_circle.png"))
+        self.logo.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\artikel\\logo_circle.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
         self.horizontalLayout_2.addWidget(self.logo)
@@ -283,13 +283,3 @@ class Ui_MainWindow(object):
         self.label_title_artikel.setText(_translate("MainWindow", "Artikel"))
         self.text_title_artikel.setPlainText(_translate("MainWindow", "Cara Menanam Tanaman"))
         self.text_description_artikel.setPlainText(_translate("MainWindow", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at nibh volutpat, eleifend augue vel, hendrerit augue. Fusce egestas ipsum dolor, id convallis nulla cursus eleifend. Aliquam erat volutpat. Suspendisse facilisis quis ex non vestibulum. In ultricies porta dapibus. Praesent in arcu vel risus auctor elementum id at ex. Vestibulum gravida, odio ac dapibus convallis, erat lacus molestie turpis, in tristique urna mauris vitae ligula."))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec())

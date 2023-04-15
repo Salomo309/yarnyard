@@ -1,11 +1,9 @@
 from models.db import mysql
 
-class Artikel():
-    def __init__(self, id_artikel, judul, penulis, tanggal_artikel, isi_artikel, gambar):
+class ArtikelModels:
+    def __init__(self, id_artikel, judul, isi_artikel, gambar):
         self.id_artikel = id_artikel
         self.judul = judul
-        self.penulis = penulis
-        self.tanggal_artikel = tanggal_artikel
         self.isi_artikel = isi_artikel
         self.gambar = gambar
     
@@ -23,14 +21,12 @@ class Artikel():
         else:
             listArtikel = []
             for data in dataArtikel:
-                id_artikel, judul, penulis, tanggal_artikel, isi_artikel, gambar = data
+                id_artikel, judul, isi_artikel, gambar = data
                 
                 # initialize class
                 self = cls.__new__(cls)
                 self.id_artikel = id_artikel
                 self.judul = judul
-                self.penulis = penulis
-                self.tanggal_artikel = tanggal_artikel
                 self.isi_artikel = isi_artikel
                 self.gambar = gambar
                 
@@ -44,12 +40,6 @@ class Artikel():
     
     def getJudulArtikel(self):
         return self.judul
-    
-    def getPenulisArtikel(self):
-        return self.penulis
-    
-    def getTanggalArtikel(self):
-        return self.tanggal_artikel
     
     def getIsiArtikel(self):
         return self.isi_artikel

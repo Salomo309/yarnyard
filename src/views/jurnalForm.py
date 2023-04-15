@@ -9,6 +9,7 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 import datetime
 from controllers.jurnalControllers import JurnalControllers
+import sqlite3
 
 
 class Ui_JurnalForm(object):
@@ -171,7 +172,8 @@ class Ui_JurnalForm(object):
                 "}")
         self.plainTextEdit.setObjectName("plainTextEdit")
 
-        # self.btn_submit.clicked.connect(self.setJurnal)
+        connection = sqlite3.connect('database.db')
+        self.btn_submit.clicked.connect(self.setJurnal(connection))
 
         self.retranslateUi(JurnalForm)
         QtCore.QMetaObject.connectSlotsByName(JurnalForm)
@@ -183,7 +185,8 @@ class Ui_JurnalForm(object):
         self.btn_submit.setText(_translate("JurnalForm", "Submit"))
         self.plainTextEdit.setPlainText(_translate("JurnalForm", "Tulis deskripsi jurnal"))
 
-    def setJurnal(self):
+    def setJurnal(self, connection):
+        cursor = connection.cursor()
         # dapatkan isi jurnal yang telah ditulis
         journal = self.plainTextEdit.toPlainText()
 
@@ -195,12 +198,12 @@ class Ui_JurnalForm(object):
         data = (id_jurnal, id_tanaman, datetime.date.today(), journal)
 
         # masukkan data ke dalam tabel jurnal pada database
-        self.cursor.execute("INSERT INTO jurnal (id_jurnal, id_tanaman, tanggal, isi_jurnal) VALUES (?, ?, ?, ?)", data)
-        self.conn.commit()
+        cursor.execute("INSERT INTO jurnal (id_jurnal, id_tanaman, tanggal, isi_jurnal) VALUES (?, ?, ?, ?)", data)
+        connection.commit()
 
         # tutup koneksi database
-        self.cursor.close()
-        self.conn.close()
+        cursor.close()
+        connection.close()
 
 if __name__ == "__main__":
     import sys

@@ -25,26 +25,32 @@ class Ui_JurnalForm(object):
         self.header.setSizePolicy(sizePolicy)
         self.header.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.header.setAutoFillBackground(False)
-        self.header.setStyleSheet("*{\n"
-                                "    border: none;\n"
-                                "    background-color: transparent;\n"
-                                "    background: transparent;\n"
-                                "    padding: 0;\n"
-                                "    margin: 0;\n"
-                                "}\n"
-                                "\n"
-                                "#header {\n"
-                                "    background-color: #3C6255;\n"
-                                "}\n"
-                                "\n"
-                                "#main {\n"
-                                "    background-color: #F7F4D9;\n"
-                                "}\n"
-                                "\n"
-                                "#footer {\n"
-                                "    background-color: #F7F4D9;\n"
-                                "}\n"
-                                "")
+        self.header.setStyleSheet(
+            "*{\n"
+                "    border: none;\n"
+                "    background-color: transparent;\n"
+                "    background: transparent;\n"
+                "    padding: 0;\n"
+                "    margin: 0;\n"
+                "}\n"
+
+        "\n"
+
+                "#header {\n"
+                 "    background-color: #3C6255;\n"
+                "}\n"
+        "\n"
+
+                "#main {\n"
+                "    background-color: #F7F4D9;\n"
+                "}\n"
+
+        "\n"
+
+                "#footer {\n"
+                "    background-color: #F7F4D9;\n"
+                "}\n"
+        "")
 
         # Header
         self.header.setObjectName("header")
@@ -60,22 +66,23 @@ class Ui_JurnalForm(object):
         self.label.setObjectName("label")
         self.btn_submit_2 = QtWidgets.QPushButton(parent=self.header)
         self.btn_submit_2.setGeometry(QtCore.QRect(10, 15, 111, 31))
-        self.btn_submit_2.setStyleSheet("QPushButton {\n"
-                                                "    padding: 5px 10px;\n"
-                                                "    border-radius: 15px;\n"
-                                                "    background: #3C6255;\n"
-                                                "    color: #F7F3D7;\n"
-                                                "    height: 40px;\n"
-                                                "    width: 243px;\n"
-                                                "    font-size: 16px;\n"
-                                                "    font-weight: 600;\n"
-                                                "    cursor: pointer;\n"
-                                                "    text-align: left;\n"
-                                                "}\n"
-                                                "\n"
-                                                "QPushButton:hover {\n"
-                                                "    background-color: #23493C;\n"
-                                                "}")
+        self.btn_submit_2.setStyleSheet(
+            "QPushButton {\n"
+        "    padding: 5px 10px;\n"
+        "    border-radius: 15px;\n"
+        "    background: #3C6255;\n"
+        "    color: #F7F3D7;\n"
+        "    height: 40px;\n"
+        "    width: 243px;\n"
+        "    font-size: 16px;\n"
+        "    font-weight: 600;\n"
+        "    cursor: pointer;\n"
+        "    text-align: left;\n"
+        "}\n"
+        "\n"
+                "QPushButton:hover {\n"
+                "    background-color: #23493C;\n"
+                "}")
         self.btn_submit_2.setDefault(False)
         self.btn_submit_2.setFlat(False)
         self.btn_submit_2.setObjectName("btn_submit_2")
@@ -120,21 +127,22 @@ class Ui_JurnalForm(object):
         self.submit.setObjectName("submit")
         self.btn_submit = QtWidgets.QPushButton(parent=self.submit)
         self.btn_submit.setGeometry(QtCore.QRect(390, 10, 181, 31))
-        self.btn_submit.setStyleSheet("QPushButton {\n"
-                                        "    padding: 5px 10px;\n"
-                                        "    border-radius: 15px;\n"
-                                        "    background: #3C6255;\n"
-                                        "    color: #F7F3D7;\n"
-                                        "    height: 40px;\n"
-                                        "    width: 243px;\n"
-                                        "    font-size: 16px;\n"
-                                        "    font-weight: 600;\n"
-                                        "    cursor: pointer;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover {\n"
-                                        "    background-color: #23493C;\n"
-                                        "}")
+        self.btn_submit.setStyleSheet(
+            "QPushButton {\n"
+        "    padding: 5px 10px;\n"
+        "    border-radius: 15px;\n"
+        "    background: #3C6255;\n"
+        "    color: #F7F3D7;\n"
+        "    height: 40px;\n"
+        "    width: 243px;\n"
+        "    font-size: 16px;\n"
+        "    font-weight: 600;\n"
+        "    cursor: pointer;\n"
+        "}\n"
+        "\n"
+                "QPushButton:hover {\n"
+                "    background-color: #23493C;\n"
+                "}")
         self.btn_submit.setDefault(False)
         self.btn_submit.setFlat(False)
         self.btn_submit.setObjectName("btn_submit")
@@ -145,21 +153,22 @@ class Ui_JurnalForm(object):
         self.frame_2.setObjectName("frame_2")
         self.plainTextEdit = QtWidgets.QPlainTextEdit(parent=self.frame_2)
         self.plainTextEdit.setGeometry(QtCore.QRect(150, 60, 661, 311))
-        self.plainTextEdit.setStyleSheet("QPlainTextEdit {\n"
-                                        "    padding: 7px 10px;\n"
-                                        "    border-radius: 15px;\n"
-                                        "    background: #61876E;\n"
-                                        "    color: #F7F3D7;\n"
-                                        "    height: 40px;\n"
-                                        "    width: 243px;\n"
-                                        "    font-size: 15px;\n"
-                                        "    font-weight: 600;\n"
-                                        "    cursor: pointer;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPlainTextEdit:hover {\n"
-                                        "    background-color: #23493C;\n"
-                                        "}")
+        self.plainTextEdit.setStyleSheet(
+            "QPlainTextEdit {\n"
+        "    padding: 7px 10px;\n"
+        "    border-radius: 15px;\n"
+        "    background: #61876E;\n"
+        "    color: #F7F3D7;\n"
+        "    height: 40px;\n"
+        "    width: 243px;\n"
+        "    font-size: 15px;\n"
+        "    font-weight: 600;\n"
+        "    cursor: pointer;\n"
+        "}\n"
+        "\n"
+                "QPlainTextEdit:hover {\n"
+                "    background-color: #23493C;\n"
+                "}")
         self.plainTextEdit.setObjectName("plainTextEdit")
 
         self.btn_submit.clicked.connect(self.setJurnal)

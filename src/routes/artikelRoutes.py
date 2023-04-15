@@ -1,6 +1,6 @@
 from flask import Blueprint
-from controllers.artikelController import ArtikelController
+from controllers.artikelControllers import ArtikelControllers
 
 artikelRoutes = Blueprint("artikelRoutes", __name__)
 
-artikelRoutes.route("/", methods=["GET"])(ArtikelController.getArtikel)
+artikelRoutes.route("/", methods=["GET"])(ArtikelControllers.getArtikel)

@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'todolistWindow.ui'
+# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\form\todolistForm.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -58,7 +58,7 @@ class Ui_ToDoListWindow(object):
         self.label = QtWidgets.QLabel(parent=self.frame_logo)
         self.label.setGeometry(QtCore.QRect(0, 0, 42, 42))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("logo_circle.png"))
+        self.label.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\form\\logo_circle.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.btn_submit_2 = QtWidgets.QPushButton(parent=self.header)
@@ -202,13 +202,3 @@ class Ui_ToDoListWindow(object):
         self.btn_submit_2.setText(_translate("ToDoListWindow", "< Kembali"))
         self.btn_submit.setText(_translate("ToDoListWindow", "Submit"))
         self.plainTextEdit.setPlainText(_translate("ToDoListWindow", "Tulis Deskripsi"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    ToDoListWindow = QtWidgets.QDialog()
-    ui = Ui_ToDoListWindow()
-    ui.setupUi(ToDoListWindow)
-    ToDoListWindow.show()
-    sys.exit(app.exec())

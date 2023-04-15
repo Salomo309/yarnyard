@@ -2,9 +2,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtGui import QGuiApplication, QCursor, QIcon, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
-import sys
-import os
-import pathlib
+import os, pathlib
 
 class MenuWindow(QMainWindow):
     channel = pyqtSignal(str)
@@ -28,7 +26,7 @@ class MenuWindow(QMainWindow):
                     int((screen_height - self.height()) / 2))
         
         # Assets path
-        path = str(pathlib.Path(__file__).parent.absolute()) + '/../../assets/'
+        path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
         
         # Logo
         self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
@@ -243,6 +241,7 @@ class MenuWindow(QMainWindow):
     
     def on_btn_tanaman_clicked(self):
         print("Tanaman Clicked")
+        self.channel.emit("test")
         
     def on_btn_tdl_clicked(self):
         print("TDL Clicked")

@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\form\jurnalForm.ui'
+# Form implementation generated from reading ui file 'jurnalForm.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -7,10 +7,14 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-
+from PyQt6.QtCore import Qt
+import pathlib
 
 class Ui_JurnalForm(object):
     def setupUi(self, JurnalForm):
+        path = str(pathlib.Path(__file__).parent.absolute()) + '/../artikel/'
+        print(path)
+
         JurnalForm.setObjectName("JurnalForm")
         JurnalForm.resize(960, 600)
         JurnalForm.setMinimumSize(QtCore.QSize(0, 60))
@@ -88,7 +92,7 @@ class Ui_JurnalForm(object):
         self.logo = QtWidgets.QLabel(parent=self.frame_logo)
         self.logo.setMinimumSize(QtCore.QSize(0, 0))
         self.logo.setMaximumSize(QtCore.QSize(42, 42))
-        self.logo.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\form\\../artikel/logo_circle.png"))
+        self.logo.setPixmap(QtGui.QPixmap(path + "logo_circle.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
         self.horizontalLayout_2.addWidget(self.logo)
@@ -143,7 +147,7 @@ class Ui_JurnalForm(object):
         self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_2.setObjectName("frame_2")
-        self.deskripsi_jurnal = QtWidgets.QPlainTextEdit(parent=self.frame_2)
+        self.deskripsi_jurnal = QtWidgets.QTextEdit(parent=self.frame_2)
         self.deskripsi_jurnal.setGeometry(QtCore.QRect(150, 110, 660, 300))
         self.deskripsi_jurnal.setStyleSheet("#deskripsi_jurnal {\n"
 "    padding: 17px 17px;\n"
@@ -155,7 +159,8 @@ class Ui_JurnalForm(object):
 "    font-weight: 600;\n"
 "    width: 243px;\n"
 "}")
-        self.deskripsi_jurnal.setOverwriteMode(True)
+        self.deskripsi_jurnal.setPlaceholderText("Tulis deskripsi jurnal . . .")
+        self.deskripsi_jurnal.setAlignment(Qt.AlignmentFlag.AlignJustify)
         self.deskripsi_jurnal.setObjectName("deskripsi_jurnal")
         self.label_title = QtWidgets.QLabel(parent=self.frame_2)
         self.label_title.setGeometry(QtCore.QRect(361, 25, 238, 60))
@@ -163,7 +168,7 @@ class Ui_JurnalForm(object):
 "    color: #F7F4D9;\n"
 "    background-color: #3C6255;\n"
 "    border-radius: 20px;\n"
-"    font-size: 20px;\n"
+"    font-size: 22px;\n"
 "    font-weight: 600;\n"
 "}")
         self.label_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -179,5 +184,15 @@ class Ui_JurnalForm(object):
         JurnalForm.setWindowTitle(_translate("JurnalForm", "Dialog"))
         self.btn_back.setText(_translate("JurnalForm", " Kembali"))
         self.btn_submit.setText(_translate("JurnalForm", "Submit"))
-        self.deskripsi_jurnal.setPlainText(_translate("JurnalForm", "Tulis deskripsi jurnal . . ."))
+        # self.deskripsi_jurnal.setPlainText(_translate("JurnalForm", "Tulis deskripsi jurnal . . ."))
         self.label_title.setText(_translate("JurnalForm", "Form Jurnal"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    JurnalForm = QtWidgets.QDialog()
+    ui = Ui_JurnalForm()
+    ui.setupUi(JurnalForm)
+    JurnalForm.show()
+    sys.exit(app.exec())

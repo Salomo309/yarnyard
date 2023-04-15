@@ -171,7 +171,7 @@ class Ui_JurnalForm(object):
                 "}")
         self.plainTextEdit.setObjectName("plainTextEdit")
 
-        self.btn_submit.clicked.connect(self.setJurnal)
+        # self.btn_submit.clicked.connect(self.setJurnal)
 
         self.retranslateUi(JurnalForm)
         QtCore.QMetaObject.connectSlotsByName(JurnalForm)

@@ -7,7 +7,7 @@ class JurnalControllers:
     def getJurnal():
         try:
             fetchedData = JurnalModels.getAllJurnal()
-                        
+
             if fetchedData is None:
                 return "No Jurnal Found", 404
             else:
@@ -17,8 +17,8 @@ class JurnalControllers:
                                 "id_tanaman": d.getIDTanaman(),
                                 "tanggal_jurnal": d.getTanggalJurnal(),
                                 "deskripsi_jurnal": d.getDeskripsiJurnal()})
-                    
+
                 return jsonify(res), 200
-                
+
         except Exception as e:
             return str(e), 400

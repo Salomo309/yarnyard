@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\form\jurnalForm.ui'
+# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\form\todolistForm2.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -9,16 +9,23 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_JurnalForm(object):
-    def setupUi(self, JurnalForm):
-        JurnalForm.setObjectName("JurnalForm")
-        JurnalForm.resize(960, 600)
-        JurnalForm.setMinimumSize(QtCore.QSize(0, 60))
-        self.verticalLayout = QtWidgets.QVBoxLayout(JurnalForm)
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(960, 600)
+        MainWindow.setStyleSheet("*{\n"
+"    border: none;\n"
+"    padding: 0;\n"
+"    margin: 0;\n"
+"    font-family: Poppins;\n"
+"}")
+        self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.header = QtWidgets.QWidget(parent=JurnalForm)
+        self.header = QtWidgets.QWidget(parent=self.centralwidget)
         self.header.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.MinimumExpanding, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -28,26 +35,9 @@ class Ui_JurnalForm(object):
         self.header.setMinimumSize(QtCore.QSize(0, 60))
         self.header.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.header.setAutoFillBackground(False)
-        self.header.setStyleSheet("*{\n"
-"    border: none;\n"
-"    background-color: transparent;\n"
-"    background: transparent;\n"
-"    padding: 0;\n"
-"    margin: 0;\n"
-"}\n"
-"\n"
-"#header {\n"
+        self.header.setStyleSheet("#header {\n"
 "    background-color: #3C6255;\n"
-"}\n"
-"\n"
-"#main {\n"
-"    background-color: #F7F4D9;\n"
-"}\n"
-"\n"
-"#footer {\n"
-"    background-color: #F7F4D9;\n"
-"}\n"
-"")
+"}")
         self.header.setObjectName("header")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.header)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -99,7 +89,7 @@ class Ui_JurnalForm(object):
         self.frame_temp_2.setObjectName("frame_temp_2")
         self.horizontalLayout.addWidget(self.frame_temp_2)
         self.verticalLayout.addWidget(self.header)
-        self.body = QtWidgets.QWidget(parent=JurnalForm)
+        self.body = QtWidgets.QWidget(parent=self.centralwidget)
         self.body.setStyleSheet("#body {\n"
 "    background-color: #F7F4D9;\n"
 "}")
@@ -112,13 +102,79 @@ class Ui_JurnalForm(object):
         self.content.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.content.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.content.setObjectName("content")
-        self.submit = QtWidgets.QFrame(parent=self.content)
-        self.submit.setGeometry(QtCore.QRect(0, 410, 960, 90))
-        self.submit.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.submit.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.submit.setObjectName("submit")
-        self.btn_submit = QtWidgets.QPushButton(parent=self.submit)
-        self.btn_submit.setGeometry(QtCore.QRect(415, 25, 130, 40))
+        self.frame_2 = QtWidgets.QFrame(parent=self.content)
+        self.frame_2.setGeometry(QtCore.QRect(0, 0, 960, 410))
+        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.label_title = QtWidgets.QLabel(parent=self.frame_2)
+        self.label_title.setGeometry(QtCore.QRect(361, 25, 238, 60))
+        self.label_title.setStyleSheet("#label_title {\n"
+"    color: #F7F4D9;\n"
+"    background-color: #3C6255;\n"
+"    border-radius: 20px;\n"
+"    font-size: 20px;\n"
+"    font-weight: 600;\n"
+"}")
+        self.label_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_title.setObjectName("label_title")
+        self.date_time_edit = QtWidgets.QDateTimeEdit(parent=self.frame_2)
+        self.date_time_edit.setGeometry(QtCore.QRect(380, 170, 200, 35))
+        self.date_time_edit.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.ArrowCursor))
+        self.date_time_edit.setStyleSheet("QDateTimeEdit {\n"
+"    padding: 0px 0px 0px 12px;\n"
+"    border-radius: 17px;\n"
+"    background-color: #61876E;\n"
+"    color: #F7F3D7;\n"
+"    font-size: 14px;\n"
+"    font-weight: 600;\n"
+"    border: solid;\n"
+"}\n"
+"\n"
+"QDateTimeEdit::drop-down{\n"
+"    image: url(:/test/event_note.svg);\n"
+"    width: 20px;\n"
+"    padding: 0px 12px 0px 8px;\n"
+"    border-top-right-radius: 17px;\n"
+"    border-bottom-right-radius: 17px;\n"
+"}\n"
+"\n"
+"QDateTimeEdit::drop-down:hover{\n"
+"    background-color: #3C6255;\n"
+"}\n"
+"\n"
+"QCalendarWidget QToolButton {\n"
+"    color: black;\n"
+"}\n"
+"\n"
+"QCalendarWidget QToolButton:hover {\n"
+"    background-color: #61876E;\n"
+"}\n"
+"\n"
+"QCalendarWidget QAbstractItemView:enabled {\n"
+"    color: #333;\n"
+"    selection-background-color: #61876E;\n"
+"    selection-color: #fff; \n"
+"}\n"
+"")
+        self.date_time_edit.setCurrentSection(QtWidgets.QDateTimeEdit.Section.DaySection)
+        self.date_time_edit.setCalendarPopup(True)
+        self.date_time_edit.setObjectName("date_time_edit")
+        self.deskripsi_tdl = QtWidgets.QPlainTextEdit(parent=self.frame_2)
+        self.deskripsi_tdl.setGeometry(QtCore.QRect(320, 230, 320, 40))
+        self.deskripsi_tdl.setStyleSheet("#deskripsi_tdl {\n"
+"    padding: 7px 12px;\n"
+"    border-radius: 20px;\n"
+"    background: #61876E;\n"
+"    color: #F7F3D7;\n"
+"    font-size: 14px;\n"
+"    font-weight: 600;\n"
+"}\n"
+"")
+        self.deskripsi_tdl.setMaximumBlockCount(1)
+        self.deskripsi_tdl.setObjectName("deskripsi_tdl")
+        self.btn_submit = QtWidgets.QPushButton(parent=self.frame_2)
+        self.btn_submit.setGeometry(QtCore.QRect(415, 330, 130, 40))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -138,46 +194,18 @@ class Ui_JurnalForm(object):
         self.btn_submit.setDefault(False)
         self.btn_submit.setFlat(False)
         self.btn_submit.setObjectName("btn_submit")
-        self.frame_2 = QtWidgets.QFrame(parent=self.content)
-        self.frame_2.setGeometry(QtCore.QRect(0, 0, 960, 410))
-        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_2.setObjectName("frame_2")
-        self.deskripsi_jurnal = QtWidgets.QPlainTextEdit(parent=self.frame_2)
-        self.deskripsi_jurnal.setGeometry(QtCore.QRect(150, 110, 660, 300))
-        self.deskripsi_jurnal.setStyleSheet("#deskripsi_jurnal {\n"
-"    padding: 17px 17px;\n"
-"    font-size: 14px;\n"
-"    border-radius: 15px;\n"
-"    background: #61876E;\n"
-"    color: #F7F3D7;\n"
-"    height: 40px;\n"
-"    font-weight: 600;\n"
-"    width: 243px;\n"
-"}")
-        self.deskripsi_jurnal.setOverwriteMode(True)
-        self.deskripsi_jurnal.setObjectName("deskripsi_jurnal")
-        self.label_title = QtWidgets.QLabel(parent=self.frame_2)
-        self.label_title.setGeometry(QtCore.QRect(361, 25, 238, 60))
-        self.label_title.setStyleSheet("#label_title {\n"
-"    color: #F7F4D9;\n"
-"    background-color: #3C6255;\n"
-"    border-radius: 20px;\n"
-"    font-size: 20px;\n"
-"    font-weight: 600;\n"
-"}")
-        self.label_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label_title.setObjectName("label_title")
         self.verticalLayout_2.addWidget(self.content)
         self.verticalLayout.addWidget(self.body)
+        MainWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(JurnalForm)
-        QtCore.QMetaObject.connectSlotsByName(JurnalForm)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, JurnalForm):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        JurnalForm.setWindowTitle(_translate("JurnalForm", "Dialog"))
-        self.btn_back.setText(_translate("JurnalForm", " Kembali"))
-        self.btn_submit.setText(_translate("JurnalForm", "Submit"))
-        self.deskripsi_jurnal.setPlainText(_translate("JurnalForm", "Tulis deskripsi jurnal . . ."))
-        self.label_title.setText(_translate("JurnalForm", "Form Jurnal"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.btn_back.setText(_translate("MainWindow", " Kembali"))
+        self.label_title.setText(_translate("MainWindow", "Form To Do List"))
+        self.date_time_edit.setDisplayFormat(_translate("MainWindow", "dd-MM-yyyy h:mm AP"))
+        self.deskripsi_tdl.setPlaceholderText(_translate("MainWindow", "Tulis Deskripsi . . ."))
+        self.btn_submit.setText(_translate("MainWindow", "Submit"))

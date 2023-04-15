@@ -1,4 +1,8 @@
-# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\todolist\toDoListWindow.ui'
+<<<<<<< HEAD:src/views/todolistWindow.py
+# Form implementation generated from reading ui file 'src/views/menuWindow.ui'
+=======
+# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\form\todolistForm.ui'
+>>>>>>> 93844fdcfc3ccaaaf47742a3b209b69859256ad0:ui_temp/form/todolistForm_ui.py
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -38,9 +42,37 @@ class Ui_MainWindow(object):
 "\n"
 "#footer {\n"
 "    background-color: #F7F4D9;\n"
+<<<<<<< HEAD:src/views/todolistWindow.py
 "}\n"
 "\n"
 "QPushButton {\n"
+=======
+"}")
+        ToDoListWindow.setSizeGripEnabled(True)
+        self.header = QtWidgets.QWidget(parent=ToDoListWindow)
+        self.header.setEnabled(True)
+        self.header.setGeometry(QtCore.QRect(0, 0, 960, 60))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.header.sizePolicy().hasHeightForWidth())
+        self.header.setSizePolicy(sizePolicy)
+        self.header.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
+        self.header.setAutoFillBackground(False)
+        self.header.setObjectName("header")
+        self.frame_logo = QtWidgets.QFrame(parent=self.header)
+        self.frame_logo.setGeometry(QtCore.QRect(459, 9, 42, 42))
+        self.frame_logo.setObjectName("frame_logo")
+        self.label = QtWidgets.QLabel(parent=self.frame_logo)
+        self.label.setGeometry(QtCore.QRect(0, 0, 42, 42))
+        self.label.setText("")
+        self.label.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\form\\logo_circle.png"))
+        self.label.setScaledContents(True)
+        self.label.setObjectName("label")
+        self.btn_submit_2 = QtWidgets.QPushButton(parent=self.header)
+        self.btn_submit_2.setGeometry(QtCore.QRect(6, 14, 111, 31))
+        self.btn_submit_2.setStyleSheet("QPushButton {\n"
+>>>>>>> 93844fdcfc3ccaaaf47742a3b209b69859256ad0:ui_temp/form/todolistForm_ui.py
 "    padding: 5px 10px;\n"
 "    border-radius: 25px;\n"
 "    background: #3C6255;\n"
@@ -82,7 +114,7 @@ class Ui_MainWindow(object):
         self.logo = QtWidgets.QLabel(parent=self.frame_logo)
         self.logo.setMinimumSize(QtCore.QSize(0, 0))
         self.logo.setMaximumSize(QtCore.QSize(42, 42))
-        self.logo.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\todolist\\printilan logo.png"))
+        self.logo.setPixmap(QtGui.QPixmap("src/views\\printilan logo.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
         self.horizontalLayout_3.addWidget(self.logo)
@@ -112,7 +144,7 @@ class Ui_MainWindow(object):
         self.logo_2 = QtWidgets.QLabel(parent=self.frame_logo_2)
         self.logo_2.setMaximumSize(QtCore.QSize(350, 190))
         self.logo_2.setText("")
-        self.logo_2.setPixmap(QtGui.QPixmap("d:\\STEI\\Jurusan\\Semester-4\\RPL\\Tubes\\if2250-2023-k01-g09-yanyard\\ui_temp\\todolist\\logo yanyard.png"))
+        self.logo_2.setPixmap(QtGui.QPixmap("src/views\\logo yanyard.png"))
         self.logo_2.setScaledContents(True)
         self.logo_2.setObjectName("logo_2")
         self.horizontalLayout_4.addWidget(self.logo_2)
@@ -185,12 +217,14 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
+<<<<<<< HEAD:src/views/todolistWindow.py
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label_title.setText(_translate("MainWindow", "To-Do-List"))
         self.label_date.setText(_translate("MainWindow", "6 April 2023"))
         self.pushButton_tdl1.setText(_translate("MainWindow", "[07:00] Siram Rafflesia"))
         self.pushButton_tdl3.setText(_translate("MainWindow", "[09:00] Siram Mangga"))
         self.pushButton_tdl2.setText(_translate("MainWindow", "[13.30] Pupuk Lidah Buaya"))
+
 
 if __name__ == "__main__":
     import sys
@@ -200,3 +234,9 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec())
+=======
+        ToDoListWindow.setWindowTitle(_translate("ToDoListWindow", "Dialog"))
+        self.btn_submit_2.setText(_translate("ToDoListWindow", "< Kembali"))
+        self.btn_submit.setText(_translate("ToDoListWindow", "Submit"))
+        self.plainTextEdit.setPlainText(_translate("ToDoListWindow", "Tulis Deskripsi"))
+>>>>>>> 93844fdcfc3ccaaaf47742a3b209b69859256ad0:ui_temp/form/todolistForm_ui.py

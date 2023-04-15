@@ -1,12 +1,11 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtGui import QGuiApplication, QCursor, QIcon, QFontDatabase
-from PyQt6.QtCore import Qt, pyqtSignal, QEvent
-from PyQt6.QtSvg import QSvgRenderer
-import sys, os, pathlib, requests, json, io
+from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
+from PyQt6.QtCore import Qt, pyqtSignal
+import os, pathlib, requests, json
 
 class ArtikelWindow(QMainWindow):
-    channel = pyqtSignal()
+    channel = pyqtSignal(str)
     
     def __init__(self):
         super().__init__()
@@ -28,7 +27,7 @@ class ArtikelWindow(QMainWindow):
                     int((screen_height - self.height()) / 2))
         
         # Assets path
-        path = str(pathlib.Path(__file__).parent.absolute()) + '/../../assets/'
+        path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
         
         # Logo
         self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
@@ -105,7 +104,7 @@ class ArtikelWindow(QMainWindow):
             }
             
             #text_description_artikel {
-                color: #F9F9F9;
+                color: #F7F4D9;
                 padding: 0px 8px 10px;
                 font-size: 14px;
             }
@@ -117,7 +116,7 @@ class ArtikelWindow(QMainWindow):
             
             #text_title_artikel {
                 font-size: 18px;
-                color: #F9F9F9;
+                color: #F7F4D9;
                 font-weight: 600;
                 padding: 10px 8px 0px;
             }
@@ -324,7 +323,6 @@ class ArtikelWindow(QMainWindow):
         self.text_description_artikel.setObjectName("text_description_artikel")
         
         self.verticalLayout_4.addWidget(self.text_description_artikel)
-        # self.horizontalLayout_9.addWidget(self.text_description_artikel)
         self.horizontalLayout_8.addWidget(self.box_description_artikel)
         self.verticalLayout_2.addWidget(self.frame_description)
         self.verticalLayout.addWidget(self.main)
@@ -346,13 +344,13 @@ class ArtikelWindow(QMainWindow):
         if response.status_code == 200:
             self.listArtikel = json.loads(response.text)  
         else:
-            print("failed")  
+            print("failed")
                     
     def on_btn_back_clicked(self):
-        self.changePageToArtikel()
+        self.changePageToMain()
     
-    def changePageToArtikel(self):
-        self.channel.emit()
+    def changePageToMain(self):
+        self.channel.emit("main")
 
     def prev(self):
         current_index = self.stackedWidget.currentIndex()

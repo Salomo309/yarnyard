@@ -81,7 +81,7 @@ class Ui_MainWindow(object):
 "    font-size: 18px;\n"
 "    color: #F9F9F9;\n"
 "    font-weight: 600;\n"
-"    padding: 0 8px;\n"
+"    margin: 0 8px;\n"
 "}")
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")

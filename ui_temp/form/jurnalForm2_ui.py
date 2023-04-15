@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\form\jurnalForm.ui'
+# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\form\jurnalForm2.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -9,16 +9,24 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_JurnalForm(object):
-    def setupUi(self, JurnalForm):
-        JurnalForm.setObjectName("JurnalForm")
-        JurnalForm.resize(960, 600)
-        JurnalForm.setMinimumSize(QtCore.QSize(0, 60))
-        self.verticalLayout = QtWidgets.QVBoxLayout(JurnalForm)
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(960, 600)
+        MainWindow.setStyleSheet("*{\n"
+"    border: none;\n"
+"    background-color: transparent;\n"
+"    background: transparent;\n"
+"    padding: 0;\n"
+"    margin: 0;\n"
+"}")
+        self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.header = QtWidgets.QWidget(parent=JurnalForm)
+        self.header = QtWidgets.QWidget(parent=self.centralwidget)
         self.header.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.MinimumExpanding, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -28,26 +36,9 @@ class Ui_JurnalForm(object):
         self.header.setMinimumSize(QtCore.QSize(0, 60))
         self.header.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.header.setAutoFillBackground(False)
-        self.header.setStyleSheet("*{\n"
-"    border: none;\n"
-"    background-color: transparent;\n"
-"    background: transparent;\n"
-"    padding: 0;\n"
-"    margin: 0;\n"
-"}\n"
-"\n"
-"#header {\n"
+        self.header.setStyleSheet("#header {\n"
 "    background-color: #3C6255;\n"
-"}\n"
-"\n"
-"#main {\n"
-"    background-color: #F7F4D9;\n"
-"}\n"
-"\n"
-"#footer {\n"
-"    background-color: #F7F4D9;\n"
-"}\n"
-"")
+"}")
         self.header.setObjectName("header")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.header)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -75,6 +66,8 @@ class Ui_JurnalForm(object):
         self.btn_back.setAutoExclusive(False)
         self.btn_back.setFlat(False)
         self.btn_back.setObjectName("btn_back")
+        self.btn_back.setText(" Kembali")
+        
         self.horizontalLayout_3.addWidget(self.btn_back, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.horizontalLayout.addWidget(self.frame_temp)
         self.frame_logo = QtWidgets.QFrame(parent=self.header)
@@ -99,7 +92,7 @@ class Ui_JurnalForm(object):
         self.frame_temp_2.setObjectName("frame_temp_2")
         self.horizontalLayout.addWidget(self.frame_temp_2)
         self.verticalLayout.addWidget(self.header)
-        self.body = QtWidgets.QWidget(parent=JurnalForm)
+        self.body = QtWidgets.QWidget(parent=self.centralwidget)
         self.body.setStyleSheet("#body {\n"
 "    background-color: #F7F4D9;\n"
 "}")
@@ -138,6 +131,8 @@ class Ui_JurnalForm(object):
         self.btn_submit.setDefault(False)
         self.btn_submit.setFlat(False)
         self.btn_submit.setObjectName("btn_submit")
+        self.btn_submit.setText("Submit")
+
         self.frame_2 = QtWidgets.QFrame(parent=self.content)
         self.frame_2.setGeometry(QtCore.QRect(0, 0, 960, 410))
         self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -157,6 +152,9 @@ class Ui_JurnalForm(object):
 "}")
         self.deskripsi_jurnal.setOverwriteMode(True)
         self.deskripsi_jurnal.setObjectName("deskripsi_jurnal")
+        self.deskripsi_jurnal.setPlaceholderText("Tulis deskripsi jurnal . . .")
+        # self.deskripsi_jurnal.setAlignment(Qt.AlignmentFlag.AlignJustify)
+        
         self.label_title = QtWidgets.QLabel(parent=self.frame_2)
         self.label_title.setGeometry(QtCore.QRect(361, 25, 238, 60))
         self.label_title.setStyleSheet("#label_title {\n"
@@ -168,16 +166,21 @@ class Ui_JurnalForm(object):
 "}")
         self.label_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_title.setObjectName("label_title")
+        self.label_title.setText("Form Jurnal")
+        
         self.verticalLayout_2.addWidget(self.content)
         self.verticalLayout.addWidget(self.body)
+        MainWindow.setCentralWidget(self.centralwidget)
+        
+        self.btn_back.clicked.connect(self.on_btn_back_clicked)
 
-        self.retranslateUi(JurnalForm)
-        QtCore.QMetaObject.connectSlotsByName(JurnalForm)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, JurnalForm):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        JurnalForm.setWindowTitle(_translate("JurnalForm", "Dialog"))
-        self.btn_back.setText(_translate("JurnalForm", " Kembali"))
-        self.btn_submit.setText(_translate("JurnalForm", "Submit"))
-        self.deskripsi_jurnal.setPlainText(_translate("JurnalForm", "Tulis deskripsi jurnal . . ."))
-        self.label_title.setText(_translate("JurnalForm", "Form Jurnal"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.btn_back.setText(_translate("MainWindow", " Kembali"))
+        self.btn_submit.setText(_translate("MainWindow", "Submit"))
+        self.deskripsi_jurnal.setPlainText(_translate("MainWindow", "Tulis deskripsi jurnal . . ."))
+        self.label_title.setText(_translate("MainWindow", "Form Jurnal"))

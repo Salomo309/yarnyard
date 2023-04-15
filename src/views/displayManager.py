@@ -1,8 +1,10 @@
 from PyQt6 import QtWidgets
 import sys
 
-from views.menuWindow import MenuWindow
-from views.artikelWindow import ArtikelWindow
+from views.windows.menuWindow import MenuWindow
+from views.windows.artikelWindow import ArtikelWindow
+from views.forms.jurnalForm import JurnalForm
+from views.forms.todolistForm import TodolistForm
 
 class PageController:
     def __init__(self):
@@ -17,23 +19,35 @@ class PageController:
         
         self.menuWindow = MenuWindow()
         self.artikelWindow = ArtikelWindow()
+        self.jurnalForm = JurnalForm()
+        self.todolistForm = TodolistForm()
         
         # Add the windows to the stacked widget
         self.stackedWidget.addWidget(self.menuWindow)           # 0
         self.stackedWidget.addWidget(self.artikelWindow)        # 1
+        self.stackedWidget.addWidget(self.jurnalForm)           # 2
+        self.stackedWidget.addWidget(self.todolistForm)           # 3
         
     def setUpListener(self):
         self.menuWindow.channel.connect(self.handleMenuWindow)
         self.artikelWindow.channel.connect(self.handleArtikelWindow)
+        self.jurnalForm.channel.connect(self.handleJurnalForm)
+        self.todolistForm.channel.connect(self.handleTodolistForm)
     
     def handleMenuWindow(self, page):
         if page == "artikel":
-            # self.menuWindow.close()
-            # self.artikelWindow.show()
             self.stackedWidget.setCurrentIndex(1)
-            # self.artikelWindow.setUpArtikelWindow()
+        else:
+            self.stackedWidget.setCurrentIndex(3)
     
-    def handleArtikelWindow(self):
-        # self.artikelWindow.close()
-        # self.menuWindow.show()
-        self.stackedWidget.setCurrentIndex(0)
+    def handleArtikelWindow(self, page):
+        if page == "main":
+            self.stackedWidget.setCurrentIndex(0)
+        
+    def handleJurnalForm(self, page):
+        if page == "main":
+            self.stackedWidget.setCurrentIndex(0)
+            
+    def handleTodolistForm(self, page):
+        if page == "main":
+            self.stackedWidget.setCurrentIndex(0)

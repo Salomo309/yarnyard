@@ -1,11 +1,11 @@
 from models.db import mysql
 
 class JurnalForm() :
-    def __init__(self, id_jurnal, id_tanaman, tanggal_jurnal, deskripsi):
+    def __init__(self, id_jurnal, id_tanaman, tanggal_jurnal, deskripsi_jurnal):
         self.id_jurnal = id_jurnal
         self.id_tanaman = id_tanaman
         self.tanggal_jurnal = tanggal_jurnal
-        self.deskripsi = deskripsi
+        self.deskripsi_jurnal = deskripsi_jurnal
 
     @classmethod
     def getAllJurnal(cls):
@@ -21,14 +21,14 @@ class JurnalForm() :
         else:
             listJurnal = []
             for data in dataJurnal:
-                id_jurnal, id_tanaman, tanggal_jurnal, deskripsi = data
+                id_jurnal, id_tanaman, tanggal_jurnal, deskripsi_jurnal = data
 
                 # initialize class
                 self = cls.__new__(cls)
                 self.id_jurnal = id_jurnal
                 self.id_tanaman = id_tanaman
                 self.tanggal_jurnal = tanggal_jurnal
-                self.deskripsi = deskripsi
+                self.deskripsi_jurnal = deskripsi_jurnal
 
                 listJurnal.append(self)
 
@@ -45,7 +45,7 @@ class JurnalForm() :
         return self.tanggal_jurnal
 
     def getDeskripsi(self):
-        return self.deskripsi
+        return self.deskripsi_jurnal
 
     def setIdJurnal(self, idj):
         self.id_jurnal = idj
@@ -56,5 +56,5 @@ class JurnalForm() :
     def setTanggal(self, tanggal):
         self.tanggal_jurnal = tanggal
 
-    def setDeskripsi(self, deskripsi):
-        self.deskripsi = deskripsi
+    def setDeskripsi(self, deskripsi_jurnal):
+        self.deskripsi_jurnal = deskripsi_jurnal

@@ -23,7 +23,7 @@ def initServer():
 
 if __name__ == '__main__':
     threadBackend = Thread(target=initServer)
-    threadBackend.setDaemon(True)
+    threadBackend.daemon = True
     threadBackend.start()
     
     window = QApplication(sys.argv)

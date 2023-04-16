@@ -256,12 +256,6 @@ class ArtikelWindow(QMainWindow):
         # Stacked Widget
         self.stackedWidget = QtWidgets.QStackedWidget(parent=self.widget_img)
         self.stackedWidget.setObjectName("stackedWidget")
-        # self.page = QtWidgets.QWidget()
-        # self.page.setObjectName("page")
-        # self.stackedWidget.addWidget(self.page)
-        # self.page_2 = QtWidgets.QWidget()
-        # self.page_2.setObjectName("page_2")
-        # self.stackedWidget.addWidget(self.page_2)
         
         # fetched_data is a list of items fetched from somewhere
         for i, item in enumerate(self.listArtikel):

@@ -8,6 +8,9 @@
     <file>left__arrow.svg</file>
   </qresource>
   <qresource prefix="test">
-    <file>event_note.svg</file>
+    <file>article.svg</file>
+    <file>more_vert.svg</file>
+    <file>add.svg</file>
+    <file>format_list_bulleted.svg</file>
   </qresource>
 </RCC>

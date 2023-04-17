@@ -1,6 +1,3 @@
-
-# Form implementation generated from reading ui file 'src/views/menuWindow.ui'
-
 # Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\form\todolistForm.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
@@ -12,18 +9,19 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.setEnabled(True)
-        MainWindow.resize(519, 436)
+class Ui_ToDoListWindow(object):
+    def setupUi(self, ToDoListWindow):
+        ToDoListWindow.setObjectName("ToDoListWindow")
+        ToDoListWindow.setEnabled(True)
+        ToDoListWindow.resize(960, 600)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
-        MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(0, 0))
-        MainWindow.setStyleSheet("*{\n"
+        sizePolicy.setHeightForWidth(ToDoListWindow.sizePolicy().hasHeightForWidth())
+        ToDoListWindow.setSizePolicy(sizePolicy)
+        ToDoListWindow.setMinimumSize(QtCore.QSize(0, 0))
+        ToDoListWindow.setAutoFillBackground(False)
+        ToDoListWindow.setStyleSheet("*{\n"
 "    border: none;\n"
 "    background-color: transparent;\n"
 "    background: transparent;\n"
@@ -41,9 +39,6 @@ class Ui_MainWindow(object):
 "\n"
 "#footer {\n"
 "    background-color: #F7F4D9;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
 "}")
         ToDoListWindow.setSizeGripEnabled(True)
         self.header = QtWidgets.QWidget(parent=ToDoListWindow)
@@ -70,12 +65,68 @@ class Ui_MainWindow(object):
         self.btn_submit_2.setGeometry(QtCore.QRect(6, 14, 111, 31))
         self.btn_submit_2.setStyleSheet("QPushButton {\n"
 "    padding: 5px 10px;\n"
-"    border-radius: 25px;\n"
+"    border-radius: 15px;\n"
 "    background: #3C6255;\n"
 "    color: #F7F3D7;\n"
 "    height: 40px;\n"
 "    width: 243px;\n"
-"    font-size: 20px;\n"
+"    font-size: 16px;\n"
+"    font-weight: 600;\n"
+"    cursor: pointer;\n"
+"    text-align: left;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #23493C;\n"
+"}")
+        self.btn_submit_2.setDefault(False)
+        self.btn_submit_2.setFlat(False)
+        self.btn_submit_2.setObjectName("btn_submit_2")
+        self.footer = QtWidgets.QWidget(parent=ToDoListWindow)
+        self.footer.setEnabled(False)
+        self.footer.setGeometry(QtCore.QRect(0, 540, 960, 60))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.footer.sizePolicy().hasHeightForWidth())
+        self.footer.setSizePolicy(sizePolicy)
+        self.footer.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
+        self.footer.setAutoFillBackground(False)
+        self.footer.setStyleSheet("#footer {\n"
+"    background-color: #F7F4D9;\n"
+"}")
+        self.footer.setObjectName("footer")
+        self.frame = QtWidgets.QFrame(parent=self.footer)
+        self.frame.setGeometry(QtCore.QRect(0, 540, 960, 60))
+        self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame.setObjectName("frame")
+        self.body = QtWidgets.QWidget(parent=ToDoListWindow)
+        self.body.setGeometry(QtCore.QRect(0, 60, 960, 480))
+        self.body.setStyleSheet("#body {\n"
+"    background-color: #F7F4D9;\n"
+"}")
+        self.body.setObjectName("body")
+        self.content = QtWidgets.QFrame(parent=self.body)
+        self.content.setGeometry(QtCore.QRect(-1, 9, 961, 471))
+        self.content.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.content.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.content.setObjectName("content")
+        self.submit = QtWidgets.QFrame(parent=self.content)
+        self.submit.setGeometry(QtCore.QRect(0, 310, 961, 80))
+        self.submit.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.submit.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.submit.setObjectName("submit")
+        self.btn_submit = QtWidgets.QPushButton(parent=self.submit)
+        self.btn_submit.setGeometry(QtCore.QRect(390, 10, 181, 31))
+        self.btn_submit.setStyleSheet("QPushButton {\n"
+"    padding: 5px 10px;\n"
+"    border-radius: 15px;\n"
+"    background: #3C6255;\n"
+"    color: #F7F3D7;\n"
+"    height: 40px;\n"
+"    width: 243px;\n"
+"    font-size: 16px;\n"
 "    font-weight: 600;\n"
 "    cursor: pointer;\n"
 "}\n"
@@ -83,149 +134,71 @@ class Ui_MainWindow(object):
 "QPushButton:hover {\n"
 "    background-color: #23493C;\n"
 "}")
-        MainWindow.setAnimated(True)
-        MainWindow.setTabShape(QtWidgets.QTabWidget.TabShape.Rounded)
-        self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
-        self.centralwidget.setStyleSheet("")
-        self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.header = QtWidgets.QWidget(parent=self.centralwidget)
-        self.header.setMinimumSize(QtCore.QSize(0, 60))
-        self.header.setObjectName("header")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.header)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setSpacing(0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.frame_logo = QtWidgets.QFrame(parent=self.header)
-        self.frame_logo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_logo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_logo.setObjectName("frame_logo")
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_logo)
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_3.setSpacing(0)
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.logo = QtWidgets.QLabel(parent=self.frame_logo)
-        self.logo.setMinimumSize(QtCore.QSize(0, 0))
-        self.logo.setMaximumSize(QtCore.QSize(42, 42))
-        self.logo.setPixmap(QtGui.QPixmap("src/views\\printilan logo.png"))
-        self.logo.setScaledContents(True)
-        self.logo.setObjectName("logo")
-        self.horizontalLayout_3.addWidget(self.logo)
-        self.horizontalLayout.addWidget(self.frame_logo)
-        self.verticalLayout.addWidget(self.header)
-        self.main = QtWidgets.QWidget(parent=self.centralwidget)
-        self.main.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.MinimumExpanding, QtWidgets.QSizePolicy.Policy.MinimumExpanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.main.sizePolicy().hasHeightForWidth())
-        self.main.setSizePolicy(sizePolicy)
-        self.main.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.main.setObjectName("main")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.main)
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_2.setSpacing(0)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.frame_logo_2 = QtWidgets.QFrame(parent=self.main)
-        self.frame_logo_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_logo_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_logo_2.setObjectName("frame_logo_2")
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_logo_2)
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_4.setSpacing(0)
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.logo_2 = QtWidgets.QLabel(parent=self.frame_logo_2)
-        self.logo_2.setMaximumSize(QtCore.QSize(350, 190))
-        self.logo_2.setText("")
-        self.logo_2.setPixmap(QtGui.QPixmap("src/views\\logo yanyard.png"))
-        self.logo_2.setScaledContents(True)
-        self.logo_2.setObjectName("logo_2")
-        self.horizontalLayout_4.addWidget(self.logo_2)
-        self.verticalLayout_2.addWidget(self.frame_logo_2, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignTop)
-        self.frame_tdl = QtWidgets.QFrame(parent=self.main)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.MinimumExpanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.frame_tdl.sizePolicy().hasHeightForWidth())
-        self.frame_tdl.setSizePolicy(sizePolicy)
-        self.frame_tdl.setStyleSheet("")
-        self.frame_tdl.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_tdl.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_tdl.setObjectName("frame_tdl")
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.frame_tdl)
-        self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.label_title = QtWidgets.QLabel(parent=self.frame_tdl)
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_title.setFont(font)
-        self.label_title.setStyleSheet("background-color: #3C6255;\n"
-"color: #fff;")
-        self.label_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label_title.setObjectName("label_title")
-        self.verticalLayout_3.addWidget(self.label_title)
-        self.label_date = QtWidgets.QLabel(parent=self.frame_tdl)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_date.setFont(font)
-        self.label_date.setStyleSheet("color: #3C6255;")
-        self.label_date.setObjectName("label_date")
-        self.verticalLayout_3.addWidget(self.label_date)
-        self.pushButton_tdl1 = QtWidgets.QPushButton(parent=self.frame_tdl)
-        font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
-        self.pushButton_tdl1.setFont(font)
-        self.pushButton_tdl1.setObjectName("pushButton_tdl1")
-        self.verticalLayout_3.addWidget(self.pushButton_tdl1)
-        self.pushButton_tdl3 = QtWidgets.QPushButton(parent=self.frame_tdl)
-        self.pushButton_tdl3.setObjectName("pushButton_tdl3")
-        self.verticalLayout_3.addWidget(self.pushButton_tdl3)
-        self.pushButton_tdl2 = QtWidgets.QPushButton(parent=self.frame_tdl)
-        self.pushButton_tdl2.setObjectName("pushButton_tdl2")
-        self.verticalLayout_3.addWidget(self.pushButton_tdl2)
-        self.verticalLayout_2.addWidget(self.frame_tdl)
-        self.verticalLayout.addWidget(self.main)
-        self.footer = QtWidgets.QWidget(parent=self.centralwidget)
-        self.footer.setMinimumSize(QtCore.QSize(0, 60))
-        self.footer.setObjectName("footer")
-        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.footer)
-        self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_7.setSpacing(0)
-        self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.frame = QtWidgets.QFrame(parent=self.footer)
-        self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame.setObjectName("frame")
-        self.verticalLayout_7.addWidget(self.frame)
-        self.verticalLayout.addWidget(self.footer, 0, QtCore.Qt.AlignmentFlag.AlignBottom)
-        MainWindow.setCentralWidget(self.centralwidget)
+        self.btn_submit.setDefault(False)
+        self.btn_submit.setFlat(False)
+        self.btn_submit.setObjectName("btn_submit")
+        self.deskripsi = QtWidgets.QFrame(parent=self.content)
+        self.deskripsi.setGeometry(QtCore.QRect(0, 180, 961, 131))
+        self.deskripsi.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.deskripsi.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.deskripsi.setObjectName("deskripsi")
+        self.plainTextEdit = QtWidgets.QPlainTextEdit(parent=self.deskripsi)
+        self.plainTextEdit.setGeometry(QtCore.QRect(310, 20, 331, 41))
+        self.plainTextEdit.setStyleSheet("QPlainTextEdit {\n"
+"    padding: 7px 10px;\n"
+"    border-radius: 15px;\n"
+"    background: #61876E;\n"
+"    color: #F7F3D7;\n"
+"    height: 40px;\n"
+"    width: 243px;\n"
+"    font-size: 15px;\n"
+"    font-weight: 600;\n"
+"    cursor: pointer;\n"
+"}\n"
+"\n"
+"QPlainTextEdit:hover {\n"
+"    background-color: #23493C;\n"
+"}\n"
+"")
+        self.plainTextEdit.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.plainTextEdit.setMidLineWidth(0)
+        self.plainTextEdit.setMaximumBlockCount(1)
+        self.plainTextEdit.setObjectName("plainTextEdit")
+        self.frame_2 = QtWidgets.QFrame(parent=self.content)
+        self.frame_2.setGeometry(QtCore.QRect(-1, 90, 961, 91))
+        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.dateTimeEdit = QtWidgets.QDateTimeEdit(parent=self.frame_2)
+        self.dateTimeEdit.setGeometry(QtCore.QRect(380, 50, 201, 31))
+        self.dateTimeEdit.setStyleSheet("QDateTimeEdit {\n"
+"    padding: 7px 10px;\n"
+"    border-radius: 15px;\n"
+"    background: #61876E;\n"
+"    color: #F7F3D7;\n"
+"    height: 40px;\n"
+"    width: 243px;\n"
+"    font-size: 15px;\n"
+"    font-weight: 600;\n"
+"    cursor: pointer;\n"
+"}\n"
+"\n"
+"QDateTimeEdit:hover {\n"
+"    background-color: #23493C;\n"
+"}\n"
+"")
+        self.dateTimeEdit.setTime(QtCore.QTime(1, 0, 0))
+        self.dateTimeEdit.setCurrentSection(QtWidgets.QDateTimeEdit.Section.YearSection)
+        self.dateTimeEdit.setCalendarPopup(True)
+        self.dateTimeEdit.setCurrentSectionIndex(2)
+        self.dateTimeEdit.setObjectName("dateTimeEdit")
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(ToDoListWindow)
+        QtCore.QMetaObject.connectSlotsByName(ToDoListWindow)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, ToDoListWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_title.setText(_translate("MainWindow", "To-Do-List"))
-        self.label_date.setText(_translate("MainWindow", "6 April 2023"))
-        self.pushButton_tdl1.setText(_translate("MainWindow", "[07:00] Siram Rafflesia"))
-        self.pushButton_tdl3.setText(_translate("MainWindow", "[09:00] Siram Mangga"))
-        self.pushButton_tdl2.setText(_translate("MainWindow", "[13.30] Pupuk Lidah Buaya"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec())
+        ToDoListWindow.setWindowTitle(_translate("ToDoListWindow", "Dialog"))
+        self.btn_submit_2.setText(_translate("ToDoListWindow", "< Kembali"))
+        self.btn_submit.setText(_translate("ToDoListWindow", "Submit"))
+        self.plainTextEdit.setPlainText(_translate("ToDoListWindow", "Tulis Deskripsi"))

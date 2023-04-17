@@ -1,8 +1,7 @@
-<<<<<<< HEAD:src/views/todolistWindow.py
+
 # Form implementation generated from reading ui file 'src/views/menuWindow.ui'
-=======
+
 # Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\form\todolistForm.ui'
->>>>>>> 93844fdcfc3ccaaaf47742a3b209b69859256ad0:ui_temp/form/todolistForm_ui.py
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -42,11 +41,9 @@ class Ui_MainWindow(object):
 "\n"
 "#footer {\n"
 "    background-color: #F7F4D9;\n"
-<<<<<<< HEAD:src/views/todolistWindow.py
 "}\n"
 "\n"
 "QPushButton {\n"
-=======
 "}")
         ToDoListWindow.setSizeGripEnabled(True)
         self.header = QtWidgets.QWidget(parent=ToDoListWindow)
@@ -72,7 +69,6 @@ class Ui_MainWindow(object):
         self.btn_submit_2 = QtWidgets.QPushButton(parent=self.header)
         self.btn_submit_2.setGeometry(QtCore.QRect(6, 14, 111, 31))
         self.btn_submit_2.setStyleSheet("QPushButton {\n"
->>>>>>> 93844fdcfc3ccaaaf47742a3b209b69859256ad0:ui_temp/form/todolistForm_ui.py
 "    padding: 5px 10px;\n"
 "    border-radius: 25px;\n"
 "    background: #3C6255;\n"
@@ -217,7 +213,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-<<<<<<< HEAD:src/views/todolistWindow.py
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label_title.setText(_translate("MainWindow", "To-Do-List"))
         self.label_date.setText(_translate("MainWindow", "6 April 2023"))
@@ -234,9 +229,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec())
-=======
-        ToDoListWindow.setWindowTitle(_translate("ToDoListWindow", "Dialog"))
-        self.btn_submit_2.setText(_translate("ToDoListWindow", "< Kembali"))
-        self.btn_submit.setText(_translate("ToDoListWindow", "Submit"))
-        self.plainTextEdit.setPlainText(_translate("ToDoListWindow", "Tulis Deskripsi"))
->>>>>>> 93844fdcfc3ccaaaf47742a3b209b69859256ad0:ui_temp/form/todolistForm_ui.py

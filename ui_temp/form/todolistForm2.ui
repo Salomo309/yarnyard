@@ -255,9 +255,9 @@
           <widget class="QDateTimeEdit" name="date_time_edit">
            <property name="geometry">
             <rect>
-             <x>376</x>
+             <x>380</x>
              <y>170</y>
-             <width>208</width>
+             <width>200</width>
              <height>35</height>
             </rect>
            </property>

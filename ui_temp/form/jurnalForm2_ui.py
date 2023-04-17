@@ -66,6 +66,8 @@ class Ui_MainWindow(object):
         self.btn_back.setAutoExclusive(False)
         self.btn_back.setFlat(False)
         self.btn_back.setObjectName("btn_back")
+        self.btn_back.setText(" Kembali")
+        
         self.horizontalLayout_3.addWidget(self.btn_back, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.horizontalLayout.addWidget(self.frame_temp)
         self.frame_logo = QtWidgets.QFrame(parent=self.header)
@@ -129,6 +131,8 @@ class Ui_MainWindow(object):
         self.btn_submit.setDefault(False)
         self.btn_submit.setFlat(False)
         self.btn_submit.setObjectName("btn_submit")
+        self.btn_submit.setText("Submit")
+
         self.frame_2 = QtWidgets.QFrame(parent=self.content)
         self.frame_2.setGeometry(QtCore.QRect(0, 0, 960, 410))
         self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -148,6 +152,9 @@ class Ui_MainWindow(object):
 "}")
         self.deskripsi_jurnal.setOverwriteMode(True)
         self.deskripsi_jurnal.setObjectName("deskripsi_jurnal")
+        self.deskripsi_jurnal.setPlaceholderText("Tulis deskripsi jurnal . . .")
+        # self.deskripsi_jurnal.setAlignment(Qt.AlignmentFlag.AlignJustify)
+        
         self.label_title = QtWidgets.QLabel(parent=self.frame_2)
         self.label_title.setGeometry(QtCore.QRect(361, 25, 238, 60))
         self.label_title.setStyleSheet("#label_title {\n"
@@ -159,9 +166,13 @@ class Ui_MainWindow(object):
 "}")
         self.label_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_title.setObjectName("label_title")
+        self.label_title.setText("Form Jurnal")
+        
         self.verticalLayout_2.addWidget(self.content)
         self.verticalLayout.addWidget(self.body)
         MainWindow.setCentralWidget(self.centralwidget)
+        
+        self.btn_back.clicked.connect(self.on_btn_back_clicked)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

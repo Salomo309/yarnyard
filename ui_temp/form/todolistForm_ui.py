@@ -171,7 +171,6 @@ class Ui_ToDoListWindow(object):
         self.frame_2.setObjectName("frame_2")
         self.dateTimeEdit = QtWidgets.QDateTimeEdit(parent=self.frame_2)
         self.dateTimeEdit.setGeometry(QtCore.QRect(380, 50, 201, 31))
-        self.dateTimeEdit.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.ArrowCursor))
         self.dateTimeEdit.setStyleSheet("QDateTimeEdit {\n"
 "    padding: 7px 10px;\n"
 "    border-radius: 15px;\n"

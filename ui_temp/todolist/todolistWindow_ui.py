@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\todolist\todolistWindow.ui'
+# Form implementation generated from reading ui file 'd:\STEI\Jurusan\Semester-4\RPL\Tubes\if2250-2023-k01-g09-yanyard\ui_temp\todolist\toDoListWindow.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -191,3 +191,12 @@ class Ui_MainWindow(object):
         self.pushButton_tdl1.setText(_translate("MainWindow", "[07:00] Siram Rafflesia"))
         self.pushButton_tdl3.setText(_translate("MainWindow", "[09:00] Siram Mangga"))
         self.pushButton_tdl2.setText(_translate("MainWindow", "[13.30] Pupuk Lidah Buaya"))
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec())

@@ -82,13 +82,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.frame_temp_2)
         
         
-        self.scrollArea = QtWidgets.QScrollArea(parent=self.centralwidget)
-        self.scrollArea.setGeometry(QtCore.QRect(-1, 60, 961, 550))
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName("scrollArea")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 959, 600))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        # self.scrollArea = QtWidgets.QScrollArea(parent=self.centralwidget)
+        # self.scrollArea.setGeometry(QtCore.QRect(-1, 60, 961, 550))
+        # self.scrollArea.setWidgetResizable(True)
+        # self.scrollArea.setObjectName("scrollArea")
+        # self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        # self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 959, 600))
+        # self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
          
 #         self.main = QtWidgets.QFrame(parent=self.scrollAreaWidgetContents)
 #         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.MinimumExpanding)
@@ -100,13 +100,24 @@ class Ui_MainWindow(object):
 # "    background-color: #F7F4D9;\n"
 # "}")
 
+        self.scrollArea = QtWidgets.QScrollArea(parent=self.centralwidget)
+        self.scrollArea.setGeometry(QtCore.QRect(-1, 60, 961, 550))
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 959, 600))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        
         
         self.frame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
         self.frame.setGeometry(QtCore.QRect(400, 100, 300, 60))
         self.frame.setObjectName("frame")
         # self.frame.setStyleSheet("background-color: #61876E;\n")
         
-
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setContentsMargins(30, 30, 30, 30)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.verticalLayout_2.setSpacing(0)
         # add the frame to the vertical layout of the scrollAreaWidgetContents
         self.widget = QtWidgets.QWidget(parent=self.scrollAreaWidgetContents)
         self.widget.setGeometry(QtCore.QRect(0, 0, 961, 531))
@@ -114,6 +125,7 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setContentsMargins(30, 30, 30, 30)
         self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout.setSpacing(0)
         
         
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame)
@@ -124,8 +136,8 @@ class Ui_MainWindow(object):
         
         self.label_title_data.setGeometry(QtCore.QRect(325, 0, 250, 60))
         self.gridLayoutWidget = QtWidgets.QWidget(self.widget)
-        self.gridLayoutWidget.setMinimumSize(QtCore.QSize(960, 520))
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(0, 100, 961, 600))
+        self.gridLayoutWidget.setMinimumSize(QtCore.QSize(960, 400))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(0, 100, 961, 400))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         # self.gridLayoutWidget.setStyleSheet("background-color: black;")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
@@ -134,17 +146,18 @@ class Ui_MainWindow(object):
         self.gridLayout.setColumnStretch(1, 1)
         self.gridLayout.setColumnStretch(1, 1)
         self.gridLayout.setColumnStretch(1, 1)  # new column
-        if self.gridLayout.count() == 3:
-            self.scrollArea = QtWidgets.QScrollArea()
+        if self.gridLayout.count() >= 6:
+            self.verticalLayout_2.resize(self.scrollAreaWidgetContents.width(), self.gridLayout.sizeHint().height())
+            # self.scrollArea = QtWidgets.QScrollArea()
             self.scrollArea.setWidgetResizable(True)
+            self.scrollWidget = QtWidgets.QWidget()
+            self.scrollWidget.setLayout(self.gridLayoutWidget)
             self.scrollArea.setWidget(self.scrollWidget)
 
             # Add the scroll area to the main layout
             self.centralwidget.addWidget(self.scrollArea)
 
             # Create a new widget to hold the frames inside the scroll area
-            self.scrollWidget = QtWidgets.QWidget()
-            self.scrollWidget.setLayout(self.gridLayout)
         self.verticalLayout.addWidget(self.frame)
         self.verticalLayout.addLayout(self.gridLayout)
 
@@ -166,6 +179,7 @@ class Ui_MainWindow(object):
 
         # self.verticalLayout.addWidget(self.pushButton)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout_2.addWidget(self.scrollArea)
         self.scrollArea.setStyleSheet("#scrollArea {\n"
 "    background-color: #F7F4D9;}\n")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -216,6 +230,9 @@ class Ui_MainWindow(object):
         layout.addSpacing(5) # Add some vertical spacing
         layout.addLayout(waktu_layout)
         layout.addStretch() # Add some stretch at the bottom to make the layout expandable
+        
+        # if self.verticalLayout.count() > 6:
+        #     self.scrollAreaWidgetContents.resize(self.scrollAreaWidgetContents.width(), self.verticalLayout.sizeHint().height())
             
         self.gridLayout.addWidget(frame, self.gridLayout.count() // 3, self.gridLayout.count() % 3)
         

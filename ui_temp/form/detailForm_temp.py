@@ -160,33 +160,35 @@ class Ui_MainWindow(object):
 "}")
         self.nama_tanaman.setOverwriteMode(True)
         self.nama_tanaman.setObjectName("nama_tanaman")
-        self.add_tanaman_btn = QtWidgets.QPushButton(parent=self.frame_2)
-        self.add_tanaman_btn.setGeometry(QtCore.QRect(370, 19, 221, 271))
+        self.add_tanaman_btn = QtWidgets.QToolButton(parent=self.frame_2)
+        self.add_tanaman_btn.setGeometry(QtCore.QRect(371, 19, 221, 271))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(self.add_tanaman_btn.sizePolicy().hasHeightForWidth())
         self.add_tanaman_btn.setSizePolicy(sizePolicy)
+        self.add_tanaman_btn.setContextMenuPolicy(QtCore.Qt.ContextMenuPolicy.NoContextMenu)
         self.add_tanaman_btn.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.add_tanaman_btn.setStyleSheet("#add_tanaman_btn{\n"
-"    border-radius: 40px;\n"
-"    background: #E5E5E5;\n"
+"    border-radius: 50px;\n"
+"    background: #C4C4C4;\n"
 "    color: #61876E;\n"
-"    font-size: 16px;\n"
+"    font-size: 20px;\n"
 "    font-weight: 600;\n"
 "    text-align: center;\n"
+"    padding-top: 45px;\n"
+"    padding-bottom: 30px;\n"
 "}\n"
 "\n"
-"#add_tanaman_btn:hover {\n"
+"#add_tanaman_btn::hover {\n"
 "    background-color: #a3a3a3;\n"
 "}")
-        self.add_tanaman_btn.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("../../assets/icons/add_tanaman_icon.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.add_tanaman_btn.setIcon(icon1)
         self.add_tanaman_btn.setIconSize(QtCore.QSize(140, 140))
-        self.add_tanaman_btn.setDefault(False)
-        self.add_tanaman_btn.setFlat(False)
+        self.add_tanaman_btn.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
+        self.add_tanaman_btn.setAutoRaise(False)
         self.add_tanaman_btn.setObjectName("add_tanaman_btn")
         self.verticalLayout_2.addWidget(self.content)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -201,6 +203,7 @@ class Ui_MainWindow(object):
         self.btn_submit.setText(_translate("MainWindow", "Submit"))
         self.deskripsitanaman.setPlainText(_translate("MainWindow", "Tulis deskripsi"))
         self.nama_tanaman.setPlainText(_translate("MainWindow", "Masukkan nama tanaman"))
+        self.add_tanaman_btn.setText(_translate("MainWindow", "Add Photo"))
 
 
 if __name__ == "__main__":

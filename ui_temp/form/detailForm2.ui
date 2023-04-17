@@ -335,10 +335,10 @@
           <bool>true</bool>
          </property>
         </widget>
-        <widget class="QPushButton" name="add_tanaman_btn">
+        <widget class="QToolButton" name="add_tanaman_btn">
          <property name="geometry">
           <rect>
-           <x>370</x>
+           <x>371</x>
            <y>19</y>
            <width>221</width>
            <height>271</height>
@@ -350,25 +350,30 @@
            <verstretch>1</verstretch>
           </sizepolicy>
          </property>
+         <property name="contextMenuPolicy">
+          <enum>Qt::NoContextMenu</enum>
+         </property>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
          </property>
          <property name="styleSheet">
           <string notr="true">#add_tanaman_btn{
-	border-radius: 40px;
-	background: #E5E5E5;
+	border-radius: 50px;
+	background: #C4C4C4;
 	color: #61876E;
-	font-size: 16px;
+	font-size: 20px;
 	font-weight: 600;
 	text-align: center;
+	padding-top: 45px;
+	padding-bottom: 30px;
 }
 
-#add_tanaman_btn:hover {
+#add_tanaman_btn::hover {
     background-color: #a3a3a3;
 }</string>
          </property>
          <property name="text">
-          <string/>
+          <string>Add Photo</string>
          </property>
          <property name="icon">
           <iconset>
@@ -380,10 +385,10 @@
            <height>140</height>
           </size>
          </property>
-         <property name="default">
-          <bool>false</bool>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
          </property>
-         <property name="flat">
+         <property name="autoRaise">
           <bool>false</bool>
          </property>
         </widget>

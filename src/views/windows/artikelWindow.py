@@ -54,42 +54,42 @@ class ArtikelWindow(QMainWindow):
                 margin: 0;
                 font-family: Poppins;
             }
-            
+
             #header {
                 background-color: #3C6255;
             }
-            
+
             #main {
                 background-color: #F7F4D9;
             }
-            
+
             #footer {
                 background-color: #F7F4D9;
             }
-            
+
             #btn_back {
                 color: #F7F4D9;
                 font-size: 20px;
                 font-weight: 600;
             }
-            
+
             #btn_back:hover {
                 color: #DEDBC0;
             }
-            
+
             #btn_prev, #btn_next {
                 background-color: #61876E;
                 border-radius: 25px;
             }
-            
+
             #btn_prev:hover {
                 background-color: #486E55;
             }
-            
+
             #btn_next:hover {
                 background-color: #486E55;
             }
-            
+
             #label_title_artikel {
                 color: #F7F4D9;
                 background-color: #3C6255;
@@ -98,20 +98,20 @@ class ArtikelWindow(QMainWindow):
                 font-size: 28px;
                 font-weight: 600;
             }
-            
+
             #box_description_artikel {
                 color: #F9F9F9;
                 background-color: #3C6255;
                 border-radius: 20px;
             }
-            
+
             #text_description_artikel {
                 color: #F7F4D9;
                 padding: 0px 8px 10px;
                 font-size: 14px;
                 font-weight: 500;
             }
-            
+
             #text_title_artikel {
                 font-size: 18px;
                 color: #F7F4D9;

@@ -2,10 +2,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
-import os
-import pathlib
-import requests
-import json
+import os, pathlib, requests, json
 
 
 class ArtikelWindow(QMainWindow):
@@ -436,7 +433,7 @@ class ArtikelWindow(QMainWindow):
             self.listArtikel = json.loads(response.text)
         else:
             self.listArtikel = []
-            print("No List Artikel Found")
+            print("No Artikel Found")
 
     def on_btn_back_clicked(self):
         self.changePageToMain()

@@ -5,6 +5,7 @@ import sys
 from views.windows.menuWindow import MenuWindow
 from views.windows.artikelWindow import ArtikelWindow
 from views.windows.detailTanamanWindow import DetailTanamanWindow
+from views.windows.todolistWindow import TodolistWindow
 
 # Forms
 from views.forms.jurnalForm import JurnalForm
@@ -24,7 +25,7 @@ class PageController:
 
         self.menuWindow = MenuWindow()
         self.artikelWindow = ArtikelWindow()
-        # self.detailTanamanWindow = DetailTanamanWindow()
+        self.todolistWindow = TodolistWindow()
         self.detailTanamanWindows = {}
 
         self.jurnalForm = JurnalForm()
@@ -33,15 +34,17 @@ class PageController:
         # Add the windows to the stacked widget
         self.stackedWidget.addWidget(self.menuWindow)           # 0
         self.stackedWidget.addWidget(self.artikelWindow)        # 1
-        # self.stackedWidget.addWidget(self.detailTanamanWindow)  # 2
+        # self.stackedWidget.addWidget(self.detailTanamanWindow)
+        self.stackedWidget.addWidget(self.todolistWindow)       # 2
 
-        self.stackedWidget.addWidget(self.jurnalForm)           # 2
-        self.stackedWidget.addWidget(self.todolistForm)         # 3
+        self.stackedWidget.addWidget(self.jurnalForm)           # 3
+        self.stackedWidget.addWidget(self.todolistForm)         # 4
 
     def setUpListener(self):
         self.menuWindow.channel.connect(self.handleMenuWindow)
         self.artikelWindow.channel.connect(self.handleArtikelWindow)
         # self.detailTanamanWindows.channel.connect(self.handleDetailTanamanWindow)
+        self.todolistWindow.channel.connect(self.handleTodolistWindow)
 
         self.jurnalForm.channel.connect(self.handleJurnalForm)
         self.todolistForm.channel.connect(self.handleTodolistForm)
@@ -49,6 +52,8 @@ class PageController:
     def handleMenuWindow(self, page, idTanaman=None):
         if page == "artikel":
             self.stackedWidget.setCurrentIndex(1)
+        elif page == "todolist":
+            self.stackedWidget.setCurrentIndex(2)
         else:
             idTanaman = 1
             if idTanaman in self.detailTanamanWindows:
@@ -68,6 +73,10 @@ class PageController:
             self.stackedWidget.setCurrentIndex(0)
 
     def handleDetailTanamanWindow(self, page):
+        if page == "main":
+            self.stackedWidget.setCurrentIndex(0)
+    
+    def handleTodolistWindow(self, page):
         if page == "main":
             self.stackedWidget.setCurrentIndex(0)
 

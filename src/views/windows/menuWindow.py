@@ -240,15 +240,12 @@ class MenuWindow(QMainWindow):
         self.setCentralWidget(self.centralwidget)
     
     def on_btn_tanaman_clicked(self):
-        print("Tanaman Clicked")
         self.channel.emit("test")
         
     def on_btn_tdl_clicked(self):
-        print("TDL Clicked")
-
+        self.channel.emit("todolist")
+        
     def on_btn_artikel_clicked(self):
-        print("Artikel Clicked")
-        # self.changePageToArtikel()
         self.channel.emit("artikel")
         
     def changePageToArtikel(self):

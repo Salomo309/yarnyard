@@ -107,7 +107,11 @@ class ArtikelWindow(QMainWindow):
                 color: #F7F4D9;
                 padding: 0px 8px 10px;
                 font-size: 14px;
-                font-weight: 500;
+            }
+            
+            #widget_img {
+                border-radius: 40px;
+                background-color: #3C6255;
             }
             
             #text_title_artikel {
@@ -202,7 +206,6 @@ class ArtikelWindow(QMainWindow):
         
         self.horizontalLayout_4.addWidget(self.label_title_artikel, 0, QtCore.Qt.AlignmentFlag.AlignHCenter | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.verticalLayout_2.addWidget(self.frame_title)
-        
         self.frame_contents_1 = QtWidgets.QFrame(parent=self.main)
         self.frame_contents_1.setMaximumSize(QtCore.QSize(16777215, 190))
         self.frame_contents_1.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -212,14 +215,6 @@ class ArtikelWindow(QMainWindow):
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_5.setSpacing(0)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-                
-        if (len(self.listArtikel) == 0):
-            self.vertical_layout_x = QtWidgets.QVBoxLayout()
-            self.vertical_layout_x.setContentsMargins(0, 90, 0, 0)
-            self.vertical_layout_x.setSpacing(0)
-            self.vertical_layout_x.setObjectName("vertical_layout_x")
-            self.verticalLayout_2.addLayout(self.vertical_layout_x)
-        
         self.frame_prev = QtWidgets.QFrame(parent=self.frame_contents_1)
         self.frame_prev.setMaximumSize(QtCore.QSize(260, 16777215))
         self.frame_prev.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -230,18 +225,17 @@ class ArtikelWindow(QMainWindow):
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         
         # Btn_Prev
-        if (len(self.listArtikel) != 0):
-            self.btn_prev = QtWidgets.QPushButton(parent=self.frame_prev)
-            self.btn_prev.setMinimumSize(QtCore.QSize(50, 50))
-            self.btn_prev.setMaximumSize(QtCore.QSize(50, 50))
-            icon1 = QtGui.QIcon()
-            icon1.addPixmap(QtGui.QPixmap(path + "icons/left_arrow_circle.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-            self.btn_prev.setIcon(icon1)
-            self.btn_prev.setIconSize(QtCore.QSize(26, 26))
-            self.btn_prev.setObjectName("btn_prev")
-            self.btn_prev.setCursor(Qt.CursorShape.PointingHandCursor)
-            self.horizontalLayout_6.addWidget(self.btn_prev)
+        self.btn_prev = QtWidgets.QPushButton(parent=self.frame_prev)
+        self.btn_prev.setMinimumSize(QtCore.QSize(50, 50))
+        self.btn_prev.setMaximumSize(QtCore.QSize(50, 50))
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(path + "icons/left_arrow_circle.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_prev.setIcon(icon1)
+        self.btn_prev.setIconSize(QtCore.QSize(26, 26))
+        self.btn_prev.setObjectName("btn_prev")
+        self.btn_prev.setCursor(Qt.CursorShape.PointingHandCursor)
         
+        self.horizontalLayout_6.addWidget(self.btn_prev)
         self.horizontalLayout_5.addWidget(self.frame_prev, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.frame_img = QtWidgets.QFrame(parent=self.frame_contents_1)
         self.frame_img.setMinimumSize(QtCore.QSize(400, 170))
@@ -259,10 +253,15 @@ class ArtikelWindow(QMainWindow):
         self.horizontalLayout_11.setSpacing(0)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         
-        # if (len(self.listArtikel) != 0):
         # Stacked Widget
         self.stackedWidget = QtWidgets.QStackedWidget(parent=self.widget_img)
         self.stackedWidget.setObjectName("stackedWidget")
+        # self.page = QtWidgets.QWidget()
+        # self.page.setObjectName("page")
+        # self.stackedWidget.addWidget(self.page)
+        # self.page_2 = QtWidgets.QWidget()
+        # self.page_2.setObjectName("page_2")
+        # self.stackedWidget.addWidget(self.page_2)
         
         # fetched_data is a list of items fetched from somewhere
         for i, item in enumerate(self.listArtikel):
@@ -271,7 +270,6 @@ class ArtikelWindow(QMainWindow):
             self.stackedWidget.addWidget(new_widget)
         
         self.horizontalLayout_11.addWidget(self.stackedWidget)
-        
         self.hboxlayout.addWidget(self.widget_img)
         self.horizontalLayout_5.addWidget(self.frame_img)
         self.frame_next = QtWidgets.QFrame(parent=self.frame_contents_1)
@@ -282,20 +280,17 @@ class ArtikelWindow(QMainWindow):
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.frame_next)
         self.horizontalLayout_7.setContentsMargins(27, -1, -1, -1)
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        
-        if (len(self.listArtikel) != 0):
-            # Btn next
-            self.btn_next = QtWidgets.QPushButton(parent=self.frame_next)
-            self.btn_next.setMinimumSize(QtCore.QSize(50, 50))
-            self.btn_next.setMaximumSize(QtCore.QSize(50, 50))
-            icon2 = QtGui.QIcon()
-            icon2.addPixmap(QtGui.QPixmap(path + "icons/right_arrow_circle.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-            self.btn_next.setIcon(icon2)
-            self.btn_next.setIconSize(QtCore.QSize(26, 26))
-            self.btn_next.setObjectName("btn_next")
-            self.btn_next.setCursor(Qt.CursorShape.PointingHandCursor)
-            self.horizontalLayout_7.addWidget(self.btn_next)
+        self.btn_next = QtWidgets.QPushButton(parent=self.frame_next)
+        self.btn_next.setMinimumSize(QtCore.QSize(50, 50))
+        self.btn_next.setMaximumSize(QtCore.QSize(50, 50))
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(path + "icons/right_arrow_circle.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_next.setIcon(icon2)
+        self.btn_next.setIconSize(QtCore.QSize(26, 26))
+        self.btn_next.setObjectName("btn_next")
+        self.btn_next.setCursor(Qt.CursorShape.PointingHandCursor)
 
+        self.horizontalLayout_7.addWidget(self.btn_next)
         self.horizontalLayout_5.addWidget(self.frame_next, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.verticalLayout_2.addWidget(self.frame_contents_1)
         self.frame_description = QtWidgets.QFrame(parent=self.main)
@@ -305,13 +300,9 @@ class ArtikelWindow(QMainWindow):
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.frame_description)
         self.horizontalLayout_8.setContentsMargins(-1, -1, -1, 18)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
-        
         self.box_description_artikel = QtWidgets.QWidget(parent=self.frame_description)
         self.box_description_artikel.setMaximumSize(QtCore.QSize(600, 220))
         self.box_description_artikel.setObjectName("box_description_artikel")
-        
-        if (len(self.listArtikel) == 0):
-            self.box_description_artikel.setMaximumSize(QtCore.QSize(0, 0))
         
         # Deskripsi Artikel
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.box_description_artikel)
@@ -340,63 +331,20 @@ class ArtikelWindow(QMainWindow):
         self.stackedWidget.setCurrentIndex(0)
 
         current_index = self.stackedWidget.currentIndex()
-        if (len(self.listArtikel) != 0):
-            self.change_background_img(current_index)
 
-            self.btn_prev.clicked.connect(self.prev)
-            self.btn_next.clicked.connect(self.next)
-        
-        if (len(self.listArtikel) == 0):
-            self.frame_no_artikel = QtWidgets.QFrame(parent=self.frame_contents_1)
-            self.frame_no_artikel.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-            self.frame_no_artikel.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-            self.frame_no_artikel.setObjectName("frame_no_artikel")
-            
-            self.vertical_layout_no_artikel = QtWidgets.QVBoxLayout(self.frame_no_artikel)
-            self.vertical_layout_no_artikel.setContentsMargins(0, 0, 0, 0)
-            self.vertical_layout_no_artikel.setSpacing(0)
-            self.vertical_layout_no_artikel.setObjectName("vertical_layout_no_artikel")
-            
-            self.frame_label_no_artikel = QtWidgets.QFrame(parent=self.frame_no_artikel)
-            self.frame_label_no_artikel.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-            self.frame_label_no_artikel.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-            self.frame_label_no_artikel.setObjectName(f"frame_label_no_artikel")
-            
-            self.vertical_layout_no_artikel_2 = QtWidgets.QVBoxLayout(self.frame_label_no_artikel)
-            self.vertical_layout_no_artikel_2.setContentsMargins(0, 0, 0, 0)
-            self.vertical_layout_no_artikel_2.setSpacing(0)
-            self.vertical_layout_no_artikel_2.setObjectName(f"vertical_layout_no_artikel_2")
-            
-            self.icon_no_artikel = QtWidgets.QLabel(parent=self.frame_label_no_artikel)
-            self.icon_no_artikel.setFixedSize(100, 100)
-            self.icon_no_artikel.setPixmap(QtGui.QPixmap(path + "icons/search_off.svg"))
-            self.icon_no_artikel.setScaledContents(True)
-            self.icon_no_artikel.setObjectName("icon_no_artikel")
-            
-            self.label_no_artikel = QtWidgets.QLabel(parent=self.frame_label_no_artikel)
-            self.label_no_artikel.setStyleSheet('''
-                                            #label_no_artikel {
-                                                color: #3C6255;
-                                                font-size: 24px;
-                                                font-weight: 600;
-                                            }
-                                            ''')
-            self.label_no_artikel.setObjectName("label_no_artikel")
-            self.label_no_artikel.setText("No Artikel Found")
-            
-            self.vertical_layout_no_artikel.addWidget(self.icon_no_artikel, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
-            self.vertical_layout_no_artikel.addWidget(self.label_no_artikel, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
-            self.vertical_layout_x.addWidget(self.frame_no_artikel)
-        
+        self.change_background_img(current_index)
+
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
+        self.btn_prev.clicked.connect(self.prev)
+        self.btn_next.clicked.connect(self.next)
+        
     def setArtikel(self):
-        response = requests.get('http://127.0.0.1:3000/artikel/')
+        response = requests.get('http://localhost:3000/artikel/')
         
         if response.status_code == 200:
             self.listArtikel = json.loads(response.text)  
         else:
-            self.listArtikel = []
-            print("No List Artikel Found")
+            print("failed")
                     
     def on_btn_back_clicked(self):
         self.changePageToMain()
@@ -430,7 +378,7 @@ class ArtikelWindow(QMainWindow):
         image = self.listArtikel[index]["gambar"]
         
         self.widget_img.setStyleSheet(
-            f"#widget_img {{border-image: url({image}) 0 0 0 0 stretch stretch; background-attachment: fixed; border-radius: 40px;}}")
+            f"#widget_img {{background-image: url({image}); background-attachment: fixed;}}")
 
         self.text_title_artikel.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.text_description_artikel.setAlignment(Qt.AlignmentFlag.AlignJustify)

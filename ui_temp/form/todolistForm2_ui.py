@@ -119,7 +119,7 @@ class Ui_MainWindow(object):
         self.label_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_title.setObjectName("label_title")
         self.date_time_edit = QtWidgets.QDateTimeEdit(parent=self.frame_2)
-        self.date_time_edit.setGeometry(QtCore.QRect(376, 170, 208, 35))
+        self.date_time_edit.setGeometry(QtCore.QRect(380, 170, 200, 35))
         self.date_time_edit.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.ArrowCursor))
         self.date_time_edit.setStyleSheet("QDateTimeEdit {\n"
 "    padding: 0px 0px 0px 12px;\n"

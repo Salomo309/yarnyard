@@ -224,9 +224,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-243</y>
+         <y>-240</y>
          <width>940</width>
-         <height>801</height>
+         <height>823</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -347,7 +347,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>130</width>
+                     <width>160</width>
                      <height>200</height>
                     </size>
                    </property>
@@ -658,6 +658,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="spacing">
                     <number>0</number>
                    </property>
+                   <property name="topMargin">
+                    <number>9</number>
+                   </property>
                    <property name="bottomMargin">
                     <number>0</number>
                    </property>
@@ -686,7 +689,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                        <widget class="QFrame" name="frame_time_tdl_1">
                         <property name="maximumSize">
                          <size>
-                          <width>120</width>
+                          <width>160</width>
                           <height>16777215</height>
                          </size>
                         </property>
@@ -716,22 +719,22 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                           <widget class="QLabel" name="label_time_tdl_1">
                            <property name="minimumSize">
                             <size>
-                             <width>0</width>
-                             <height>35</height>
+                             <width>160</width>
+                             <height>40</height>
                             </size>
                            </property>
                            <property name="styleSheet">
                             <string notr="true">#label_time_tdl_1 {
 	color: #F7F4D9;
 	background-color: #61876E;
-	padding: 8px 40px;
+	padding: 8px 36px;
 	border-radius: 16px;
 	font-size: 14px;
 	font-weight: 600;
 }</string>
                            </property>
                            <property name="text">
-                            <string>07.00</string>
+                            <string>07.00aaaaa</string>
                            </property>
                           </widget>
                          </item>
@@ -740,10 +743,10 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                       </item>
                       <item>
                        <widget class="QFrame" name="frame_desc_tdl">
-                        <property name="maximumSize">
+                        <property name="minimumSize">
                          <size>
-                          <width>16777215</width>
-                          <height>35</height>
+                          <width>0</width>
+                          <height>40</height>
                          </size>
                         </property>
                         <property name="styleSheet">
@@ -1018,7 +1021,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <number>0</number>
                    </property>
                    <property name="topMargin">
-                    <number>9</number>
+                    <number>18</number>
                    </property>
                    <item>
                     <widget class="QFrame" name="frame_jurnal_1">
@@ -1085,7 +1088,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                           <number>9</number>
                          </property>
                          <property name="bottomMargin">
-                          <number>9</number>
+                          <number>0</number>
                          </property>
                          <item>
                           <widget class="QFrame" name="frame_left">
@@ -1121,7 +1124,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 }</string>
                               </property>
                               <property name="text">
-                               <string>19 April 2023</string>
+                               <string>9 April 2023</string>
                               </property>
                              </widget>
                             </item>
@@ -1173,7 +1176,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                         </property>
                         <layout class="QHBoxLayout" name="horizontalLayout_13">
                          <property name="leftMargin">
-                          <number>27</number>
+                          <number>24</number>
                          </property>
                          <property name="topMargin">
                           <number>0</number>
@@ -1193,7 +1196,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 }</string>
                            </property>
                            <property name="plainText">
-                            <string>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at nibh volutpat, eleifend augue vel, hendrerit augue. Fusce egestas ipsum dolor, id convallis nulla cursus eleifend. Aliquam erat volutpat. Suspendisse facilisis quis ex non vestibulum. In ultricies porta dapibus. Praesent in arcu vel risus auctor elementum id at ex. Vestibulum gravida, odio ac dapibus convallis, erat lacus molestie turpis, in tristique urna mauris vitae ligula.</string>
+                            <string>Hari ini aku menanam cabai di taman belakangku</string>
                            </property>
                           </widget>
                          </item>

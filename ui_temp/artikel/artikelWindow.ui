@@ -191,7 +191,7 @@
              </size>
             </property>
             <property name="pixmap">
-             <pixmap>logo_circle.png</pixmap>
+             <pixmap>C:/Users/bangk/.designer/backup/logo_circle.png</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>

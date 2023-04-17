@@ -128,7 +128,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -243, 940, 801))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -240, 940, 823))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -169,7 +169,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.widget_img = QtWidgets.QWidget(parent=self.frame_img)
         self.widget_img.setMinimumSize(QtCore.QSize(160, 200))
-        self.widget_img.setMaximumSize(QtCore.QSize(130, 200))
+        self.widget_img.setMaximumSize(QtCore.QSize(160, 200))
         self.widget_img.setStyleSheet("#widget_img {\n"
 "    border-radius:30px;\n"
 "    background-color: #3C6255;\n"
@@ -287,7 +287,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.setSpacing(0)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.verticalLayout_10 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_10.setContentsMargins(-1, -1, -1, 0)
+        self.verticalLayout_10.setContentsMargins(-1, 9, -1, 0)
         self.verticalLayout_10.setSpacing(0)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.frame_tdl_1 = QtWidgets.QFrame(parent=self.frame_list_tdl)
@@ -298,7 +298,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_7.setContentsMargins(0, 9, 0, 9)
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
         self.frame_time_tdl_1 = QtWidgets.QFrame(parent=self.frame_tdl_1)
-        self.frame_time_tdl_1.setMaximumSize(QtCore.QSize(120, 16777215))
+        self.frame_time_tdl_1.setMaximumSize(QtCore.QSize(160, 16777215))
         self.frame_time_tdl_1.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_time_tdl_1.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_time_tdl_1.setObjectName("frame_time_tdl_1")
@@ -307,11 +307,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_11.setSpacing(0)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
         self.label_time_tdl_1 = QtWidgets.QLabel(parent=self.frame_time_tdl_1)
-        self.label_time_tdl_1.setMinimumSize(QtCore.QSize(0, 35))
+        self.label_time_tdl_1.setMinimumSize(QtCore.QSize(160, 40))
         self.label_time_tdl_1.setStyleSheet("#label_time_tdl_1 {\n"
 "    color: #F7F4D9;\n"
 "    background-color: #61876E;\n"
-"    padding: 8px 40px;\n"
+"    padding: 8px 36px;\n"
 "    border-radius: 16px;\n"
 "    font-size: 14px;\n"
 "    font-weight: 600;\n"
@@ -320,7 +320,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_11.addWidget(self.label_time_tdl_1, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.horizontalLayout_7.addWidget(self.frame_time_tdl_1)
         self.frame_desc_tdl = QtWidgets.QFrame(parent=self.frame_tdl_1)
-        self.frame_desc_tdl.setMaximumSize(QtCore.QSize(16777215, 35))
+        self.frame_desc_tdl.setMinimumSize(QtCore.QSize(0, 40))
         self.frame_desc_tdl.setStyleSheet("#frame_desc_tdl {\n"
 "    color: #F7F4D9;\n"
 "    background-color: #61876E;\n"
@@ -425,7 +425,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_14.setSpacing(0)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.verticalLayout_13 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_13.setContentsMargins(-1, 9, -1, -1)
+        self.verticalLayout_13.setContentsMargins(-1, 18, -1, -1)
         self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
         self.frame_jurnal_1 = QtWidgets.QFrame(parent=self.frame_list_jurnal)
@@ -448,7 +448,7 @@ class Ui_MainWindow(object):
         self.frame_jurnal_top.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_jurnal_top.setObjectName("frame_jurnal_top")
         self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.frame_jurnal_top)
-        self.horizontalLayout_11.setContentsMargins(27, 18, 9, 9)
+        self.horizontalLayout_11.setContentsMargins(27, 18, 9, 0)
         self.horizontalLayout_11.setSpacing(0)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.frame_left = QtWidgets.QFrame(parent=self.frame_jurnal_top)
@@ -488,7 +488,7 @@ class Ui_MainWindow(object):
         self.frame_jurnal_bot.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_jurnal_bot.setObjectName("frame_jurnal_bot")
         self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.frame_jurnal_bot)
-        self.horizontalLayout_13.setContentsMargins(27, 0, 27, 0)
+        self.horizontalLayout_13.setContentsMargins(24, 0, 27, 0)
         self.horizontalLayout_13.setObjectName("horizontalLayout_13")
         self.text_desc_jurnal_1 = QtWidgets.QPlainTextEdit(parent=self.frame_jurnal_bot)
         self.text_desc_jurnal_1.setStyleSheet("#text_desc_jurnal_1 {\n"
@@ -520,9 +520,9 @@ class Ui_MainWindow(object):
         self.text_desc_tanaman.setPlainText(_translate("MainWindow", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at nibh volutpat, eleifend augue vel, hendrerit augue. Fusce egestas ipsum dolor, id convallis nulla cursus eleifend. Aliquam erat volutpat. Suspendisse facilisis quis ex non vestibulum. In ultricies porta dapibus. Praesent in arcu vel risus auctor elementum id at ex."))
         self.label_tdl.setText(_translate("MainWindow", "To Do List"))
         self.btn_add_tdl.setText(_translate("MainWindow", "ADD TO DO LIST"))
-        self.label_time_tdl_1.setText(_translate("MainWindow", "07.00"))
+        self.label_time_tdl_1.setText(_translate("MainWindow", "07.00aaaaa"))
         self.label_desc_tdl_1.setText(_translate("MainWindow", "Siram tanaman sebelum berangkat kuliah"))
         self.label_jurnal.setText(_translate("MainWindow", "Jurnal Tanaman"))
         self.btn_add_jurnal.setText(_translate("MainWindow", "ADD JURNAL"))
-        self.label_time_jurnal_1.setText(_translate("MainWindow", "19 April 2023"))
-        self.text_desc_jurnal_1.setPlainText(_translate("MainWindow", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at nibh volutpat, eleifend augue vel, hendrerit augue. Fusce egestas ipsum dolor, id convallis nulla cursus eleifend. Aliquam erat volutpat. Suspendisse facilisis quis ex non vestibulum. In ultricies porta dapibus. Praesent in arcu vel risus auctor elementum id at ex. Vestibulum gravida, odio ac dapibus convallis, erat lacus molestie turpis, in tristique urna mauris vitae ligula."))
+        self.label_time_jurnal_1.setText(_translate("MainWindow", "9 April 2023"))
+        self.text_desc_jurnal_1.setPlainText(_translate("MainWindow", "Hari ini aku menanam cabai di taman belakangku"))

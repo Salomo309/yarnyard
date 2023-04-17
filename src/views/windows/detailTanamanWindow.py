@@ -2,13 +2,14 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
-import os, pathlib, requests, json
+import os, pathlib, requests, json, datetime
 
 class DetailTanamanWindow(QMainWindow):
     channel = pyqtSignal(str)
 
-    def __init__(self):
+    def __init__(self, idTanaman=None):
         super().__init__()
+        self.idTanaman = idTanaman
         self.setUpDetailTanamanWindow()
 
     def setUpDetailTanamanWindow(self):
@@ -39,8 +40,9 @@ class DetailTanamanWindow(QMainWindow):
                 font_path = os.path.join(fonts_folder_path, filename)
                 QFontDatabase.addApplicationFont(font_path)
 
-        # self.setArtikel()
-        self.initializeWidgets(path)
+        if (self.idTanaman != None):
+            self.setDetailTanaman(self.idTanaman)
+            self.initializeWidgets(path)
         
     def initializeWidgets(self, path):
         self.setStyleSheet('''
@@ -50,6 +52,7 @@ class DetailTanamanWindow(QMainWindow):
                                 background: transparent;
                                 padding: 0;
                                 margin: 0;
+                                font-family: Poppins;
                             }
                             ''')
         
@@ -100,6 +103,9 @@ class DetailTanamanWindow(QMainWindow):
         self.btn_back.setAutoExclusive(False)
         self.btn_back.setFlat(False)
         self.btn_back.setObjectName("btn_back")
+        self.btn_back.setText(" Kembali")
+        self.btn_back.setCursor(Qt.CursorShape.PointingHandCursor)
+        
         self.horizontalLayout_3.addWidget(self.btn_back, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.horizontalLayout.addWidget(self.frame_temp)
         self.frame_logo = QtWidgets.QFrame(parent=self.header)
@@ -218,14 +224,14 @@ class DetailTanamanWindow(QMainWindow):
         # Image Tanaman
         self.widget_img = QtWidgets.QWidget(parent=self.frame_img)
         self.widget_img.setMinimumSize(QtCore.QSize(160, 200))
-        self.widget_img.setMaximumSize(QtCore.QSize(130, 200))
-        self.widget_img.setStyleSheet('''
-                                        #widget_img {
-                                            border-radius:30px;
-                                            background-color: #3C6255;
-                                        }
-                                        ''')
+        self.widget_img.setMaximumSize(QtCore.QSize(160, 200))
         self.widget_img.setObjectName("widget_img")
+        
+        image = self.detailTanaman[0]["gambar"]
+
+        self.widget_img.setStyleSheet(
+            f"#widget_img {{border-image: url({image}) 0 0 0 0 stretch stretch; background-attachment: fixed; border-radius:40px;}}")
+        
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget_img)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_5.setSpacing(0)
@@ -252,6 +258,8 @@ class DetailTanamanWindow(QMainWindow):
                                         }
                                         ''')
         self.label_name.setObjectName("label_name")
+        self.label_name.setText(self.detailTanaman[0]["nama_tanaman"])
+        
         self.horizontalLayout_5.addWidget(self.label_name, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.verticalLayout_4.addWidget(self.frame_name)
         self.frame_text = QtWidgets.QFrame(parent=self.frame_tanaman)
@@ -265,15 +273,19 @@ class DetailTanamanWindow(QMainWindow):
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         
         # Description Tanaman
-        self.text_desc_tanaman = QtWidgets.QPlainTextEdit(parent=self.frame_text)
+        self.text_desc_tanaman = QtWidgets.QTextEdit(parent=self.frame_text)
         self.text_desc_tanaman.setStyleSheet('''
                                             #text_desc_tanaman {
-                                                color: #0F0F0F;
+                                                color: #3C6255;
                                                 font-size: 14px;
+                                                font-weight: 500;
                                             }
                                             ''')
         self.text_desc_tanaman.setReadOnly(True)
         self.text_desc_tanaman.setObjectName("text_desc_tanaman")
+        self.text_desc_tanaman.setText(self.detailTanaman[0]["deskripsi_tanaman"])
+        self.text_desc_tanaman.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        
         self.horizontalLayout_6.addWidget(self.text_desc_tanaman)
         self.verticalLayout_4.addWidget(self.frame_text)
         self.verticalLayout_3.addWidget(self.frame_tanaman)
@@ -336,7 +348,11 @@ class DetailTanamanWindow(QMainWindow):
                                             padding: 15px;
                                             border-radius: 20px;
                                             font-size: 14px;
-                                            font-weight: 800;
+                                            font-weight: 600;
+                                        }
+                                        
+                                        #btn_add_tdl:hover {
+                                            background-color: #486E55;
                                         }
                                         ''')
         icon1 = QtGui.QIcon()
@@ -345,6 +361,7 @@ class DetailTanamanWindow(QMainWindow):
         self.btn_add_tdl.setIconSize(QtCore.QSize(20, 20))
         self.btn_add_tdl.setObjectName("btn_add_tdl")
         self.btn_add_tdl.setText("ADD TO DO LIST")
+        self.btn_add_tdl.setCursor(Qt.CursorShape.PointingHandCursor)
         
         self.verticalLayout_8.addWidget(self.btn_add_tdl, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.horizontalLayout_4.addWidget(self.frame_head_tdl_2)
@@ -365,7 +382,49 @@ class DetailTanamanWindow(QMainWindow):
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         
         # Dynamic TDL
-        for i in range(3):
+        if (len(self.listTDL) == 0):
+            self.frame_no_tdl = QtWidgets.QFrame(parent=self.frame_list_tdl)
+            self.frame_no_tdl.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_no_tdl.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_no_tdl.setObjectName("frame_no_tdl")
+            
+            self.vertical_layout_no_tdl = QtWidgets.QVBoxLayout(self.frame_no_tdl)
+            self.vertical_layout_no_tdl.setContentsMargins(0, 0, 0, 0)
+            self.vertical_layout_no_tdl.setSpacing(0)
+            self.vertical_layout_no_tdl.setObjectName("vertical_layout_no_tdl")
+            
+            self.frame_label_no_tdl = QtWidgets.QFrame(parent=self.frame_no_tdl)
+            self.frame_label_no_tdl.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_label_no_tdl.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_label_no_tdl.setObjectName(f"frame_label_no_tdl")
+            
+            self.vertical_layout_no_tdl_2 = QtWidgets.QVBoxLayout(self.frame_label_no_tdl)
+            self.vertical_layout_no_tdl_2.setContentsMargins(0, 0, 0, 0)
+            self.vertical_layout_no_tdl_2.setSpacing(0)
+            self.vertical_layout_no_tdl_2.setObjectName(f"vertical_layout_no_tdl_2")
+            
+            self.icon_no_tdl = QtWidgets.QLabel(parent=self.frame_label_no_tdl)
+            self.icon_no_tdl.setFixedSize(100, 100)
+            self.icon_no_tdl.setPixmap(QtGui.QPixmap(path + "icons/search_off.svg"))
+            self.icon_no_tdl.setScaledContents(True)
+            self.icon_no_tdl.setObjectName("icon_no_tdl")
+            
+            self.label_no_tdl = QtWidgets.QLabel(parent=self.frame_label_no_tdl)
+            self.label_no_tdl.setStyleSheet('''
+                                            #label_no_tdl {
+                                                color: #3C6255;
+                                                font-size: 24px;
+                                                font-weight: 600;
+                                            }
+                                            ''')
+            self.label_no_tdl.setObjectName("label_no_tdl")
+            self.label_no_tdl.setText("No To Do List Found")
+            
+            self.vertical_layout_no_tdl.addWidget(self.icon_no_tdl, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
+            self.vertical_layout_no_tdl.addWidget(self.label_no_tdl, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
+            self.verticalLayout_10.addWidget(self.frame_no_tdl)
+            
+        for i, item in enumerate(self.listTDL):
             # Frame
             self.frame_tdl_temp = QtWidgets.QFrame(parent=self.frame_list_tdl)
             self.frame_tdl_temp.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -374,12 +433,12 @@ class DetailTanamanWindow(QMainWindow):
             
             # Layout for frame
             self.horizontal_layout_temp = QtWidgets.QHBoxLayout(self.frame_tdl_temp)
-            self.horizontal_layout_temp.setContentsMargins(0, 9, 0, 9)
+            self.horizontal_layout_temp.setContentsMargins(0, 9, 0, 0)
             self.horizontal_layout_temp.setObjectName(f"horizontal_layout_temp_{i}")
             
             # Time frame
             self.frame_time_tdl = QtWidgets.QFrame(parent=self.frame_tdl_temp)
-            self.frame_time_tdl.setMaximumSize(QtCore.QSize(120, 16777215))
+            self.frame_time_tdl.setMaximumSize(QtCore.QSize(140, 16777215))
             self.frame_time_tdl.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
             self.frame_time_tdl.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
             self.frame_time_tdl.setObjectName(f"frame_time_tdl_{i}")
@@ -391,29 +450,32 @@ class DetailTanamanWindow(QMainWindow):
             self.vertical_layout_time.setObjectName(f"vertical_layout_time_{i}")
             
             # Label time
-            self.label_time = QtWidgets.QLabel(parent=self.frame_time_tdl)
-            self.label_time.setMinimumSize(QtCore.QSize(0, 35))
-            self.label_time.setStyleSheet(f'''
-                                            #label_time_{i} {{
+            self.label_time_tdl = QtWidgets.QLabel(parent=self.frame_time_tdl)
+            self.label_time_tdl.setMinimumSize(QtCore.QSize(140, 40))
+            self.label_time_tdl.setStyleSheet(f'''
+                                            #label_time_tdl_{i} {{
                                                 color: #F7F4D9;
                                                 background-color: #61876E;
-                                                padding: 8px 40px;
                                                 border-radius: 16px;
                                                 font-size: 14px;
-                                                font-weight: 600;
+                                                font-weight: 500;
                                             }}
                                             ''')
-            self.label_time.setText("07.00")
-            self.label_time.setObjectName(f"label_time_{i}")
+            self.label_time_tdl.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+            str_time = self.listTDL[i]["waktu"]
+            date_time = datetime.datetime.strptime(str_time, "%a, %d %b %Y %H:%M:%S %Z")
+            
+            self.label_time_tdl.setText(date_time.strftime('%H:%M') + " │ " + date_time.strftime('%d %b'))
+            self.label_time_tdl.setObjectName(f"label_time_tdl_{i}")
         
-            self.vertical_layout_time.addWidget(self.label_time, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+            self.vertical_layout_time.addWidget(self.label_time_tdl, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
     
             # Add time frame to horizontal layout
             self.horizontal_layout_temp.addWidget(self.frame_time_tdl)
             
             # Desc frame
             self.frame_desc = QtWidgets.QFrame(parent=self.frame_tdl_temp)
-            self.frame_desc.setMaximumSize(QtCore.QSize(16777215, 35))
+            self.frame_desc.setMinimumSize(QtCore.QSize(16777215, 40))
             self.frame_desc.setStyleSheet(f'''
                                      #frame_desc_{i} {{
                                         color: #F7F4D9;
@@ -437,10 +499,10 @@ class DetailTanamanWindow(QMainWindow):
                                                 #label_desc_tdl_{i} {{
                                                     color: #F7F4D9;
                                                     font-size: 14px;
-                                                    font-weight: 600;
+                                                    font-weight: 500;
                                                 }}
                                                 ''')
-            self.label_desc_tdl.setText("Siram tanaman sebelum berangkat kuliah")
+            self.label_desc_tdl.setText(self.listTDL[i]["deskripsi_tdl"])
             self.label_desc_tdl.setObjectName(f"label_desc_tdl_{i}")
             self.horizontal_layout_desc.addWidget(self.label_desc_tdl, 0, QtCore.Qt.AlignmentFlag.AlignLeft) #
             
@@ -448,10 +510,42 @@ class DetailTanamanWindow(QMainWindow):
             self.btn_more_1.setStyleSheet("")
             self.btn_more_1.setText("")
             icon2 = QtGui.QIcon()
-            icon2.addPixmap(QtGui.QPixmap(":/test/more_vert.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+            icon2.addPixmap(QtGui.QPixmap(path + "icons/more_vert.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
             self.btn_more_1.setIcon(icon2)
             self.btn_more_1.setIconSize(QtCore.QSize(20, 20))
             self.btn_more_1.setObjectName(f"btn_more_1_{i}")
+            
+            self.menu = QtWidgets.QMenu()
+            self.edit_action = self.menu.addAction("Edit")
+            self.delete_action = self.menu.addAction("Delete")
+
+            self.menu.setStyleSheet(
+                '''
+                QMenu{
+                    background-color: #3C6255;
+                    color: #F7F4D9;
+                    width: 87px;
+                    }
+
+                QMenu::item {
+                    border-radius: 4px;
+                    padding: 2px 25px 2px 20px;
+                    border: 1px solid transparent; /* reserve space for selection border */
+                }
+
+                QMenu::item:selected{
+                background-color: #61876E;
+                color: #F7F4D9;
+                }
+                '''
+            )
+            str_id_tdl = self.listTDL[i]["id_tdl"]
+            self.edit_action.triggered.connect(lambda checked, obj_name=f"btn_menu_tdl_{str_id_tdl}": self.handle_menu_tdl(self.edit_action, obj_name))
+            self.delete_action.triggered.connect(lambda checked, obj_name=f"btn_menu_tdl_{str_id_tdl}": self.handle_menu_tdl(self.delete_action, obj_name))
+            
+            self.btn_more_1.setMenu(self.menu)
+            self.btn_more_1.setStyleSheet("QPushButton::menu-indicator { width: 0px }")
+            self.btn_more_1.setCursor(Qt.CursorShape.PointingHandCursor)
             
             self.horizontal_layout_desc.addWidget(self.btn_more_1, 0, QtCore.Qt.AlignmentFlag.AlignRight)
             self.horizontal_layout_temp.addWidget(self.frame_desc)
@@ -489,11 +583,11 @@ class DetailTanamanWindow(QMainWindow):
         self.frame_head_jurnal_1.setObjectName("frame_head_jurnal_1")
         self.icon_jurnal = QtWidgets.QLabel(parent=self.frame_head_jurnal_1)
         self.icon_jurnal.setGeometry(QtCore.QRect(0, 15, 30, 30))
-        self.icon_jurnal.setPixmap(QtGui.QPixmap(":/test/article.svg"))
+        self.icon_jurnal.setPixmap(QtGui.QPixmap(path + "icons/article.svg"))
         self.icon_jurnal.setScaledContents(True)
         self.icon_jurnal.setObjectName("icon_jurnal")
         self.label_jurnal = QtWidgets.QLabel(parent=self.frame_head_jurnal_1)
-        self.label_jurnal.setGeometry(QtCore.QRect(40, 15, 200, 30))
+        self.label_jurnal.setGeometry(QtCore.QRect(40, 15, 210, 30))
         self.label_jurnal.setStyleSheet('''
                                         #label_jurnal {
                                             color: #3C6255;
@@ -502,6 +596,8 @@ class DetailTanamanWindow(QMainWindow):
                                         }
                                         ''')
         self.label_jurnal.setObjectName("label_jurnal")
+        self.label_jurnal.setText("Jurnal Tanaman")
+        
         self.horizontalLayout_9.addWidget(self.frame_head_jurnal_1)
         self.frame_head_jurnal_2 = QtWidgets.QFrame(parent=self.frame_head_jurnal)
         self.frame_head_jurnal_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -519,12 +615,19 @@ class DetailTanamanWindow(QMainWindow):
                                             padding: 15px;
                                             border-radius: 20px;
                                             font-size: 14px;
-                                            font-weight: 800;
+                                            font-weight: 600;
+                                        }
+                                        
+                                        #btn_add_jurnal:hover {
+                                            background-color: #486E55;
                                         }
                                         ''')
         self.btn_add_jurnal.setIcon(icon1)
         self.btn_add_jurnal.setIconSize(QtCore.QSize(20, 20))
         self.btn_add_jurnal.setObjectName("btn_add_jurnal")
+        self.btn_add_jurnal.setText("ADD JURNAL")
+        self.btn_add_jurnal.setCursor(Qt.CursorShape.PointingHandCursor)
+        
         self.horizontalLayout_10.addWidget(self.btn_add_jurnal, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.horizontalLayout_9.addWidget(self.frame_head_jurnal_2)
         self.verticalLayout_12.addWidget(self.frame_head_jurnal)
@@ -540,85 +643,205 @@ class DetailTanamanWindow(QMainWindow):
         self.verticalLayout_13.setContentsMargins(-1, 18, -1, -1)
         self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
-        self.frame_jurnal_1 = QtWidgets.QFrame(parent=self.frame_list_jurnal)
-        self.frame_jurnal_1.setMaximumSize(QtCore.QSize(16777215, 160))
-        self.frame_jurnal_1.setStyleSheet('''
-                                            #frame_jurnal_1 {
-                                                color: #F7F4D9;
-                                                background-color: #3C6255;
-                                                border-radius: 30px;
+        
+        # DYNAMIC Jurnal
+        if (len(self.listJurnal) == 0):
+            self.frame_no_jurnal = QtWidgets.QFrame(parent=self.frame_list_jurnal)
+            self.frame_no_jurnal.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_no_jurnal.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_no_jurnal.setObjectName("frame_no_jurnal")
+            
+            self.vertical_layout_no_jurnal = QtWidgets.QVBoxLayout(self.frame_no_jurnal)
+            self.vertical_layout_no_jurnal.setContentsMargins(0, 0, 0, 0)
+            self.vertical_layout_no_jurnal.setSpacing(0)
+            self.vertical_layout_no_jurnal.setObjectName("vertical_layout_no_jurnal")
+            
+            self.frame_label_no_jurnal = QtWidgets.QFrame(parent=self.frame_no_jurnal)
+            self.frame_label_no_jurnal.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_label_no_jurnal.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_label_no_jurnal.setObjectName(f"frame_label_no_jurnal")
+            
+            self.vertical_layout_no_jurnal_2 = QtWidgets.QVBoxLayout(self.frame_label_no_jurnal)
+            self.vertical_layout_no_jurnal_2.setContentsMargins(0, 0, 0, 0)
+            self.vertical_layout_no_jurnal_2.setSpacing(0)
+            self.vertical_layout_no_jurnal_2.setObjectName(f"vertical_layout_no_jurnal_2")
+            
+            self.icon_no_jurnal = QtWidgets.QLabel(parent=self.frame_label_no_jurnal)
+            self.icon_no_jurnal.setFixedSize(100, 100)
+            self.icon_no_jurnal.setPixmap(QtGui.QPixmap(path + "icons/search_off.svg"))
+            self.icon_no_jurnal.setScaledContents(True)
+            self.icon_no_jurnal.setObjectName("icon_no_jurnal")
+            
+            # Name Tanaman
+            self.label_no_jurnal = QtWidgets.QLabel(parent=self.frame_label_no_jurnal)
+            self.label_no_jurnal.setStyleSheet('''
+                                            #label_no_jurnal {
+                                                color: #3C6255;
+                                                font-size: 24px;
+                                                font-weight: 600;
                                             }
                                             ''')
-        self.frame_jurnal_1.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_jurnal_1.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_jurnal_1.setObjectName("frame_jurnal_1")
-        self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.frame_jurnal_1)
-        self.verticalLayout_15.setContentsMargins(0, 0, 0, 9)
-        self.verticalLayout_15.setSpacing(0)
-        self.verticalLayout_15.setObjectName("verticalLayout_15")
-        self.frame_jurnal_top = QtWidgets.QFrame(parent=self.frame_jurnal_1)
-        self.frame_jurnal_top.setMaximumSize(QtCore.QSize(16777215, 60))
-        self.frame_jurnal_top.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_jurnal_top.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_jurnal_top.setObjectName("frame_jurnal_top")
-        self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.frame_jurnal_top)
-        self.horizontalLayout_11.setContentsMargins(27, 18, 9, 9)
-        self.horizontalLayout_11.setSpacing(0)
-        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        self.frame_left = QtWidgets.QFrame(parent=self.frame_jurnal_top)
-        self.frame_left.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_left.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_left.setObjectName("frame_left")
-        self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.frame_left)
-        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_12.setSpacing(0)
-        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
-        self.label_time_jurnal_1 = QtWidgets.QLabel(parent=self.frame_left)
-        self.label_time_jurnal_1.setStyleSheet('''
-                                                #label_time_jurnal_1 {
+            self.label_no_jurnal.setObjectName("label_no_jurnal")
+            self.label_no_jurnal.setText("No Jurnal Found")
+            
+            self.vertical_layout_no_jurnal.addWidget(self.icon_no_jurnal, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
+            self.vertical_layout_no_jurnal.addWidget(self.label_no_jurnal, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
+            self.verticalLayout_13.addWidget(self.frame_no_jurnal)
+        
+        for i, item in enumerate(self.listJurnal):
+            # Outer Frame
+            self.frame_jurnal_outer = QtWidgets.QFrame(parent=self.frame_list_jurnal)
+            self.frame_jurnal_outer.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_jurnal_outer.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_jurnal_outer.setObjectName(f"frame_jurnal_outer_{i}")
+            
+            self.vertical_layout_outer = QtWidgets.QVBoxLayout(self.frame_jurnal_outer)
+            self.vertical_layout_outer.setContentsMargins(0, 0, 0, 18)
+            self.vertical_layout_outer.setSpacing(0)
+            self.vertical_layout_outer.setObjectName("vertical_layout_outer")
+            
+            # Frame
+            self.frame_jurnal_temp = QtWidgets.QFrame(parent=self.frame_jurnal_outer)
+            self.frame_jurnal_temp.setMaximumSize(QtCore.QSize(16777215, 160))
+            self.frame_jurnal_temp.setStyleSheet(f'''
+                                                #frame_jurnal_temp_{i} {{
+                                                    color: #F7F4D9;
+                                                    background-color: #3C6255;
+                                                    border-radius: 30px;
+                                                }}
+                                                ''')
+            self.frame_jurnal_temp.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_jurnal_temp.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_jurnal_temp.setObjectName(f"frame_jurnal_temp_{i}")
+            
+            # Layout for frame
+            self.vertical_layout_jurnal = QtWidgets.QVBoxLayout(self.frame_jurnal_temp)
+            self.vertical_layout_jurnal.setContentsMargins(0, 0, 0, 9)
+            self.vertical_layout_jurnal.setSpacing(0)
+            self.vertical_layout_jurnal.setObjectName("vertical_layout_jurnal")
+            
+            # Frame top
+            self.frame_jurnal_top = QtWidgets.QFrame(parent=self.frame_jurnal_temp)
+            self.frame_jurnal_top.setMaximumSize(QtCore.QSize(16777215, 60))
+            self.frame_jurnal_top.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_jurnal_top.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_jurnal_top.setObjectName("frame_jurnal_top")
+            self.horizontal_layout_jurnal = QtWidgets.QHBoxLayout(self.frame_jurnal_top)
+            self.horizontal_layout_jurnal.setContentsMargins(27, 18, 9, 0)
+            self.horizontal_layout_jurnal.setSpacing(0)
+            self.horizontal_layout_jurnal.setObjectName("horizontal_layout_jurnal")
+            
+            # Frame left
+            self.frame_left = QtWidgets.QFrame(parent=self.frame_jurnal_top)
+            self.frame_left.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_left.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_left.setObjectName("frame_left")
+            self.horizontal_layout_jurnal_2 = QtWidgets.QHBoxLayout(self.frame_left)
+            self.horizontal_layout_jurnal_2.setContentsMargins(0, 0, 0, 0)
+            self.horizontal_layout_jurnal_2.setSpacing(0)
+            self.horizontal_layout_jurnal_2.setObjectName("horizontal_layout_jurnal_2")
+            
+            # Time
+            self.label_time_jurnal = QtWidgets.QLabel(parent=self.frame_left)
+            self.label_time_jurnal.setStyleSheet(f'''
+                                                #label_time_jurnal_{i} {{
                                                     color: #F7F4D9;
                                                     font-size: 20px;
                                                     font-weight: 600;
-                                                }
+                                                }}
                                                 ''')
-        self.label_time_jurnal_1.setObjectName("label_time_jurnal_1")
-        self.horizontalLayout_12.addWidget(self.label_time_jurnal_1)
-        self.horizontalLayout_11.addWidget(self.frame_left)
-        self.frame_right = QtWidgets.QFrame(parent=self.frame_jurnal_top)
-        self.frame_right.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_right.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_right.setObjectName("frame_right")
-        self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.frame_right)
-        self.verticalLayout_16.setObjectName("verticalLayout_16")
-        self.btn_more_2 = QtWidgets.QPushButton(parent=self.frame_right)
-        self.btn_more_2.setStyleSheet("")
-        self.btn_more_2.setText("")
-        self.btn_more_2.setIcon(icon2)
-        self.btn_more_2.setIconSize(QtCore.QSize(20, 20))
-        self.btn_more_2.setObjectName("btn_more_2")
-        self.verticalLayout_16.addWidget(self.btn_more_2, 0, QtCore.Qt.AlignmentFlag.AlignRight)
-        self.horizontalLayout_11.addWidget(self.frame_right)
-        self.verticalLayout_15.addWidget(self.frame_jurnal_top)
-        self.frame_jurnal_bot = QtWidgets.QFrame(parent=self.frame_jurnal_1)
-        self.frame_jurnal_bot.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_jurnal_bot.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_jurnal_bot.setObjectName("frame_jurnal_bot")
-        self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.frame_jurnal_bot)
-        self.horizontalLayout_13.setContentsMargins(27, 0, 27, 0)
-        self.horizontalLayout_13.setObjectName("horizontalLayout_13")
-        self.text_desc_jurnal_1 = QtWidgets.QPlainTextEdit(parent=self.frame_jurnal_bot)
-        self.text_desc_jurnal_1.setStyleSheet('''
-                                                #text_desc_jurnal_1 {
+            
+            str_date = self.listJurnal[i]["tanggal_jurnal"]
+            date = datetime.datetime.strptime(str_date, "%a, %d %b %Y %H:%M:%S %Z")
+            self.label_time_jurnal.setObjectName(f"label_time_jurnal_{i}")
+            self.label_time_jurnal.setText(date.strftime("%d %B %Y"))
+    
+            self.horizontal_layout_jurnal_2.addWidget(self.label_time_jurnal)
+            self.horizontal_layout_jurnal.addWidget(self.frame_left)
+            
+            # Frame right
+            self.frame_right = QtWidgets.QFrame(parent=self.frame_jurnal_top)
+            self.frame_right.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_right.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_right.setObjectName("frame_right")
+            self.vertical_layout_jurnal_1 = QtWidgets.QVBoxLayout(self.frame_right)
+            self.vertical_layout_jurnal_1.setObjectName("vertical_layout_jurnal_1")
+            
+            # Btn more
+            self.btn_more_2 = QtWidgets.QPushButton(parent=self.frame_right)
+            self.btn_more_2.setStyleSheet("")
+            self.btn_more_2.setText("")
+            self.btn_more_2.setIcon(icon2)
+            self.btn_more_2.setIconSize(QtCore.QSize(20, 20))
+            self.btn_more_2.setObjectName("btn_more_2")
+            
+            self.btn_more_2.setStyleSheet("QPushButton::menu-indicator { width: 0px }")
+            
+            self.menu_2 = QtWidgets.QMenu()
+            self.edit_action_2 = self.menu_2.addAction("Edit")
+            self.delete_action_2 = self.menu_2.addAction("Delete")
+            
+            str_id_jurnal = self.listJurnal[i]["id_jurnal"]
+            self.edit_action_2.triggered.connect(lambda checked, obj_name=f"btn_menu_jurnal_{str_id_jurnal}": self.handle_menu_jurnal(self.edit_action_2, obj_name))
+            self.delete_action_2.triggered.connect(lambda checked, obj_name=f"btn_menu_jurnal_{str_id_jurnal}": self.handle_menu_jurnal(self.delete_action_2, obj_name))
+            
+            self.menu_2.setStyleSheet(
+                '''
+                QMenu{
+                    background-color: #3C6255;
+                    color: #F7F4D9;
+                    width: 87px;
+                    }
+
+                QMenu::item {
+                    border-radius: 4px;
+                    padding: 2px 25px 2px 20px;
+                    border: 1px solid transparent; /* reserve space for selection border */
+                }
+
+                QMenu::item:selected{
+                background-color: #61876E;
+                color: #F7F4D9;
+                }
+                '''
+            )
+
+            self.btn_more_2.setMenu(self.menu_2)
+            
+            self.btn_more_2.setCursor(Qt.CursorShape.PointingHandCursor)
+            
+            self.vertical_layout_jurnal_1.addWidget(self.btn_more_2, 0, QtCore.Qt.AlignmentFlag.AlignRight)
+            self.horizontal_layout_jurnal.addWidget(self.frame_right)
+            self.vertical_layout_jurnal.addWidget(self.frame_jurnal_top)
+            
+            # Frame bot
+            self.frame_jurnal_bot = QtWidgets.QFrame(parent=self.frame_jurnal)
+            self.frame_jurnal_bot.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_jurnal_bot.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_jurnal_bot.setObjectName("frame_jurnal_bot")
+            
+            self.horizontal_layout_jurnal_3 = QtWidgets.QHBoxLayout(self.frame_jurnal_bot)
+            self.horizontal_layout_jurnal_3.setContentsMargins(24, 0, 27, 0)
+            self.horizontal_layout_jurnal_3.setObjectName("horizontal_layout_jurnal_3")
+            self.text_desc_jurnal = QtWidgets.QTextEdit(parent=self.frame_jurnal_bot)
+            self.text_desc_jurnal.setStyleSheet(f'''
+                                                #text_desc_jurnal_{i} {{
                                                     color: #F7F4D9;
                                                     font-size: 14px;
-                                                }
+                                                    font-weight: 500;
+                                                }}
                                                 ''')
-        self.text_desc_jurnal_1.setObjectName("text_desc_jurnal_1")
-        self.horizontalLayout_13.addWidget(self.text_desc_jurnal_1)
-        self.verticalLayout_15.addWidget(self.frame_jurnal_bot)
-        self.verticalLayout_13.addWidget(self.frame_jurnal_1)
-        spacerItem1 = QtWidgets.QSpacerItem(0, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_13.addItem(spacerItem1)
+            self.text_desc_jurnal.setObjectName(f"text_desc_jurnal_{i}")
+            self.text_desc_jurnal.setText(self.listJurnal[i]["deskripsi_jurnal"])
+            self.text_desc_jurnal.setAlignment(Qt.AlignmentFlag.AlignJustify)
+            
+            self.horizontal_layout_jurnal_3.addWidget(self.text_desc_jurnal)
+            self.vertical_layout_jurnal.addWidget(self.frame_jurnal_bot)
+            
+            self.vertical_layout_outer.addWidget(self.frame_jurnal_temp)
+            
+            self.verticalLayout_13.addWidget(self.frame_jurnal_outer)
+        
         self.verticalLayout_14.addLayout(self.verticalLayout_13)
         self.verticalLayout_12.addWidget(self.frame_list_jurnal)
         self.verticalLayout_3.addWidget(self.frame_jurnal)
@@ -626,18 +849,66 @@ class DetailTanamanWindow(QMainWindow):
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
         self.setCentralWidget(self.centralwidget)
+        
+        self.btn_back.clicked.connect(self.on_btn_back_clicked)
+    
+    def setDetailTanaman(self, id):
+        responseDetail = requests.get(f'http://127.0.0.1:3000/tanaman/{id}')
+        responseTDL = requests.get(f'http://127.0.0.1:3000/todolist/{id}')
+        responseJurnal = requests.get(f'http://127.0.0.1:3000/jurnal/{id}')
+        
+        if responseDetail.status_code == 200:
+            self.detailTanaman = json.loads(responseDetail.text)
+        else:
+            self.detailTanaman = []
+            print("No Detail Tanaman Found")
+        
+        if responseTDL.status_code == 200:
+            self.listTDL = json.loads(responseTDL.text)
+        else:
+            self.listTDL = []
+            print("No List To Do List Found")
+            
+        if responseJurnal.status_code == 200:
+            self.listJurnal = json.loads(responseJurnal.text)
+        else:
+            self.listJurnal = []
+            print("No List JurnalFound")
+    
+    def handle_menu_tdl(self, action, obj_name):
+        idTDL = int(obj_name.split("_")[-1])
+        if (action == self.edit_action):
+            print(f"EDIT id = {idTDL}")
+        elif (action == self.delete_action):
+            print(f"DELETE id = {idTDL}")
+            self.delete_tdl(idTDL)
+            
+    def handle_menu_jurnal(self, action, obj_name):
+        idJurnal = int(obj_name.split("_")[-1])
+        if (action == self.edit_action_2):
+            print(f"EDIT i = {idJurnal}")
+        elif (action == self.delete_action_2):
+            print(f"DELETE i = {idJurnal}")
+            self.delete_jurnal(idJurnal)
+    
+    def delete_tdl(self, idTDL):
+        response = requests.delete(f'http://127.0.0.1:3000/todolist/deletetodolist/{idTDL}')
+        if response.status_code == 204:
+            print("Todolist item deleted successfully.")
+            self.setUpDetailTanamanWindow()
+        else:
+            print(f"Failed to delete Todolist item with id {idTDL}. Status code: {response.status_code}")
+    
+    def delete_jurnal(self, idJurnal):
+        response = requests.delete(f'http://127.0.0.1:3000/jurnal/deletejurnal/{idJurnal}')
+        if response.status_code == 204:
+            print("Jurnal item deleted successfully.")
+            self.setUpDetailTanamanWindow()
+        else:
+            print(f"Failed to delete Jurnal item with id {idJurnal}. Status code: {response.status_code}")
+    
+    def on_btn_back_clicked(self):
+        self.changePageToMain()
 
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.btn_back.setText(_translate("MainWindow", " Kembali"))
-        self.label_name.setText(_translate("MainWindow", "Strobeyi"))
-        self.text_desc_tanaman.setPlainText(_translate("MainWindow", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at nibh volutpat, eleifend augue vel, hendrerit augue. Fusce egestas ipsum dolor, id convallis nulla cursus eleifend. Aliquam erat volutpat. Suspendisse facilisis quis ex non vestibulum. In ultricies porta dapibus. Praesent in arcu vel risus auctor elementum id at ex."))
-        # self.label_tdl.setText(_translate("MainWindow", "To Do List"))
-        # self.btn_add_tdl.setText(_translate("MainWindow", "ADD TO DO LIST"))
-        # self.label_time_tdl_1.setText(_translate("MainWindow", "07.00"))
-        # self.label_desc_tdl_1.setText(_translate("MainWindow", "Siram tanaman sebelum berangkat kuliah"))
-        self.label_jurnal.setText(_translate("MainWindow", "Jurnal Tanaman"))
-        self.btn_add_jurnal.setText(_translate("MainWindow", "ADD JURNAL"))
-        self.label_time_jurnal_1.setText(_translate("MainWindow", "19 April 2023"))
-        self.text_desc_jurnal_1.setPlainText(_translate("MainWindow", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at nibh volutpat, eleifend augue vel, hendrerit augue. Fusce egestas ipsum dolor, id convallis nulla cursus eleifend. Aliquam erat volutpat. Suspendisse facilisis quis ex non vestibulum. In ultricies porta dapibus. Praesent in arcu vel risus auctor elementum id at ex. Vestibulum gravida, odio ac dapibus convallis, erat lacus molestie turpis, in tristique urna mauris vitae ligula."))
+    def changePageToMain(self):
+        self.channel.emit("main")

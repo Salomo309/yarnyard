@@ -463,8 +463,10 @@ class Ui_MainWindow(object):
         self.frame_jurnal.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_jurnal.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_jurnal.setObjectName("frame_jurnal")
+        
+        
         self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.frame_jurnal)
-        self.verticalLayout_12.setContentsMargins(0, 0, 0, 36)
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 18)
         self.verticalLayout_12.setSpacing(0)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.frame_head_jurnal = QtWidgets.QFrame(parent=self.frame_jurnal)
@@ -494,6 +496,8 @@ class Ui_MainWindow(object):
 "    font-weight: 600;\n"
 "}")
         self.label_jurnal.setObjectName("label_jurnal")
+        self.label_jurnal.setText("Jurnal Tanaman")
+        
         self.horizontalLayout_9.addWidget(self.frame_head_jurnal_1)
         self.frame_head_jurnal_2 = QtWidgets.QFrame(parent=self.frame_head_jurnal)
         self.frame_head_jurnal_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -515,6 +519,8 @@ class Ui_MainWindow(object):
         self.btn_add_jurnal.setIcon(icon1)
         self.btn_add_jurnal.setIconSize(QtCore.QSize(20, 20))
         self.btn_add_jurnal.setObjectName("btn_add_jurnal")
+        self.btn_add_jurnal.setText("ADD JURNAL")
+        
         self.horizontalLayout_10.addWidget(self.btn_add_jurnal, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.horizontalLayout_9.addWidget(self.frame_head_jurnal_2)
         self.verticalLayout_12.addWidget(self.frame_head_jurnal)
@@ -530,79 +536,197 @@ class Ui_MainWindow(object):
         self.verticalLayout_13.setContentsMargins(-1, 18, -1, -1)
         self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
-        self.frame_jurnal_1 = QtWidgets.QFrame(parent=self.frame_list_jurnal)
-        self.frame_jurnal_1.setMaximumSize(QtCore.QSize(16777215, 160))
-        self.frame_jurnal_1.setStyleSheet("#frame_jurnal_1 {\n"
-"    color: #F7F4D9;\n"
-"    background-color: #3C6255;\n"
-"    border-radius: 30px;\n"
-"}")
-        self.frame_jurnal_1.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_jurnal_1.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_jurnal_1.setObjectName("frame_jurnal_1")
-        self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.frame_jurnal_1)
-        self.verticalLayout_15.setContentsMargins(0, 0, 0, 9)
-        self.verticalLayout_15.setSpacing(0)
-        self.verticalLayout_15.setObjectName("verticalLayout_15")
-        self.frame_jurnal_top = QtWidgets.QFrame(parent=self.frame_jurnal_1)
-        self.frame_jurnal_top.setMaximumSize(QtCore.QSize(16777215, 60))
-        self.frame_jurnal_top.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_jurnal_top.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_jurnal_top.setObjectName("frame_jurnal_top")
-        self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.frame_jurnal_top)
-        self.horizontalLayout_11.setContentsMargins(27, 18, 9, 9)
-        self.horizontalLayout_11.setSpacing(0)
-        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        self.frame_left = QtWidgets.QFrame(parent=self.frame_jurnal_top)
-        self.frame_left.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_left.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_left.setObjectName("frame_left")
-        self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.frame_left)
-        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_12.setSpacing(0)
-        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
-        self.label_time_jurnal_1 = QtWidgets.QLabel(parent=self.frame_left)
-        self.label_time_jurnal_1.setStyleSheet("#label_time_jurnal_1 {\n"
-"    color: #F7F4D9;\n"
-"    font-size: 20px;\n"
-"    font-weight: 600;\n"
-"}")
-        self.label_time_jurnal_1.setObjectName("label_time_jurnal_1")
-        self.horizontalLayout_12.addWidget(self.label_time_jurnal_1)
-        self.horizontalLayout_11.addWidget(self.frame_left)
-        self.frame_right = QtWidgets.QFrame(parent=self.frame_jurnal_top)
-        self.frame_right.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_right.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_right.setObjectName("frame_right")
-        self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.frame_right)
-        self.verticalLayout_16.setObjectName("verticalLayout_16")
-        self.btn_more_2 = QtWidgets.QPushButton(parent=self.frame_right)
-        self.btn_more_2.setStyleSheet("")
-        self.btn_more_2.setText("")
-        self.btn_more_2.setIcon(icon2)
-        self.btn_more_2.setIconSize(QtCore.QSize(20, 20))
-        self.btn_more_2.setObjectName("btn_more_2")
-        self.verticalLayout_16.addWidget(self.btn_more_2, 0, QtCore.Qt.AlignmentFlag.AlignRight)
-        self.horizontalLayout_11.addWidget(self.frame_right)
-        self.verticalLayout_15.addWidget(self.frame_jurnal_top)
-        self.frame_jurnal_bot = QtWidgets.QFrame(parent=self.frame_jurnal_1)
-        self.frame_jurnal_bot.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_jurnal_bot.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_jurnal_bot.setObjectName("frame_jurnal_bot")
-        self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.frame_jurnal_bot)
-        self.horizontalLayout_13.setContentsMargins(27, 0, 27, 0)
-        self.horizontalLayout_13.setObjectName("horizontalLayout_13")
-        self.text_desc_jurnal_1 = QtWidgets.QPlainTextEdit(parent=self.frame_jurnal_bot)
-        self.text_desc_jurnal_1.setStyleSheet("#text_desc_jurnal_1 {\n"
-"    color: #F7F4D9;\n"
-"    font-size: 14px;\n"
-"}")
-        self.text_desc_jurnal_1.setObjectName("text_desc_jurnal_1")
-        self.horizontalLayout_13.addWidget(self.text_desc_jurnal_1)
-        self.verticalLayout_15.addWidget(self.frame_jurnal_bot)
-        self.verticalLayout_13.addWidget(self.frame_jurnal_1)
-        spacerItem1 = QtWidgets.QSpacerItem(0, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_13.addItem(spacerItem1)
+        
+        # DYNAMIC
+        for i in range(2):
+            # Outer Frame
+            self.frame_jurnal_outer = QtWidgets.QFrame(parent=self.frame_list_jurnal)
+            self.frame_jurnal_outer.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_jurnal_outer.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_jurnal_outer.setObjectName(f"frame_jurnal_outer_{i}")
+            
+            self.vertical_layout_outer = QtWidgets.QVBoxLayout(self.frame_jurnal_outer)
+            self.vertical_layout_outer.setContentsMargins(0, 0, 0, 18)
+            self.vertical_layout_outer.setSpacing(0)
+            self.vertical_layout_outer.setObjectName("vertical_layout_outer")
+            
+            # Frame
+            self.frame_jurnal_temp = QtWidgets.QFrame(parent=self.frame_jurnal_outer)
+            self.frame_jurnal_temp.setMaximumSize(QtCore.QSize(16777215, 160))
+            self.frame_jurnal_temp.setStyleSheet(f'''
+                                                #frame_jurnal_temp_{i} {{
+                                                    color: #F7F4D9;
+                                                    background-color: #3C6255;
+                                                    border-radius: 30px;
+                                                }}
+                                                ''')
+            self.frame_jurnal_temp.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_jurnal_temp.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_jurnal_temp.setObjectName(f"frame_jurnal_temp_{i}")
+            
+            # Layout for frame
+            self.vertical_layout_jurnal = QtWidgets.QVBoxLayout(self.frame_jurnal_temp)
+            self.vertical_layout_jurnal.setContentsMargins(0, 0, 0, 9)
+            self.vertical_layout_jurnal.setSpacing(0)
+            self.vertical_layout_jurnal.setObjectName("vertical_layout_jurnal")
+            
+            # Frame top
+            self.frame_jurnal_top = QtWidgets.QFrame(parent=self.frame_jurnal_temp)
+            self.frame_jurnal_top.setMaximumSize(QtCore.QSize(16777215, 60))
+            self.frame_jurnal_top.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_jurnal_top.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_jurnal_top.setObjectName("frame_jurnal_top")
+            self.horizontal_layout_jurnal = QtWidgets.QHBoxLayout(self.frame_jurnal_top)
+            self.horizontal_layout_jurnal.setContentsMargins(27, 18, 9, 9)
+            self.horizontal_layout_jurnal.setSpacing(0)
+            self.horizontal_layout_jurnal.setObjectName("horizontal_layout_jurnal")
+            
+            # Frame left
+            self.frame_left = QtWidgets.QFrame(parent=self.frame_jurnal_top)
+            self.frame_left.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_left.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_left.setObjectName("frame_left")
+            self.horizontal_layout_jurnal_2 = QtWidgets.QHBoxLayout(self.frame_left)
+            self.horizontal_layout_jurnal_2.setContentsMargins(0, 0, 0, 0)
+            self.horizontal_layout_jurnal_2.setSpacing(0)
+            self.horizontal_layout_jurnal_2.setObjectName("horizontal_layout_jurnal_2")
+            
+            # Time
+            self.label_time_jurnal = QtWidgets.QLabel(parent=self.frame_left)
+            self.label_time_jurnal.setStyleSheet(f'''
+                                                    #label_time_jurnal_{i} {{
+                                                        color: #F7F4D9;
+                                                        font-size: 20px;
+                                                        font-weight: 600;
+                                                    }}
+                                                    ''')
+            
+            self.label_time_jurnal.setObjectName(f"label_time_jurnal_{i}")
+            self.label_time_jurnal.setText("19 April 2023")
+    
+            self.horizontal_layout_jurnal_2.addWidget(self.label_time_jurnal)
+            self.horizontal_layout_jurnal.addWidget(self.frame_left)
+            
+            # Frame right
+            self.frame_right = QtWidgets.QFrame(parent=self.frame_jurnal_top)
+            self.frame_right.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_right.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_right.setObjectName("frame_right")
+            self.vertical_layout_jurnal_1 = QtWidgets.QVBoxLayout(self.frame_right)
+            self.vertical_layout_jurnal_1.setObjectName("vertical_layout_jurnal_1")
+            
+            # Btn more
+            self.btn_more_2 = QtWidgets.QPushButton(parent=self.frame_right)
+            self.btn_more_2.setStyleSheet("")
+            self.btn_more_2.setText("")
+            self.btn_more_2.setIcon(icon2)
+            self.btn_more_2.setIconSize(QtCore.QSize(20, 20))
+            self.btn_more_2.setObjectName("btn_more_2")
+            
+            
+            self.vertical_layout_jurnal_1.addWidget(self.btn_more_2, 0, QtCore.Qt.AlignmentFlag.AlignRight)
+            self.horizontal_layout_jurnal.addWidget(self.frame_right)
+            self.vertical_layout_jurnal.addWidget(self.frame_jurnal_top)
+            
+            # Frame bot
+            self.frame_jurnal_bot = QtWidgets.QFrame(parent=self.frame_jurnal)
+            self.frame_jurnal_bot.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+            self.frame_jurnal_bot.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+            self.frame_jurnal_bot.setObjectName("frame_jurnal_bot")
+            
+            self.horizontal_layout_jurnal_3 = QtWidgets.QHBoxLayout(self.frame_jurnal_bot)
+            self.horizontal_layout_jurnal_3.setContentsMargins(27, 0, 27, 0)
+            self.horizontal_layout_jurnal_3.setObjectName("horizontal_layout_jurnal_3")
+            self.text_desc_jurnal = QtWidgets.QPlainTextEdit(parent=self.frame_jurnal_bot)
+            self.text_desc_jurnal.setStyleSheet(f'''
+                                                    #text_desc_jurnal_{i} {{
+                                                        color: #F7F4D9;
+                                                        font-size: 14px;
+                                                    }}
+                                                    ''')
+            self.text_desc_jurnal.setObjectName(f"text_desc_jurnal_{i}")
+            self.text_desc_jurnal.setPlainText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at nibh volutpat, eleifend augue vel, hendrerit augue. Fusce egestas ipsum dolor, id convallis nulla cursus eleifend. Aliquam erat volutpat. Suspendisse facilisis quis ex non vestibulum. In ultricies porta dapibus. Praesent in arcu vel risus auctor elementum id at ex. Vestibulum gravida, odio ac dapibus convallis, erat lacus molestie turpis, in tristique urna mauris vitae ligula.")
+            
+            self.horizontal_layout_jurnal_3.addWidget(self.text_desc_jurnal)
+            self.vertical_layout_jurnal.addWidget(self.frame_jurnal_bot)
+            
+            self.vertical_layout_outer.addWidget(self.frame_jurnal_temp)
+            
+            self.verticalLayout_13.addWidget(self.frame_jurnal_outer)
+            
+            
+    #         self.frame_jurnal_1 = QtWidgets.QFrame(parent=self.frame_list_jurnal)
+    #         self.frame_jurnal_1.setMaximumSize(QtCore.QSize(16777215, 160))
+    #         self.frame_jurnal_1.setStyleSheet("#frame_jurnal_1 {\n"
+    # "    color: #F7F4D9;\n"
+    # "    background-color: #3C6255;\n"
+    # "    border-radius: 30px;\n"
+    # "}")
+    #         self.frame_jurnal_1.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+    #         self.frame_jurnal_1.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+    #         self.frame_jurnal_1.setObjectName("frame_jurnal_1")
+            # self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.frame_jurnal_1)
+            # self.verticalLayout_15.setContentsMargins(0, 0, 0, 9)
+            # self.verticalLayout_15.setSpacing(0)
+            # self.verticalLayout_15.setObjectName("verticalLayout_15")
+    #         self.frame_jurnal_top = QtWidgets.QFrame(parent=self.frame_jurnal_1)
+    #         self.frame_jurnal_top.setMaximumSize(QtCore.QSize(16777215, 60))
+    #         self.frame_jurnal_top.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+    #         self.frame_jurnal_top.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+    #         self.frame_jurnal_top.setObjectName("frame_jurnal_top")
+    #      _layout_jurnhorizontal_layout_jurnal = QtWidgets.QHBoxLayout(self.frame_jurnal_top)
+    #         self.horizontalLayout_11.setContentsMargins(27, 18, 9, 9)
+    #         self.horizontalLayout_11.setSpacing(0)
+    #         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
+    #         self.frame_left = QtWidgets.QFrame(parent=self.frame_jurnal_top)
+    #         self.frame_left.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+    #         self.frame_left.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+    #         self.frame_left.setObjectName("frame_left")
+    #         self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.frame_left)
+    #         self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
+    #         self.horizontalLayout_12.setSpacing(0)
+    #         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
+    #         self.label_time_jurnal_1 = QtWidgets.QLabel(parent=self.frame_left)
+    #         self.label_time_jurnal_1.setStyleSheet("#label_time_jurnal_1 {\n"
+    # "    color: #F7F4D9;\n"
+    # "    font-size: 20px;\n"
+    # "    font-weight: 600;\n"
+    # "}")
+    #         self.label_time_jurnal_1.setObjectName("label_time_jurnal_1")
+    #         self.horizontalLayout_12.addWidget(self.label_time_jurnal_1)
+    #         self.horizontalLayout_11.addWidget(self.frame_left)
+    #         self.frame_right = QtWidgets.QFrame(parent=self.frame_jurnal_top)
+    #         self.frame_right.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+    #         self.frame_right.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+    #         self.frame_right.setObjectName("frame_right")
+    #         self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.frame_right)
+    #         self.verticalLayout_16.setObjectName("verticalLayout_16")
+    #         self.btn_more_2 = QtWidgets.QPushButton(parent=self.frame_right)
+    #         self.btn_more_2.setStyleSheet("")
+    #         self.btn_more_2.setText("")
+    #         self.btn_more_2.setIcon(icon2)
+    #         self.btn_more_2.setIconSize(QtCore.QSize(20, 20))
+    #         self.btn_more_2.setObjectName("btn_more_2")
+    #         self.verticalLayout_16.addWidget(self.btn_more_2, 0, QtCore.Qt.AlignmentFlag.AlignRight)
+    #         self.horizontalLayout_11.addWidget(self.frame_right)
+    #         self.verticalLayout_15.addWidget(self.frame_jurnal_top)
+    #         self.frame_jurnal_bot = QtWidgets.QFrame(parent=self.frame_jurnal_1)
+    #         self.frame_jurnal_bot.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+    #         self.frame_jurnal_bot.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+    #         self.frame_jurnal_bot.setObjectName("frame_jurnal_bot")
+    #         self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.frame_jurnal_bot)
+    #         self.horizontalLayout_13.setContentsMargins(27, 0, 27, 0)
+    #         self.horizontalLayout_13.setObjectName("horizontalLayout_13")
+    #         self.text_desc_jurnal_1 = QtWidgets.QPlainTextEdit(parent=self.frame_jurnal_bot)
+    #         self.text_desc_jurnal_1.setStyleSheet("#text_desc_jurnal_1 {\n"
+    # "    color: #F7F4D9;\n"
+    # "    font-size: 14px;\n"
+    # "}")
+    #         self.text_desc_jurnal_1.setObjectName("text_desc_jurnal_1")
+    #         self.horizontalLayout_13.addWidget(self.text_desc_jurnal_1)
+    #         self.verticalLayout_15.addWidget(self.frame_jurnal_bot)
+    #         self.verticalLayout_13.addWidget(self.frame_jurnal_1)
+            
         self.verticalLayout_14.addLayout(self.verticalLayout_13)
         self.verticalLayout_12.addWidget(self.frame_list_jurnal)
         self.verticalLayout_3.addWidget(self.frame_jurnal)
@@ -624,10 +748,10 @@ class Ui_MainWindow(object):
         # self.btn_add_tdl.setText(_translate("MainWindow", "ADD TO DO LIST"))
         # self.label_time_tdl_1.setText(_translate("MainWindow", "07.00"))
         # self.label_desc_tdl_1.setText(_translate("MainWindow", "Siram tanaman sebelum berangkat kuliah"))
-        self.label_jurnal.setText(_translate("MainWindow", "Jurnal Tanaman"))
-        self.btn_add_jurnal.setText(_translate("MainWindow", "ADD JURNAL"))
-        self.label_time_jurnal_1.setText(_translate("MainWindow", "19 April 2023"))
-        self.text_desc_jurnal_1.setPlainText(_translate("MainWindow", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at nibh volutpat, eleifend augue vel, hendrerit augue. Fusce egestas ipsum dolor, id convallis nulla cursus eleifend. Aliquam erat volutpat. Suspendisse facilisis quis ex non vestibulum. In ultricies porta dapibus. Praesent in arcu vel risus auctor elementum id at ex. Vestibulum gravida, odio ac dapibus convallis, erat lacus molestie turpis, in tristique urna mauris vitae ligula."))
+        # self.label_jurnal.setText(_translate("MainWindow", "Jurnal Tanaman"))
+        # self.btn_add_jurnal.setText(_translate("MainWindow", "ADD JURNAL"))
+        # self.label_time_jurnal_1.setText(_translate("MainWindow", "19 April 2023"))
+        # self.text_desc_jurnal_1.setPlainText(_translate("MainWindow", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at nibh volutpat, eleifend augue vel, hendrerit augue. Fusce egestas ipsum dolor, id convallis nulla cursus eleifend. Aliquam erat volutpat. Suspendisse facilisis quis ex non vestibulum. In ultricies porta dapibus. Praesent in arcu vel risus auctor elementum id at ex. Vestibulum gravida, odio ac dapibus convallis, erat lacus molestie turpis, in tristique urna mauris vitae ligula."))
 
 
 if __name__ == "__main__":

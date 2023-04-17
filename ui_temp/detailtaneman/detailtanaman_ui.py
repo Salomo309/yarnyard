@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(960, 600)
+        MainWindow.resize(996, 770)
         MainWindow.setStyleSheet("*{\n"
 "    border: none;\n"
 "    background-color: transparent;\n"
@@ -137,7 +137,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 972, 746))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 978, 752))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -384,13 +384,3 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "kasih pupuk"))
         self.listtodo.setSortingEnabled(__sortingEnabled)
         self.addjurnal.setText(_translate("MainWindow", "ADD JURNAL"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec())

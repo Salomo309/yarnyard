@@ -37,6 +37,40 @@ class TanamanModels:
             cursor.close()
             return listTanaman
         
+    @classmethod
+    def getTanaman(cls, idTanaman):
+        cursor = mysql.connection.cursor()
+
+        query = '''
+            SELECT * 
+            FROM tanaman
+            WHERE id_tanaman = %s
+        '''
+        cursor.execute(query, (idTanaman,))
+        dataTanaman = cursor.fetchall()
+
+        # If empty set
+        if len(dataTanaman) == 0:
+            cursor.close()
+            return None
+        else:
+            listTanaman = []
+            for data in dataTanaman:
+                id_tanaman, nama_tanaman, tanggal_tanaman, deskripsi_tanaman, gambar = data
+
+                # initialize class
+                self = cls.__new__(cls)
+                self.id_tanaman = id_tanaman
+                self.nama_tanaman = nama_tanaman
+                self.tanggal_tanaman = tanggal_tanaman
+                self.deskripsi_tanaman = deskripsi_tanaman
+                self.gambar = gambar
+
+                listTanaman.append(self)
+
+            cursor.close()
+            return listTanaman
+        
     def getIDTanaman(self):
         return self.id_tanaman
     

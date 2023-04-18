@@ -2,21 +2,20 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
-import os
-import pathlib
+import os, pathlib
 
-class TodolistForm(QMainWindow):
+class TanamanForm(QMainWindow):
     channel = pyqtSignal(str)
 
     def __init__(self):
         super().__init__()
-        self.setUpTodolistForm()
-    
-    def setUpTodolistForm(self):
-        self.setWindowTitle("yanyard - ToDoList Form")
+        self.setUpTanamanForm()
+
+    def setUpTanamanForm(self):
+        self.setWindowTitle("yanyard - Tanaman Form")
         self.resize(960, 600)
         # self.setFixedSize(960, 600)
-        
+
         # Get the size and position of the user's screen
         primary_screen = QGuiApplication.primaryScreen()
         screen = primary_screen.availableGeometry()
@@ -24,68 +23,33 @@ class TodolistForm(QMainWindow):
 
         # Center the window on the screen
         self.move(int((screen_width - self.width()) / 2),
-                    int((screen_height - self.height()) / 2))
-        
+                  int((screen_height - self.height()) / 2))
+
         # Assets path
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
-        
+
         # Logo
-        self.setWindowIcon(QIcon(path + 'logo/logo_circle.png'))
-        
+        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
+
         # Fonts
         fonts_folder_path = path + 'fonts/'
         for filename in os.listdir(fonts_folder_path):
             if filename.endswith('.ttf') or filename.endswith('.otf'):
                 font_path = os.path.join(fonts_folder_path, filename)
                 QFontDatabase.addApplicationFont(font_path)
-        
+                
         self.initializeWidgets(path)
-        
+
     def initializeWidgets(self, path):
         self.setStyleSheet('''
-                           *{
-                                border: none;
-                                padding: 0;
-                                margin: 0;
-                                font-family: Poppins;
-                            }
-                            
-                            QScrollBar:vertical {
-                                border: none;
-                                width: 12px;
-                                margin: 8px 0px 8px 5px;
-                                border-radius: 0px;
-                            }
-                            
-                            /*  HANDLE BAR VERTICAL */
-                            QScrollBar::handle:vertical {    
-                                background-color: #F7F4D9;
-                                min-height: 20px;
-                                border-radius: 3px;
-                            }
-                            
-                            QScrollBar::handle:vertical:hover{    
-                                background-color: #23493C;
-                            }
-                            
-                            /* BTN TOP - SCROLLBAR */
-                            QScrollBar::sub-line:vertical {
-                                height: 0px;
-                            }
-                            
-                            /* BTN BOTTOM - SCROLLBAR */
-                            QScrollBar::add-line:vertical {
-                                height: 0px;
-                            }
-                            
-                            /* RESET ARROW */
-                            QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
-                                background: none;
-                            }
-                            QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-                                background: none;
-                            }
-                            ''')
+                                *{
+                                    border: none;
+                                    background-color: transparent;
+                                    background: transparent;
+                                    padding: 0;
+                                    margin: 0;
+                                }
+                                ''')
         self.centralwidget = QtWidgets.QWidget(parent=self)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -187,6 +151,7 @@ class TodolistForm(QMainWindow):
         self.frame_title.setSizePolicy(sizePolicy)
         self.frame_title.setObjectName("frame_title")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_title)
+        self.horizontalLayout_4.setContentsMargins(-1, -1, -1, 0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.label_title_form = QtWidgets.QLabel(parent=self.frame_title)
         self.label_title_form.setMinimumSize(QtCore.QSize(238, 68))
@@ -202,90 +167,58 @@ class TodolistForm(QMainWindow):
                                             ''')
         self.label_title_form.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_title_form.setObjectName("label_title_form")
-        self.label_title_form.setText("Form ToDoList")
+        self.label_title_form.setText("Form Tanaman")
         
         self.horizontalLayout_4.addWidget(self.label_title_form, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.verticalLayout_2.addWidget(self.frame_title)
         self.frame_contents_1 = QtWidgets.QFrame(parent=self.main)
-        self.frame_contents_1.setMaximumSize(QtCore.QSize(16777215, 210))
+        self.frame_contents_1.setMinimumSize(QtCore.QSize(500, 340))
         self.frame_contents_1.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_contents_1.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_contents_1.setObjectName("frame_contents_1")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.frame_contents_1)
-        self.verticalLayout_3.setContentsMargins(-1, 45, -1, 18)
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.frame = QtWidgets.QFrame(parent=self.frame_contents_1)
-        self.frame.setMaximumSize(QtCore.QSize(16777215, 40))
-        self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame.setObjectName("frame")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.frame)
+        self.frame_3 = QtWidgets.QFrame(parent=self.frame_contents_1)
+        self.frame_3.setMaximumSize(QtCore.QSize(160, 200))
+        self.frame_3.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_3.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_3.setObjectName("frame_3")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.frame_3)
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.date_time_edit = QtWidgets.QDateTimeEdit(parent=self.frame)
-        self.date_time_edit.setMinimumSize(QtCore.QSize(200, 35))
-        self.date_time_edit.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.ArrowCursor))
-        self.date_time_edit.setStyleSheet('''
-                                        QDateTimeEdit {
-                                            padding: 0px 0px 0px 12px;
-                                            border-radius: 17px;
-                                            background-color: #61876E;
-                                            color: #F7F3D7;
-                                            font-size: 14px;
-                                            font-weight: 600;
-                                            border: solid;
-                                        }
-                                        
-                                        QDateTimeEdit::drop-down{
-                                            image: url(assets/icons/event_note.svg);
-                                            width: 20px;
-                                            padding: 0px 12px 0px 8px;
-                                            border-top-right-radius: 17px;
-                                            border-bottom-right-radius: 17px;
-                                        }
-                                        
-                                        QDateTimeEdit::drop-down:hover{
-                                            background-color: #3C6255;
-                                        }
-                                        
-                                        QCalendarWidget QToolButton {
-                                            color: black;
-                                        }
-                                        
-                                        QCalendarWidget QToolButton:hover {
-                                            background-color: #61876E;
-                                        }
-                                        
-                                        QCalendarWidget QAbstractItemView:enabled {
-                                            color: #333;
-                                            selection-background-color: #61876E;
-                                            selection-color: #fff; 
-                                        }
-                                        ''')
-        self.date_time_edit.setCurrentSection(QtWidgets.QDateTimeEdit.Section.DaySection)
-        self.date_time_edit.setCalendarPopup(True)
-        self.date_time_edit.setObjectName("date_time_edit")
-        self.date_time_edit.setDisplayFormat("dd-MM-yyyy h:mm AP")
-        self.date_time_edit.setDateTime(QtCore.QDateTime.currentDateTime())
-        self.date_time_edit.setMinimumDateTime(QtCore.QDateTime.currentDateTime())
+        self.widget_img = QtWidgets.QPushButton(parent=self.frame_3)
+        self.widget_img.setMinimumSize(QtCore.QSize(160, 200))
         
-        self.verticalLayout_4.addWidget(self.date_time_edit)
-        self.verticalLayout_3.addWidget(self.frame, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        image = "assets/images/tanaman/add_photo.png"
+        self.widget_img.setStyleSheet(f'''
+                                        #widget_img {{
+                                            border-image: url({image}) 0 0 0 0 stretch stretch;
+                                            border-radius:40px;
+                                        }}
+                                        ''')
+        
+        self.widget_img.setObjectName("widget_img")
+        self.widget_img.setCursor(Qt.CursorShape.PointingHandCursor)
+        
+        self.verticalLayout_4.addWidget(self.widget_img)
+        self.verticalLayout_3.addWidget(self.frame_3, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.frame_2 = QtWidgets.QFrame(parent=self.frame_contents_1)
-        self.frame_2.setMaximumSize(QtCore.QSize(330, 45))
+        self.frame_2.setMaximumSize(QtCore.QSize(370, 55))
         self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_2.setObjectName("frame_2")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.frame_2)
-        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_5.setContentsMargins(0, 9, 0, 0)
         self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.deskripsi_tdl = QtWidgets.QPlainTextEdit(parent=self.frame_2)
-        self.deskripsi_tdl.setMinimumSize(QtCore.QSize(320, 45))
-        self.deskripsi_tdl.setStyleSheet('''
-                                        #deskripsi_tdl {
+        self.nama_tanaman = QtWidgets.QPlainTextEdit(parent=self.frame_2)
+        self.nama_tanaman.setMinimumSize(QtCore.QSize(310, 45))
+        self.nama_tanaman.setMaximumSize(QtCore.QSize(16777215, 45))
+        self.nama_tanaman.setStyleSheet('''
+                                        #nama_tanaman {
                                             padding: 7px 12px;
                                             border-radius: 20px;
                                             background: #61876E;
@@ -294,19 +227,46 @@ class TodolistForm(QMainWindow):
                                             font-weight: 600;
                                         }
                                         ''')
-        self.deskripsi_tdl.setMaximumBlockCount(1)
-        self.deskripsi_tdl.setObjectName("deskripsi_tdl")
-        self.deskripsi_tdl.setPlaceholderText("Tuliskan ToDoList-mu yah . . .")
+        self.nama_tanaman.setMaximumBlockCount(1)
+        self.nama_tanaman.setObjectName("nama_tanaman")
+        self.nama_tanaman.setPlaceholderText("Masukkan nama tanamanmu . . .")
         
-        self.verticalLayout_5.addWidget(self.deskripsi_tdl)
-        self.verticalLayout_3.addWidget(self.frame_2)
+        self.verticalLayout_5.addWidget(self.nama_tanaman, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.verticalLayout_3.addWidget(self.frame_2, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.frame = QtWidgets.QFrame(parent=self.frame_contents_1)
+        self.frame.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame.setObjectName("frame")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.frame)
+        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_6.setSpacing(0)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.deskripsi_jurnal = QtWidgets.QPlainTextEdit(parent=self.frame)
+        self.deskripsi_jurnal.setMinimumSize(QtCore.QSize(310, 40))
+        self.deskripsi_jurnal.setStyleSheet('''
+                                            #deskripsi_jurnal {
+                                                padding: 12px;
+                                                font-size: 14px;
+                                                border-radius: 15px;
+                                                background: #61876E;
+                                                color: #F7F3D7;
+                                                font-weight: 600;
+                                            }
+                                            ''')
+        self.deskripsi_jurnal.setOverwriteMode(True)
+        self.deskripsi_jurnal.setObjectName("deskripsi_jurnal")
+        self.deskripsi_jurnal.setPlaceholderText("Ceritakan tentang tanamanmu. . .")
+        
+        self.verticalLayout_6.addWidget(self.deskripsi_jurnal)
+        self.verticalLayout_3.addWidget(self.frame, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.verticalLayout_2.addWidget(self.frame_contents_1, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.frame_description = QtWidgets.QFrame(parent=self.main)
         self.frame_description.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_description.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_description.setObjectName("frame_description")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.frame_description)
-        self.horizontalLayout_5.setContentsMargins(-1, 9, -1, -1)
+        self.horizontalLayout_5.setContentsMargins(-1, 0, -1, -1)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.btn_submit = QtWidgets.QPushButton(parent=self.frame_description)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
@@ -316,18 +276,18 @@ class TodolistForm(QMainWindow):
         self.btn_submit.setSizePolicy(sizePolicy)
         self.btn_submit.setMinimumSize(QtCore.QSize(130, 40))
         self.btn_submit.setStyleSheet('''
-                                    #btn_submit {
-                                        border-radius: 20px;
-                                        background: #3C6255;
-                                        color: #F7F3D7;
-                                        font-size: 16px;
-                                        font-weight: 600;
-                                    }
-                                    
-                                    #btn_submit:hover {
-                                        background-color: #23493C;
-                                    }
-                                    ''')
+                                        #btn_submit {
+                                            border-radius: 20px;
+                                            background: #3C6255;
+                                            color: #F7F3D7;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                        }
+                                        
+                                        #btn_submit:hover {
+                                            background-color: #23493C;
+                                        }
+                                        ''')
         self.btn_submit.setDefault(False)
         self.btn_submit.setFlat(False)
         self.btn_submit.setObjectName("btn_submit")
@@ -338,11 +298,26 @@ class TodolistForm(QMainWindow):
         self.verticalLayout_2.addWidget(self.frame_description)
         self.verticalLayout.addWidget(self.main)
         self.setCentralWidget(self.centralwidget)
-        
+
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
+        self.widget_img.clicked.connect(self.on_img_clicked)
 
     def on_btn_back_clicked(self):
         self.changePageToMain()
 
     def changePageToMain(self):
         self.channel.emit("main")
+        
+    def on_img_clicked(self):
+        # Open File Dialog
+        file_dialog = QtWidgets.QFileDialog()
+        file_path, _ = file_dialog.getOpenFileName(self, 'Open Image', '', 'Images (*.png *.xpm *.jpg *.jpeg)')
+        if file_path:
+            image = file_path
+            self.widget_img.setStyleSheet(f'''
+                                            #widget_img {{
+                                                border-image: url({image}) 0 0 0 0 stretch stretch;
+                                                border-radius:40px;
+                                            }}
+                                            ''')
+        

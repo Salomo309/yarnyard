@@ -2,10 +2,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
-import os
-import pathlib
-import requests
-import json
+import os, pathlib, requests, json
 
 
 class ArtikelWindow(QMainWindow):
@@ -120,6 +117,42 @@ class ArtikelWindow(QMainWindow):
                 color: #F7F4D9;
                 font-weight: 600;
                 padding: 10px 8px 0px;
+            }
+            
+            QScrollBar:vertical {
+                border: none;
+                width: 12px;
+                margin: 8px 0px 8px 5px;
+                border-radius: 0px;
+            }
+            
+            /*  HANDLE BAR VERTICAL */
+            QScrollBar::handle:vertical {    
+                background-color: #F7F4D9;
+                min-height: 20px;
+                border-radius: 3px;
+            }
+            
+            QScrollBar::handle:vertical:hover{    
+                background-color: #23493C;
+            }
+            
+            /* BTN TOP - SCROLLBAR */
+            QScrollBar::sub-line:vertical {
+                height: 0px;
+            }
+            
+            /* BTN BOTTOM - SCROLLBAR */
+            QScrollBar::add-line:vertical {
+                height: 0px;
+            }
+            
+            /* RESET ARROW */
+            QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+                background: none;
+            }
+            QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+                background: none;
             }
         ''')
 
@@ -258,7 +291,7 @@ class ArtikelWindow(QMainWindow):
         self.horizontalLayout_5.addWidget(
             self.frame_prev, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.frame_img = QtWidgets.QFrame(parent=self.frame_contents_1)
-        self.frame_img.setMinimumSize(QtCore.QSize(400, 170))
+        self.frame_img.setMinimumSize(QtCore.QSize(400, 190))
         self.frame_img.setMaximumSize(QtCore.QSize(400, 190))
         self.frame_img.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_img.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
@@ -325,7 +358,7 @@ class ArtikelWindow(QMainWindow):
 
         self.box_description_artikel = QtWidgets.QWidget(
             parent=self.frame_description)
-        self.box_description_artikel.setMaximumSize(QtCore.QSize(600, 220))
+        self.box_description_artikel.setMaximumSize(QtCore.QSize(600, 205))
         self.box_description_artikel.setObjectName("box_description_artikel")
 
         if (len(self.listArtikel) == 0):
@@ -436,7 +469,7 @@ class ArtikelWindow(QMainWindow):
             self.listArtikel = json.loads(response.text)
         else:
             self.listArtikel = []
-            print("No List Artikel Found")
+            print("No Artikel Found")
 
     def on_btn_back_clicked(self):
         self.changePageToMain()

@@ -438,7 +438,7 @@ class DetailTanamanWindow(QMainWindow):
             
             # Time frame
             self.frame_time_tdl = QtWidgets.QFrame(parent=self.frame_tdl_temp)
-            self.frame_time_tdl.setMaximumSize(QtCore.QSize(140, 16777215))
+            self.frame_time_tdl.setMaximumSize(QtCore.QSize(160, 16777215))
             self.frame_time_tdl.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
             self.frame_time_tdl.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
             self.frame_time_tdl.setObjectName(f"frame_time_tdl_{i}")
@@ -461,7 +461,7 @@ class DetailTanamanWindow(QMainWindow):
                                                 font-weight: 500;
                                             }}
                                             ''')
-            self.label_time_tdl.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+            self.label_time_tdl.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter | QtCore.Qt.AlignmentFlag.AlignVCenter)
             str_time = self.listTDL[i]["waktu"]
             date_time = datetime.datetime.strptime(str_time, "%a, %d %b %Y %H:%M:%S %Z")
             
@@ -504,7 +504,7 @@ class DetailTanamanWindow(QMainWindow):
                                                 ''')
             self.label_desc_tdl.setText(self.listTDL[i]["deskripsi_tdl"])
             self.label_desc_tdl.setObjectName(f"label_desc_tdl_{i}")
-            self.horizontal_layout_desc.addWidget(self.label_desc_tdl, 0, QtCore.Qt.AlignmentFlag.AlignLeft) #
+            self.horizontal_layout_desc.addWidget(self.label_desc_tdl, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
             
             self.btn_more_1 = QtWidgets.QPushButton(parent=self.frame_desc)
             self.btn_more_1.setStyleSheet("")
@@ -867,13 +867,13 @@ class DetailTanamanWindow(QMainWindow):
             self.listTDL = json.loads(responseTDL.text)
         else:
             self.listTDL = []
-            print("No List To Do List Found")
+            print("No To Do List Found")
             
         if responseJurnal.status_code == 200:
             self.listJurnal = json.loads(responseJurnal.text)
         else:
             self.listJurnal = []
-            print("No List JurnalFound")
+            print("No Jurnal Found")
     
     def handle_menu_tdl(self, action, obj_name):
         idTDL = int(obj_name.split("_")[-1])

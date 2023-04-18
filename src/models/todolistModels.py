@@ -11,7 +11,11 @@ class TodolistModels:
     @classmethod
     def getAllTodolist(cls):
         cursor = mysql.connection.cursor()
-        cursor.execute("SELECT * FROM todolist")
+        cursor.execute('''
+                       SELECT * 
+                       FROM todolist 
+                       ORDER BY waktu ASC
+                       ''')
 
         dataTDL = cursor.fetchall()
 

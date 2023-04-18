@@ -1,92 +1,131 @@
-# IF2250-2023-K01-G09-yanyard
+# yanyard - Aplikasi Jurnal Tanaman
 
+## Daftar Isi
 
+- [Deskripsi Aplikasi](#deskripsi-aplikasi)
+- [Teknologi yang Digunakan](#teknologi-yang-digunakan)
+- [Daftar Modul](#daftar-modul)
+- [Daftar Basis Data](#daftar-basis-data)
+- [Cara Menjalankan Aplikasi](#cara-menjalankan-aplikasi)
+- [Anggota Kelompok dan Pembagian Tugas](#anggota-kelompok-dan-pembagian-tugas)
 
-## Getting started
+## Deskripsi Aplikasi
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+yarnyard adalah aplikasi berkebun yang dapat membantu user dalam kegiatan berkebun, mulai dari mencatat semua jenis tanaman, mencatat perkembangan tanaman, hingga menambahkan to-do list sebagai reminder. Perangkat lunak ini dibuat untuk memenuhi kebutuhan masyarakat yang memiliki hobi maupun ingin bercocok-tanam. Perangkat lunak ini menyediakan beberapa fitur untuk mempermudah masyarakat dalam menjadwal kebutuhan tanaman serta menyimpan perkembangan tanaman.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Aplikasi ini memiliki beberapa fitur, yaitu:
 
-## Add your files
+- Menambah dan Menghapus Tanaman <br>
+  Fitur ini digunakan untuk menambahkan tanaman yang baru ditanam serta menghapus tanaman yang sudah layu.
+- Jurnal Progress Tanaman <br>
+  Jurnal progress ini berguna untuk mencatat tanaman yang dimiliki serta perkembangan tanaman. Kelebihan dari jurnal progress ini adalah user dapat mengunggah foto ke dalam journal.
+- Daily To-do-list <br>
+  Daily to-do-list ini akan berisi jadwal penyiraman, pemupukan, ataupun kegiatan lain yang perlu dilakukan untuk merawat tanaman tersebut. Nantinya, daily to-do list ini akan menjadi reminder untuk user melalui notifikasi.
+- Artikel Seputar Tanaman <br>
+  User dapat membaca artikel seputar tanaman secara spesifik maupun general. Artikel ini dapat berguna bagi masyarakat yang ingin mencari-tahu informasi seperti kebutuhan tanaman, tata cara merawat tanaman, dan sebagainya.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## Teknologi yang Digunakan
 
+Bahasa pemrograman : Python 3 <br>
+Paradigma pemrograman : Object Oriented <br>
+
+DBMS : MySQL <br>
+Backend : Flask <br>
+GUI : PyQt <br>
+
+## Daftar Modul
+
+### Menu Utama
+
+Modul menu utama digunakan untuk menampilkan tampilan utama dari aplikasi
+
+![menu utama](doc/menu-utama.jpg)
+
+### Artikel
+
+Modul artikel digunakan untuk menampilkan artikel
+
+![artikel](doc/artikel.jpg)
+
+### Tanaman
+
+Modul tanaman digunakan untuk menampilkan list tanaman, detail setiap tanaman, serta operasi CRUD terkait data tanaman
+
+![tanaman](doc/tanaman.jpg)
+
+### To Do List
+
+Modul to-do-list digunakan untuk menampilkan to–do-list semua tanaman, to-do-list setiap tanaman, serta operasi CRUD terkait data to-do-list
+
+![to-do-list](doc/to-do-list.jpg)
+
+### Jurnal
+
+Modul jurnal digunakan untuk menampilkan jurnal tanaman serta operasi CRUD terkait data jurnal
+
+![jurnal](doc/jurnal.jpg)
+
+## Daftar Basis Data
+
+### artikel
+
+| Field       | Type         | Null | Key | Default | Extra          | Desc                         |
+| ----------- | ------------ | ---- | --- | ------- | -------------- | ---------------------------- |
+| id_artikel  | int(11)      | NO   | PRI | NULL    | auto_increment | Menyimpan ID unik artikel    |
+| judul       | varchar(50)  | NO   |     | NULL    |                | Menyimpan judul artikel      |
+| isi_artikel | text         | NO   |     | NULL    |                | Menyimpan isi/konten artikel |
+| gambar      | varchar(255) | NO   |     | NULL    |                | Menyimpan gambar artikel     |
+
+### jurnal
+
+| Field            | Type         | Null | Key | Default | Extra          | Desc                               |
+| ---------------- | ------------ | ---- | --- | ------- | -------------- | ---------------------------------- |
+| id_jurnal        | int(11)      | NO   | PRI | NULL    | auto_increment | Menyimpan ID unik jurnal           |
+| id_tanaman       | int(11)      | NO   | MUL | NULL    |                | Menyimpan ID unik tanaman          |
+| tanggal_jurnal   | date         | NO   |     | NULL    |                | Menyimpan tanggal pembuatan jurnal |
+| deskripsi_jurnal | varchar(255) | NO   |     | NULL    |                | Menyimpan deskripsi jurnal         |
+
+### tanaman
+
+| Field             | Type         | Null | Key | Default | Extra          | Desc                                |
+| ----------------- | ------------ | ---- | --- | ------- | -------------- | ----------------------------------- |
+| id_tanaman        | int(11)      | NO   | PRI | NULL    | auto_increment | Menyimpan ID unik tanaman           |
+| nama_tanaman      | varchar(50)  | NO   |     | NULL    |                | Menyimpan nama tanaman              |
+| tanggal_tanaman   | date         | NO   |     | NULL    |                | Menyimpan tanggal penanaman tanaman |
+| deskripsi_tanaman | varchar(255) | YES  |     | NULL    |                | Menyimpan deskripsi tanaman         |
+| gambar            | varchar(255) | YES  |     | NULL    |                | Menyimpan gambar tanaman            |
+
+### todolist
+
+| Field         | Type         | Null | Key | Default | Extra          | Desc                                |
+| ------------- | ------------ | ---- | --- | ------- | -------------- | ----------------------------------- |
+| id_tdl        | int(11)      | NO   | PRI | NULL    | auto_increment | Menyimpan ID unik to-do-list        |
+| id_tanaman    | int(11)      | NO   | MUL | NULL    |                | Menyimpan ID unik tanaman           |
+| waktu         | datetime     | NO   |     | NULL    |                | Menyimpan waktu reminder to-do-list |
+| deskripsi_tdl | varchar(255) | NO   |     | NULL    |                | Menyimpan deskripsi to-do-list      |
+
+## Cara Menjalankan Aplikasi
+
+### 1. Clone repository
+
+```sh
+git clone https://gitlab.informatika.org/bangkitdc/if2250-2023-k01-g09-yanyard.git
 ```
-cd existing_repo
-git remote add origin https://gitlab.informatika.org/bangkitdc/if2250-2023-k01-g09-yanyard.git
-git branch -M main
-git push -uf origin main
+
+### 3. Run the app
+
+Pastikan telah menginstall Python, kemudian jalankan command berikut
+
+```sh
+python src/main.py
 ```
 
-## Integrate with your tools
+## Anggota Kelompok dan Pembagian Tugas
 
-- [ ] [Set up project integrations](https://gitlab.informatika.org/bangkitdc/if2250-2023-k01-g09-yanyard/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+| NIM      | Nama                           | Pembagian Tugas |
+| -------- | ------------------------------ | --------------- |
+| 13521055 | Muhammad Bangkit Dwi Cahyono   | Jurnal Tanaman  |
+| 13521063 | Salomo Reinhart Gregory Manalu | Detail Tanaman  |
+| 13521071 | Margaretha Olivia Haryono      | To-Do-List      |
+| 13521081 | Bagas Aryo Seto                | List Tanaman    |
+| 13521103 | Aulia Mey Diva Annandya        | Detail Tanaman  |

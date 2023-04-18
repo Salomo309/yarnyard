@@ -1,5 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os, pathlib
@@ -238,3 +238,13 @@ class JurnalForm(QMainWindow):
 
     def changePageToMain(self):
         self.channel.emit("main")
+        
+    def is_deskripsi_jurnal_too_long(self):
+        return len(self.deskripsi_jurnal.toPlainText().strip()) > 255
+
+    def validate_input(self):
+        if not self.is_deskripsi_jurnal_too_long():
+            # masukin ke database dan balik ke data tanaman page
+            print("anjay masuk")
+        else :
+            QMessageBox.warning(self, "Error", "Panjang deskripsi tanaman tidak boleh lebih dari 255 karakter.")

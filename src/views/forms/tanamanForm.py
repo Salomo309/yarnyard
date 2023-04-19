@@ -428,6 +428,8 @@ class TanamanForm(QMainWindow):
             imageFormat = f"assets/images/tanaman/{max_num + 1}.png"
             
             if (self.idTanaman == None): # Insert
+                if self.image_tanaman == None:
+                    imageFormat = None
                 # masukin ke database dan balik ke data tanaman page
                 data = {
                     "nama_tanaman": self.nama_tanaman.toPlainText().strip(),
@@ -436,7 +438,8 @@ class TanamanForm(QMainWindow):
                 }
                 response = requests.post(f'http://127.0.0.1:3000/tanaman/addtanaman', data=data)
                 if response.status_code == 201:
-                    shutil.copyfile(self.image_tanaman, imageFormat)
+                    if (self.image_tanaman != None):
+                        shutil.copyfile(self.image_tanaman, imageFormat)
                     print("Tanaman added successfully.")
                     self.clear_data()
                     self.channel.emit("data tanaman", None)

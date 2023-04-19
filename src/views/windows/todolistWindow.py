@@ -1,6 +1,6 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
+from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os, pathlib, requests, json, datetime
 
@@ -461,9 +461,6 @@ class TodolistWindow(QMainWindow):
             print("No To Do List Found")
             
     def on_btn_back_clicked(self):
-        self.changePageToMain()
-
-    def changePageToMain(self):
         self.channel.emit("main")
         
     def handle_menu_tdl(self, action, obj_name):

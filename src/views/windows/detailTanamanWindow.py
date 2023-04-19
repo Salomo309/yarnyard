@@ -1,6 +1,6 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
+from PyQt6.QtWidgets import QMainWindow, QMessageBox
+from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os, pathlib, requests, json, datetime
 
@@ -125,7 +125,72 @@ class DetailTanamanWindow(QMainWindow):
         self.frame_temp_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_temp_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_temp_2.setObjectName("frame_temp_2")
-        self.horizontalLayout.addWidget(self.frame_temp_2)
+        
+        self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.frame_temp_2)
+        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_14.setSpacing(0)
+        self.horizontalLayout_14.setObjectName("horizontalLayout_14")
+        self.frame = QtWidgets.QFrame(parent=self.frame_temp_2)
+        self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame.setObjectName("frame")
+        self.horizontalLayout_15 = QtWidgets.QHBoxLayout(self.frame)
+        self.horizontalLayout_15.setContentsMargins(2, 2, 2, 2)
+        self.horizontalLayout_15.setSpacing(0)
+        self.horizontalLayout_15.setObjectName("horizontalLayout_15")
+        self.btn_edit = QtWidgets.QPushButton(parent=self.frame)
+        self.btn_edit.setStyleSheet("#btn_edit {\n"
+                                    "    border-radius: 17px;\n"
+                                    "    height: 34px;\n"
+                                    "    width: 34px;\n"
+                                    "    margin: 2px;\n"
+                                    "}\n"
+                                    "\n"
+                                    "#btn_edit:hover {\n"
+                                    "    background-color: #61876E;\n"
+                                    "}")
+        icon_edit = QtGui.QIcon()
+        icon_edit.addPixmap(QtGui.QPixmap(path + "/icons/mode_edit.svg"),
+                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_edit.setIcon(icon_edit)
+        self.btn_edit.setIconSize(QtCore.QSize(24, 24))
+        self.btn_edit.setObjectName("btn_edit")
+        self.btn_edit.setCursor(Qt.CursorShape.PointingHandCursor)
+        
+        self.horizontalLayout_15.addWidget(self.btn_edit)
+        self.horizontalLayout_14.addWidget(self.frame)
+        self.frame_2 = QtWidgets.QFrame(parent=self.frame_temp_2)
+        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.horizontalLayout_16 = QtWidgets.QHBoxLayout(self.frame_2)
+        self.horizontalLayout_16.setContentsMargins(2, 2, 2, 2)
+        self.horizontalLayout_16.setSpacing(0)
+        self.horizontalLayout_16.setObjectName("horizontalLayout_16")
+        self.btn_delete = QtWidgets.QPushButton(parent=self.frame_2)
+        self.btn_delete.setStyleSheet("#btn_delete {\n"
+                                      "    border-radius: 17px;\n"
+                                      "    height: 34px;\n"
+                                      "    width: 34px;\n"
+                                      "    margin: 2px;\n"
+                                      "}\n"
+                                      "\n"
+                                      "#btn_delete:hover {\n"
+                                      "    background-color: #61876E;\n"
+                                      "}")
+        self.btn_delete.setText("")
+        icon_delete = QtGui.QIcon()
+        icon_delete.addPixmap(QtGui.QPixmap(path + "icons/delete.svg"),
+                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_delete.setIcon(icon_delete)
+        self.btn_delete.setIconSize(QtCore.QSize(24, 24))
+        self.btn_delete.setObjectName("btn_delete")
+        self.btn_delete.setCursor(Qt.CursorShape.PointingHandCursor)
+        
+        self.horizontalLayout_16.addWidget(self.btn_delete)
+        self.horizontalLayout_14.addWidget(self.frame_2)
+        
+        self.horizontalLayout.addWidget(self.frame_temp_2, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.verticalLayout.addWidget(self.header)
         
         # Scroll area
@@ -858,6 +923,8 @@ class DetailTanamanWindow(QMainWindow):
         self.setCentralWidget(self.centralwidget)
         
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
+        # self.btn_edit.clicked.connect()
+        self.btn_delete.clicked.connect(self.delete_tanaman)
     
     def setDetailTanaman(self, id):
         responseDetail = requests.get(f'http://127.0.0.1:3000/tanaman/{id}')
@@ -914,8 +981,13 @@ class DetailTanamanWindow(QMainWindow):
         else:
             print(f"Failed to delete Jurnal item with id {idJurnal}. Status code: {response.status_code}")
     
+    def delete_tanaman(self):
+        response = requests.delete(f'http://127.0.0.1:3000/tanaman/deletetanaman/{self.idTanaman}')
+        if response.status_code == 204:
+            print("Tanaman deleted successfully.")
+            self.channel.emit("data tanaman")
+        else:
+            print(f"Failed to delete Tanaman with id {self.idTanaman}. Status code: {response.status_code}")
+    
     def on_btn_back_clicked(self):
-        self.changePageToMain()
-
-    def changePageToMain(self):
         self.channel.emit("data tanaman")

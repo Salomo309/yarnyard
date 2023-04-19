@@ -1,6 +1,6 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QMessageBox
-from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
+from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os
 import pathlib
@@ -13,9 +13,7 @@ class TodolistForm(QMainWindow):
         self.setUpTodolistForm()
     
     def setUpTodolistForm(self):
-        self.setWindowTitle("yanyard - To Do List Form")
         self.resize(960, 600)
-        # self.setFixedSize(960, 600)
         
         # Get the size and position of the user's screen
         primary_screen = QGuiApplication.primaryScreen()
@@ -28,9 +26,6 @@ class TodolistForm(QMainWindow):
         
         # Assets path
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
-        
-        # Logo
-        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
         
         # Fonts
         fonts_folder_path = path + 'fonts/'
@@ -329,8 +324,8 @@ class TodolistForm(QMainWindow):
 
     def validate_input(self):
         if self.is_todolist_null():
-            QMessageBox.critical(self, "Error", "Deskripsi To Do List Kosong")
+            QMessageBox.warning(self, "Error", "Deskripsi To Do List Kosong")
         elif self.is_todolist_too_long():
-            QMessageBox.critical(self, "Error", "Deskripsi To Do List Terlalu Panjang")
+            QMessageBox.warning(self, "Error", "Deskripsi To Do List Terlalu Panjang")
         else:
             print('To Database')

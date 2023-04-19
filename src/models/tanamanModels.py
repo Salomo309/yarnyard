@@ -8,6 +8,18 @@ class TanamanModels:
         self.tanggal_tanaman = tanggal_tanaman
         self.deskripsi_tanaman = deskripsi_tanaman
         self.gambar = gambar
+        
+        cursor = mysql.connection.cursor()
+        query = '''
+            INSERT INTO tanaman
+            (id_tanaman, nama_tanaman, tanggal_tanaman, deskripsi_tanaman, gambar)
+            VALUES (NULL, %s, NOW(), %s, %s)
+        '''
+        values = (self.nama_tanaman, self.deskripsi_tanaman, self.gambar)
+        cursor.execute(query, values)
+
+        mysql.connection.commit()
+        cursor.close()
 
     @classmethod
     def getAllTanaman(cls):
@@ -71,6 +83,21 @@ class TanamanModels:
 
             cursor.close()
             return listTanaman
+    
+    @classmethod
+    def deleteTanaman(cls, idTanaman):
+        try:
+            cursor = mysql.connection.cursor()
+            query = '''
+                DELETE FROM tanaman
+                WHERE id_tanaman = %s
+            '''
+            cursor.execute(query, (idTanaman,))
+            mysql.connection.commit()
+            cursor.close()
+        except Exception as e:
+            print("Error:", str(e))
+            mysql.connection.rollback()
 
     def getIDTanaman(self):
         return self.id_tanaman

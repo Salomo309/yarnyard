@@ -1,6 +1,5 @@
 from PyQt6 import QtWidgets
 from PyQt6.QtGui import QIcon
-import sys
 
 # Windows
 from views.windows.menuWindow import MenuWindow
@@ -15,11 +14,7 @@ from views.forms.todolistForm import TodolistForm
 from views.forms.tanamanForm import TanamanForm
 
 # self.setWindowTitle("yanyard - Detail Tanaman")
-# self.setWindowTitle("yanyard - To Do List")
-# self.setWindowTitle("yanyard - Data Tanaman")
-# self.setWindowTitle("yanyard - Artikel")
 # self.setWindowTitle("yanyard - To Do List Form")
-# self.setWindowTitle("yanyard - Tanaman Form")
 # self.setWindowTitle("yanyard - Jurnal Form")
 
 class PageController(QtWidgets.QMainWindow):
@@ -49,7 +44,6 @@ class PageController(QtWidgets.QMainWindow):
         # Add the windows to the stacked widget
         self.stackedWidget.addWidget(self.menuWindow)           # 0
         self.stackedWidget.addWidget(self.artikelWindow)        # 1
-        # self.stackedWidget.addWidget(self.detailTanamanWindow)
         self.stackedWidget.addWidget(self.todolistWindow)       # 2
         self.stackedWidget.addWidget(self.dataTanamanWindow)    # 3
 
@@ -62,7 +56,6 @@ class PageController(QtWidgets.QMainWindow):
     def setUpListener(self):
         self.menuWindow.channel.connect(self.handleMenuWindow)
         self.artikelWindow.channel.connect(self.handleArtikelWindow)
-        # self.detailTanamanWindows.channel.connect(self.handleDetailTanamanWindow)
         self.todolistWindow.channel.connect(self.handleTodolistWindow)
         self.dataTanamanWindow.channel.connect(self.handleDataTanamanWindow)
 
@@ -70,13 +63,17 @@ class PageController(QtWidgets.QMainWindow):
         self.todolistForm.channel.connect(self.handleTodolistForm)
         self.tanamanForm.channel.connect(self.handleTanamanForm)
 
-    def handleMenuWindow(self, page, idTanaman=None):
+    def handleMenuWindow(self, page):
         if page == "artikel":
-            self.stackedWidget.setCurrentIndex(4)
+            self.setWindowTitle("yanyard - Artikel")
+            self.stackedWidget.setCurrentIndex(1)
         elif page == "todolist":
-            self.stackedWidget.setCurrentIndex(5)
-        else:
-            self.stackedWidget.setCurrentIndex(6)
+            self.setWindowTitle("yanyard - To Do List")
+            self.stackedWidget.setCurrentIndex(2)
+        elif page == "data tanaman":
+            self.setWindowTitle("yanyard - Data Tanaman")
+            self.dataTanamanWindow.setUpDataTanamanWindow()
+            self.stackedWidget.setCurrentIndex(3)
             
     def handleArtikelWindow(self, page):
         if page == "main":
@@ -84,10 +81,13 @@ class PageController(QtWidgets.QMainWindow):
 
     def handleDetailTanamanWindow(self, page):
         if page == "data tanaman":
+            self.setWindowTitle("yanyard - Data Tanaman")
+            self.dataTanamanWindow.setUpDataTanamanWindow()
             self.stackedWidget.setCurrentIndex(3)
     
     def handleTodolistWindow(self, page):
         if page == "main":
+            self.setWindowTitle("yanyard - Main Menu")
             self.stackedWidget.setCurrentIndex(0)
             
     def handleDataTanamanWindow(self, page, idTanaman=None):
@@ -105,6 +105,9 @@ class PageController(QtWidgets.QMainWindow):
                     self.detailTanamanWindows[idTanaman])
                 detailTanamanWindow.channel.connect(
                     self.handleDetailTanamanWindow)
+        elif page == "form tanaman":
+            self.setWindowTitle("yanyard - Tanaman Form")
+            self.stackedWidget.setCurrentIndex(6)
 
     def handleJurnalForm(self, page):
         if page == "main":
@@ -115,5 +118,7 @@ class PageController(QtWidgets.QMainWindow):
             self.stackedWidget.setCurrentIndex(0)
             
     def handleTanamanForm(self, page):
-        if page == "main":
-            self.stackedWidget.setCurrentIndex(0)
+        if page == "data tanaman":
+            self.setWindowTitle("yanyard - Data Tanaman")
+            self.dataTanamanWindow.setUpDataTanamanWindow()
+            self.stackedWidget.setCurrentIndex(3)

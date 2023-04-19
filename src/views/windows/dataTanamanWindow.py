@@ -1,6 +1,6 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
+from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os, pathlib, requests, json, datetime
 
@@ -13,10 +13,7 @@ class DataTanamanWindow(QMainWindow):
         self.setUpDataTanamanWindow()
 
     def setUpDataTanamanWindow(self):
-        self.setWindowTitle("yanyard - Data Tanaman")
         self.resize(960, 600)
-
-        # self.setFixedSize(960, 600)
 
         # Get the size and position of the user's screen
         primary_screen = QGuiApplication.primaryScreen()
@@ -29,9 +26,6 @@ class DataTanamanWindow(QMainWindow):
 
         # Assets path
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
-
-        # Logo
-        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
 
         # Fonts
         fonts_folder_path = path + 'fonts/'
@@ -375,6 +369,7 @@ class DataTanamanWindow(QMainWindow):
         self.add_btn.setText("ADD TANAMAN")
         self.add_btn.setCursor(Qt.CursorShape.PointingHandCursor)
         self.add_btn.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
+        self.add_btn.clicked.connect(self.addTanaman)
         
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
         
@@ -395,9 +390,9 @@ class DataTanamanWindow(QMainWindow):
     def on_img_clicked(self, obj_name):
         idTanaman = int(obj_name.split("_")[-1])
         self.channel.emit("detail", idTanaman)
+    
+    def addTanaman(self):
+        self.channel.emit("form tanaman", None)
         
     def on_btn_back_clicked(self):
-        self.changePageToMain()
-
-    def changePageToMain(self):
         self.channel.emit("main", None)

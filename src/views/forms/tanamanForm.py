@@ -1,8 +1,8 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
+from PyQt6.QtWidgets import QMainWindow, QMessageBox
+from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
-import os, pathlib
+import os, pathlib, requests
 
 class TanamanForm(QMainWindow):
     channel = pyqtSignal(str)
@@ -39,8 +39,6 @@ class TanamanForm(QMainWindow):
         self.setStyleSheet('''
                                 *{
                                     border: none;
-                                    background-color: transparent;
-                                    background: transparent;
                                     padding: 0;
                                     margin: 0;
                                     font-family: Poppins;
@@ -194,6 +192,7 @@ class TanamanForm(QMainWindow):
         self.widget_img.setMinimumSize(QtCore.QSize(160, 200))
         self.widget_img.setMaximumSize(QtCore.QSize(160, 200))
         
+        self.image_tanaman = None
         image = "assets/images/tanaman/add_photo.png"
         self.widget_img.setStyleSheet(f'''
                                         #widget_img {{
@@ -246,10 +245,10 @@ class TanamanForm(QMainWindow):
         self.verticalLayout_6.setContentsMargins(9, 4, 9, 4)
         self.verticalLayout_6.setSpacing(0)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.deskripsi_jurnal = QtWidgets.QPlainTextEdit(parent=self.frame)
-        self.deskripsi_jurnal.setMinimumSize(QtCore.QSize(310, 40))
-        self.deskripsi_jurnal.setStyleSheet('''
-                                            #deskripsi_jurnal {
+        self.deskripsi_tanaman = QtWidgets.QPlainTextEdit(parent=self.frame)
+        self.deskripsi_tanaman.setMinimumSize(QtCore.QSize(310, 40))
+        self.deskripsi_tanaman.setStyleSheet('''
+                                            #deskripsi_tanaman {
                                                 padding: 12px;
                                                 font-size: 14px;
                                                 border-radius: 15px;
@@ -258,12 +257,12 @@ class TanamanForm(QMainWindow):
                                                 font-weight: 600;
                                             }
                                             ''')
-        self.deskripsi_jurnal.setOverwriteMode(True)
-        self.deskripsi_jurnal.setObjectName("deskripsi_jurnal")
-        self.deskripsi_jurnal.setPlaceholderText("Ceritakan tentang tanamanmu. . .")
-        self.deskripsi_jurnal.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
+        self.deskripsi_tanaman.setOverwriteMode(True)
+        self.deskripsi_tanaman.setObjectName("deskripsi_tanaman")
+        self.deskripsi_tanaman.setPlaceholderText("Ceritakan tentang tanamanmu. . .")
+        self.deskripsi_tanaman.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
         
-        self.verticalLayout_6.addWidget(self.deskripsi_jurnal)
+        self.verticalLayout_6.addWidget(self.deskripsi_tanaman)
         self.verticalLayout_3.addWidget(self.frame, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.verticalLayout_2.addWidget(self.frame_contents_1, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.frame_description = QtWidgets.QFrame(parent=self.main)
@@ -299,6 +298,7 @@ class TanamanForm(QMainWindow):
         self.btn_submit.setText("Submit")
         self.btn_submit.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_submit.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
+        self.btn_submit.clicked.connect(self.validate_input)
         
         self.horizontalLayout_5.addWidget(self.btn_submit, 0, QtCore.Qt.AlignmentFlag.AlignTop)
         self.verticalLayout_2.addWidget(self.frame_description)
@@ -307,23 +307,66 @@ class TanamanForm(QMainWindow):
 
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
         self.widget_img.clicked.connect(self.on_img_clicked)
+        
+    def clear_data(self):
+        self.nama_tanaman.clear()
+        self.deskripsi_tanaman.clear()
+        self.image_tanaman = ""
+        image = "assets/images/tanaman/add_photo.png"
+        self.widget_img.setStyleSheet(f'''
+                                        #widget_img {{
+                                            border-image: url({image}) 0 0 0 0 stretch stretch;
+                                            border-radius:40px;
+                                        }}
+                                        ''')
 
     def on_btn_back_clicked(self):
-        self.changePageToMain()
-
-    def changePageToMain(self):
-        self.channel.emit("main")
+        self.clear_data()
+        self.channel.emit("data tanaman")
         
     def on_img_clicked(self):
         # Open File Dialog
         file_dialog = QtWidgets.QFileDialog()
         file_path, _ = file_dialog.getOpenFileName(self, 'Open Image', '', 'Images (*.png *.xpm *.jpg *.jpeg)')
         if file_path:
-            image = file_path
+            self.image_tanaman = file_path
             self.widget_img.setStyleSheet(f'''
                                             #widget_img {{
-                                                border-image: url({image}) 0 0 0 0 stretch stretch;
+                                                border-image: url({self.image_tanaman}) 0 0 0 0 stretch stretch;
                                                 border-radius:40px;
                                             }}
                                             ''')
+    
+    def is_nama_tanaman_null(self):
+        return self.nama_tanaman.toPlainText().strip() == ""
+    
+    def is_nama_tanaman_too_long(self):
+        return len(self.nama_tanaman.toPlainText().strip()) > 50
+    
+    def is_deskripsi_tanaman_too_long(self):
+        return len(self.deskripsi_tanaman.toPlainText().strip()) > 255
+
+    def validate_input(self):
+        if not self.is_nama_tanaman_null() and not self.is_nama_tanaman_too_long() and not self.is_deskripsi_tanaman_too_long():
+            # masukin ke database dan balik ke data tanaman page
+            data = {
+                "nama_tanaman": self.nama_tanaman.toPlainText().strip(),
+                "deskripsi_tanaman": self.deskripsi_tanaman.toPlainText().strip(),
+                "image_tanaman": self.image_tanaman
+            }
+            response = requests.post(f'http://127.0.0.1:3000/tanaman/addtanaman', data=data)
+            if response.status_code == 201:
+                print("Tanaman added successfully.")
+                self.clear_data()
+                self.channel.emit("data tanaman")
+            else:
+                print(f"Failed to add Tanaman. Status code: {response.status_code}")
+        else :
+            if self.is_nama_tanaman_null():
+                QMessageBox.warning(self, "Error", "Nama tanaman tidak boleh kosong.")
+            elif self.is_nama_tanaman_too_long():
+                QMessageBox.warning(self, "Error", "Panjang nama tanaman tidak boleh lebih dari 50 karakter.")
+            elif self.is_deskripsi_tanaman_too_long():
+                QMessageBox.warning(self, "Error", "Panjang deskripsi tanaman tidak boleh lebih dari 255 karakter.")
+
         

@@ -1,6 +1,6 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
+from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os, pathlib, requests, json
 
@@ -472,9 +472,6 @@ class ArtikelWindow(QMainWindow):
             print("No Artikel Found")
 
     def on_btn_back_clicked(self):
-        self.changePageToMain()
-
-    def changePageToMain(self):
         self.channel.emit("main")
 
     def prev(self):

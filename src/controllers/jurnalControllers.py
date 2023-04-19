@@ -24,6 +24,7 @@ class JurnalControllers:
         except Exception as e:
             return str(e), 400
 
+    @staticmethod
     def getJurnalByIdTanaman(idTanaman):
         try:
             fetchedData = JurnalModels.getJurnal(idTanaman)
@@ -43,6 +44,7 @@ class JurnalControllers:
         except Exception as e:
             return str(e), 400
 
+    @staticmethod
     def deleteJurnalByIdJurnal(idJurnal):
         try:
             JurnalModels.deleteJurnal(idJurnal)

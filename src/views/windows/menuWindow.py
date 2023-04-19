@@ -1,6 +1,6 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtGui import QGuiApplication, QCursor, QIcon, QFontDatabase
+from PyQt6.QtGui import QGuiApplication, QCursor, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os, pathlib
 
@@ -241,13 +241,10 @@ class MenuWindow(QMainWindow):
         self.btn_artikel.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
     
     def on_btn_tanaman_clicked(self):
-        self.channel.emit("test")
+        self.channel.emit("data tanaman")
         
     def on_btn_tdl_clicked(self):
         self.channel.emit("todolist")
         
     def on_btn_artikel_clicked(self):
-        self.channel.emit("artikel")
-        
-    def changePageToArtikel(self):
         self.channel.emit("artikel")

@@ -80,9 +80,7 @@ class TodolistControllers:
             id_tanaman = request.form.get("id_tanaman")
             waktu = request.form.get("waktu")
             deskripsi_tdl = request.form.get("deskripsi_tdl")
-            
-            print(id_tanaman, waktu, deskripsi_tdl)
-            
+                        
             TodolistModels(id_tdl=None, id_tanaman=id_tanaman, waktu=waktu, deskripsi_tdl=deskripsi_tdl)
             
             return "Created", 201

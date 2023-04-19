@@ -3,7 +3,6 @@ from controllers.tanamanControllers import TanamanControllers
 
 tanamanRoutes = Blueprint("tanamanRoutes", __name__)
 
-# tanamanRoutes.route("/", methods=["GET"])(TanamanControllers.getTanaman)
 @tanamanRoutes.route("/", methods=["GET"])
 def get_tanamans():
     return TanamanControllers.getTanaman()

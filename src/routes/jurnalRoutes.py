@@ -8,9 +8,13 @@ jurnalRoutes = Blueprint("jurnalRoutes", __name__)
 def get_jurnals():
     return JurnalControllers.getJurnal()
 
-@jurnalRoutes.route("/<int:idTanaman>", methods=["GET"])
-def get_jurnal(idTanaman):
+@jurnalRoutes.route("/byidtanaman/<int:idTanaman>", methods=["GET"])
+def get_jurnal_by_idtanaman(idTanaman):
     return JurnalControllers.getJurnalByIdTanaman(idTanaman)
+
+@jurnalRoutes.route("/byidjurnal/<int:idJurnal>", methods=["GET"])
+def get_jurnal_by_idjurnal(idJurnal):
+    return JurnalControllers.getJurnalByIdJurnal(idJurnal)
 
 @jurnalRoutes.route("/deletejurnal/<int:idJurnal>", methods=["DELETE"])
 def delete_todolist(idJurnal):

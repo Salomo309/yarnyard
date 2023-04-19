@@ -6,7 +6,7 @@ import os, pathlib, requests, json, datetime
 
 
 class TodolistWindow(QMainWindow):
-    channel = pyqtSignal(str)
+    channel = pyqtSignal(str, int)
 
     def __init__(self):
         super().__init__()
@@ -361,7 +361,8 @@ class TodolistWindow(QMainWindow):
                                                     }}
                                                     ''')
                 self.label_desc_tdl.setObjectName(f"label_desc_tdl_{count}")
-                self.label_desc_tdl.setText(tdl["deskripsi_tdl"] + "(" + tdl["nama_tanaman"] + ")")
+                # self.label_desc_tdl.setText(tdl["deskripsi_tdl"] + "(" + tdl["nama_tanaman"] + ")")
+                self.label_desc_tdl.setText(tdl["deskripsi_tdl"])
                 
                 self.horizontalLayout_8.addWidget(self.label_desc_tdl, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
                 
@@ -461,14 +462,13 @@ class TodolistWindow(QMainWindow):
             print("No To Do List Found")
             
     def on_btn_back_clicked(self):
-        self.channel.emit("main")
+        self.channel.emit("main", None)
         
     def handle_menu_tdl(self, action, obj_name):
         idTDL = int(obj_name.split("_")[-1])
         if (action == self.edit_action):
-            print(f"EDIT id = {idTDL}")
+            self.channel.emit("form tdl edit", idTDL)
         elif (action == self.delete_action):
-            print(f"DELETE id = {idTDL}")
             self.delete_tdl(idTDL)
     
     def delete_tdl(self, idTDL):

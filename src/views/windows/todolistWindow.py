@@ -1,5 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os, pathlib, requests, json, datetime
@@ -472,9 +472,15 @@ class TodolistWindow(QMainWindow):
             self.delete_tdl(idTDL)
     
     def delete_tdl(self, idTDL):
-        response = requests.delete(f'http://127.0.0.1:3000/todolist/deletetodolist/{idTDL}')
-        if response.status_code == 204:
-            print("Todolist item deleted successfully.")
-            self.setUpTodolistWindow()
-        else:
-            print(f"Failed to delete Todolist item with id {idTDL}. Status code: {response.status_code}")
+        # ask user if they want to delete the item
+        confirm = QMessageBox.critical(self, "Delete Todolist Item", "Are you sure you want to delete this to do list?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        
+        if confirm == QMessageBox.StandardButton.Yes:
+            # send delete request
+            response = requests.delete(f'http://127.0.0.1:3000/todolist/deletetodolist/{idTDL}')
+            
+            if response.status_code == 204:
+                print("Todolist item deleted successfully.")
+                self.setUpTodolistWindow()
+            else:
+                print(f"Failed to delete Todolist item with id {idTDL}. Status code: {response.status_code}")

@@ -966,28 +966,37 @@ class DetailTanamanWindow(QMainWindow):
             self.delete_jurnal(idJurnal)
     
     def delete_tdl(self, idTDL):
-        response = requests.delete(f'http://127.0.0.1:3000/todolist/deletetodolist/{idTDL}')
-        if response.status_code == 204:
-            print("Todolist item deleted successfully.")
-            self.setUpDetailTanamanWindow()
-        else:
-            print(f"Failed to delete Todolist item with id {idTDL}. Status code: {response.status_code}")
+        confirm = QMessageBox.critical(self, "Delete Todolist Item", "Are you sure you want to delete this to do list?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        
+        if confirm == QMessageBox.StandardButton.Yes:
+            response = requests.delete(f'http://127.0.0.1:3000/todolist/deletetodolist/{idTDL}')
+            if response.status_code == 204:
+                print("Todolist item deleted successfully.")
+                self.setUpDetailTanamanWindow()
+            else:
+                print(f"Failed to delete Todolist item with id {idTDL}. Status code: {response.status_code}")
     
     def delete_jurnal(self, idJurnal):
-        response = requests.delete(f'http://127.0.0.1:3000/jurnal/deletejurnal/{idJurnal}')
-        if response.status_code == 204:
-            print("Jurnal item deleted successfully.")
-            self.setUpDetailTanamanWindow()
-        else:
-            print(f"Failed to delete Jurnal item with id {idJurnal}. Status code: {response.status_code}")
+        confirm = QMessageBox.critical(self, "Delete Todolist Item", "Are you sure you want to delete this jurnal?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        
+        if confirm == QMessageBox.StandardButton.Yes:
+            response = requests.delete(f'http://127.0.0.1:3000/jurnal/deletejurnal/{idJurnal}')
+            if response.status_code == 204:
+                print("Jurnal item deleted successfully.")
+                self.setUpDetailTanamanWindow()
+            else:
+                print(f"Failed to delete Jurnal item with id {idJurnal}. Status code: {response.status_code}")
     
     def delete_tanaman(self):
-        response = requests.delete(f'http://127.0.0.1:3000/tanaman/deletetanaman/{self.idTanaman}')
-        if response.status_code == 204:
-            print("Tanaman deleted successfully.")
-            self.channel.emit("data tanaman")
-        else:
-            print(f"Failed to delete Tanaman with id {self.idTanaman}. Status code: {response.status_code}")
+        confirm = QMessageBox.critical(self, "Delete Tanaman", "Are you sure you want to delete this tanaman?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        
+        if confirm == QMessageBox.StandardButton.Yes:
+            response = requests.delete(f'http://127.0.0.1:3000/tanaman/deletetanaman/{self.idTanaman}')
+            if response.status_code == 204:
+                print("Tanaman deleted successfully.")
+                self.channel.emit("data tanaman")
+            else:
+                print(f"Failed to delete Tanaman with id {self.idTanaman}. Status code: {response.status_code}")
     
     def on_btn_back_clicked(self):
         self.channel.emit("data tanaman")

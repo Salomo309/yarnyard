@@ -2,14 +2,35 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
-import os, pathlib, requests
+import os, pathlib, requests, json
 
 class TanamanForm(QMainWindow):
-    channel = pyqtSignal(str)
+    channel = pyqtSignal(str, int)
 
-    def __init__(self):
+    def __init__(self, idTanaman=None):
         super().__init__()
+        self.idTanaman = idTanaman
         self.setUpTanamanForm()
+        
+    def setUpFields(self, idTanaman):
+        responseDetail = requests.get(f'http://127.0.0.1:3000/tanaman/{idTanaman}')
+        if responseDetail.status_code == 200:
+            self.detailTanaman = json.loads(responseDetail.text)
+            
+            self.idTanaman = idTanaman
+            self.nama_tanaman.setPlainText(self.detailTanaman[0]["nama_tanaman"])
+            self.deskripsi_tanaman.setPlainText(self.detailTanaman[0]["deskripsi_tanaman"])
+            
+            self.image_tanaman = self.detailTanaman[0]["gambar"]
+            self.widget_img.setStyleSheet(f'''
+                                            #widget_img {{
+                                                border-image: url({self.image_tanaman}) 0 0 0 0 stretch stretch;
+                                                border-radius:40px;
+                                            }}
+                                            ''')
+        else:
+            self.detailTanaman = []
+            print("No Detail Tanaman Found")
 
     def setUpTanamanForm(self):
         self.resize(960, 600)
@@ -34,6 +55,9 @@ class TanamanForm(QMainWindow):
                 QFontDatabase.addApplicationFont(font_path)
                 
         self.initializeWidgets(path)
+        
+        if (self.idTanaman != None):
+            self.setUpFields(self.idTanaman)
 
     def initializeWidgets(self, path):
         self.setStyleSheet('''
@@ -42,6 +66,43 @@ class TanamanForm(QMainWindow):
                                     padding: 0;
                                     margin: 0;
                                     font-family: Poppins;
+                                }
+                                
+                                QScrollBar:vertical {
+                                    background-color: transparent;
+                                    border: none;
+                                    width: 20px;
+                                    margin: 5px;
+                                    border-radius: 0px;
+                                    }
+                                
+                                /*  HANDLE BAR VERTICAL */
+                                QScrollBar::handle:vertical {    
+                                    background-color: #3C6255;
+                                    min-height: 20px;
+                                    border-radius: 5px;
+                                }
+                                
+                                QScrollBar::handle:vertical:hover{    
+                                    background-color: #23493C;
+                                }
+                                
+                                /* BTN TOP - SCROLLBAR */
+                                QScrollBar::sub-line:vertical {
+                                    height: 0px;
+                                }
+                                
+                                /* BTN BOTTOM - SCROLLBAR */
+                                QScrollBar::add-line:vertical {
+                                    height: 0px;
+                                }
+                                
+                                /* RESET ARROW */
+                                QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+                                    background: none;
+                                }
+                                QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+                                    background: none;
                                 }
                                 ''')
         self.centralwidget = QtWidgets.QWidget(parent=self)
@@ -322,7 +383,10 @@ class TanamanForm(QMainWindow):
 
     def on_btn_back_clicked(self):
         self.clear_data()
-        self.channel.emit("data tanaman")
+        if (self.idTanaman == None):
+            self.channel.emit("data tanaman", None)
+        else:
+            self.channel.emit("detail", self.idTanaman)
         
     def on_img_clicked(self):
         # Open File Dialog
@@ -348,19 +412,33 @@ class TanamanForm(QMainWindow):
 
     def validate_input(self):
         if not self.is_nama_tanaman_null() and not self.is_nama_tanaman_too_long() and not self.is_deskripsi_tanaman_too_long():
-            # masukin ke database dan balik ke data tanaman page
-            data = {
-                "nama_tanaman": self.nama_tanaman.toPlainText().strip(),
-                "deskripsi_tanaman": self.deskripsi_tanaman.toPlainText().strip(),
-                "image_tanaman": self.image_tanaman
-            }
-            response = requests.post(f'http://127.0.0.1:3000/tanaman/addtanaman', data=data)
-            if response.status_code == 201:
-                print("Tanaman added successfully.")
-                self.clear_data()
-                self.channel.emit("data tanaman")
-            else:
-                print(f"Failed to add Tanaman. Status code: {response.status_code}")
+            if (self.idTanaman == None): # Insert
+                # masukin ke database dan balik ke data tanaman page
+                data = {
+                    "nama_tanaman": self.nama_tanaman.toPlainText().strip(),
+                    "deskripsi_tanaman": self.deskripsi_tanaman.toPlainText().strip(),
+                    "gambar": self.image_tanaman
+                }
+                response = requests.post(f'http://127.0.0.1:3000/tanaman/addtanaman', data=data)
+                if response.status_code == 201:
+                    print("Tanaman added successfully.")
+                    self.clear_data()
+                    self.channel.emit("data tanaman")
+                else:
+                    print(f"Failed to add Tanaman. Status code: {response.status_code}")
+            else: # Edit
+                data = {
+                    "nama_tanaman": self.nama_tanaman.toPlainText().strip(),
+                    "deskripsi_tanaman": self.deskripsi_tanaman.toPlainText().strip(),
+                    "gambar": self.image_tanaman
+                }
+                response = requests.put(f'http://127.0.0.1:3000/tanaman/edittanaman/{self.idTanaman}', data=data)
+                if response.status_code == 200:
+                    print("Tanaman updated successfully.")
+                    self.clear_data()
+                    self.channel.emit("detail", self.idTanaman)
+                else:
+                    print(f"Failed to update Tanaman. Status code: {response.status_code}")
         else :
             if self.is_nama_tanaman_null():
                 QMessageBox.warning(self, "Error", "Nama tanaman tidak boleh kosong.")

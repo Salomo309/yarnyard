@@ -361,7 +361,7 @@ class TodolistWindow(QMainWindow):
                                                     }}
                                                     ''')
                 self.label_desc_tdl.setObjectName(f"label_desc_tdl_{count}")
-                self.label_desc_tdl.setText(tdl["deskripsi_tdl"])
+                self.label_desc_tdl.setText(tdl["deskripsi_tdl"] + "(" + tdl["nama_tanaman"] + ")")
                 
                 self.horizontalLayout_8.addWidget(self.label_desc_tdl, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
                 
@@ -436,7 +436,7 @@ class TodolistWindow(QMainWindow):
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
 
     def setTodolist(self):
-        response = requests.get('http://127.0.0.1:3000/todolist/')
+        response = requests.get('http://127.0.0.1:3000/todolist')
 
         if response.status_code == 200:
             self.listTodolist = json.loads(response.text)

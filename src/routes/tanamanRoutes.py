@@ -19,3 +19,7 @@ def delete_tanaman(idTanaman):
 @tanamanRoutes.route("/addtanaman", methods=["POST"])
 def post_tanaman():
     return TanamanControllers.postTanaman()
+
+@tanamanRoutes.route("/edittanaman/<int:idTanaman>", methods=["PUT"])
+def edit_tanaman(idTanaman):
+    return TanamanControllers.editTanaman(idTanaman)

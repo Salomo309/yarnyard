@@ -98,6 +98,26 @@ class TanamanModels:
         except Exception as e:
             print("Error:", str(e))
             mysql.connection.rollback()
+            
+    @classmethod
+    def editTanaman(cls, idTanaman, nama_tanaman, deskripsi_tanaman, gambar):
+        try:
+            cursor = mysql.connection.cursor()
+            query = '''
+                UPDATE tanaman
+                SET nama_tanaman = %s,
+                    deskripsi_tanaman = %s,
+                    gambar = %s
+                WHERE id_tanaman = %s
+            '''
+            values = (nama_tanaman, deskripsi_tanaman, gambar, idTanaman)
+            cursor.execute(query, values)
+            mysql.connection.commit()
+            cursor.close()
+        except Exception as e:
+            print("Error:", str(e))
+            mysql.connection.rollback()
+        
 
     def getIDTanaman(self):
         return self.id_tanaman

@@ -13,7 +13,6 @@ from views.forms.jurnalForm import JurnalForm
 from views.forms.todolistForm import TodolistForm
 from views.forms.tanamanForm import TanamanForm
 
-# self.setWindowTitle("yanyard - Detail Tanaman")
 # self.setWindowTitle("yanyard - To Do List Form")
 # self.setWindowTitle("yanyard - Jurnal Form")
 
@@ -34,7 +33,7 @@ class PageController(QtWidgets.QMainWindow):
         self.menuWindow = MenuWindow()
         self.artikelWindow = ArtikelWindow()
         self.todolistWindow = TodolistWindow()
-        self.detailTanamanWindows = {}
+        self.detailTanamanWindows = {}                          # Only indexing
         self.dataTanamanWindow = DataTanamanWindow()
 
         self.jurnalForm = JurnalForm()
@@ -51,6 +50,7 @@ class PageController(QtWidgets.QMainWindow):
         self.stackedWidget.addWidget(self.todolistForm)         # 5
         self.stackedWidget.addWidget(self.tanamanForm)          # 6
         
+        self.detailTanamanWindowsList = {}                      # The actual object
         self.setCentralWidget(self.stackedWidget)
 
     def setUpListener(self):
@@ -79,11 +79,25 @@ class PageController(QtWidgets.QMainWindow):
         if page == "main":
             self.stackedWidget.setCurrentIndex(0)
 
-    def handleDetailTanamanWindow(self, page):
+    def handleDetailTanamanWindow(self, page, idTanaman=None, idTDL=None):
         if page == "data tanaman":
             self.setWindowTitle("yanyard - Data Tanaman")
             self.dataTanamanWindow.setUpDataTanamanWindow()
             self.stackedWidget.setCurrentIndex(3)
+        elif page == "form tanaman":
+            self.setWindowTitle("yanyard - Tanaman Form")
+            self.tanamanForm.setUpFields(idTanaman)
+            self.stackedWidget.setCurrentIndex(6)
+        elif page == "form tdl add":
+            self.stackedWidget.setCurrentIndex(5)
+            self.todolistForm.setUpFieldsAdd(idTanaman)
+        elif page == "form tdl edit":
+            self.stackedWidget.setCurrentIndex(5)
+            self.todolistForm.setUpFieldsEdit(idTDL)
+        elif page == "form jurnal add":
+            self.stackedWidget.setCurrentIndex(4)
+        elif page == "form jurnal edit":
+            self.stackedWidget.setCurrentIndex(4)
     
     def handleTodolistWindow(self, page):
         if page == "main":
@@ -94,17 +108,16 @@ class PageController(QtWidgets.QMainWindow):
         if page == "main":
             self.stackedWidget.setCurrentIndex(0)
         elif page == "detail" and idTanaman != None:
+            self.setWindowTitle("yanyard - Detail Tanaman")
             if idTanaman in self.detailTanamanWindows:
                 self.stackedWidget.setCurrentIndex(
                     self.detailTanamanWindows[idTanaman])
             else:
                 detailTanamanWindow = DetailTanamanWindow(idTanaman)
-                self.detailTanamanWindows[idTanaman] = self.stackedWidget.addWidget(
-                    detailTanamanWindow)
-                self.stackedWidget.setCurrentIndex(
-                    self.detailTanamanWindows[idTanaman])
-                detailTanamanWindow.channel.connect(
-                    self.handleDetailTanamanWindow)
+                self.detailTanamanWindows[idTanaman] = self.stackedWidget.addWidget(detailTanamanWindow)
+                self.stackedWidget.setCurrentIndex(self.detailTanamanWindows[idTanaman])
+                detailTanamanWindow.channel.connect(self.handleDetailTanamanWindow)
+                self.detailTanamanWindowsList[idTanaman] = detailTanamanWindow
         elif page == "form tanaman":
             self.setWindowTitle("yanyard - Tanaman Form")
             self.stackedWidget.setCurrentIndex(6)
@@ -113,12 +126,20 @@ class PageController(QtWidgets.QMainWindow):
         if page == "main":
             self.stackedWidget.setCurrentIndex(0)
 
-    def handleTodolistForm(self, page):
-        if page == "main":
-            self.stackedWidget.setCurrentIndex(0)
+    def handleTodolistForm(self, page, idTanaman=None):
+        if page == "detail":
+            self.setWindowTitle("yanyard - Detail Tanaman")
+            if idTanaman in self.detailTanamanWindows:
+                self.stackedWidget.setCurrentIndex(self.detailTanamanWindows[idTanaman])
+                self.detailTanamanWindowsList[idTanaman].setUpDetailTanamanWindow()
             
-    def handleTanamanForm(self, page):
+    def handleTanamanForm(self, page, idTanaman=None):
         if page == "data tanaman":
             self.setWindowTitle("yanyard - Data Tanaman")
             self.dataTanamanWindow.setUpDataTanamanWindow()
             self.stackedWidget.setCurrentIndex(3)
+        elif page == "detail":
+            self.setWindowTitle("yanyard - Detail Tanaman")
+            if idTanaman in self.detailTanamanWindows:
+                self.stackedWidget.setCurrentIndex(self.detailTanamanWindows[idTanaman])
+                self.detailTanamanWindowsList[idTanaman].setUpDetailTanamanWindow()

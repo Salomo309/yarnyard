@@ -42,8 +42,6 @@ class DetailTanamanWindow(QMainWindow):
         self.setStyleSheet('''
                            *{
                                 border: none;
-                                background-color: transparent;
-                                background: transparent;
                                 padding: 0;
                                 margin: 0;
                                 font-family: Poppins;
@@ -84,10 +82,12 @@ class DetailTanamanWindow(QMainWindow):
                                         color: #F7F4D9;
                                         font-size: 20px;
                                         font-weight: 600;
+                                        background-color: transparent;
                                     }
 
                                     #btn_back:hover {
                                         color: #DEDBC0;
+                                        background-color: transparent;
                                     }
                                     ''')
         icon = QtGui.QIcon()
@@ -139,16 +139,19 @@ class DetailTanamanWindow(QMainWindow):
         self.horizontalLayout_15.setSpacing(0)
         self.horizontalLayout_15.setObjectName("horizontalLayout_15")
         self.btn_edit = QtWidgets.QPushButton(parent=self.frame)
-        self.btn_edit.setStyleSheet("#btn_edit {\n"
-                                    "    border-radius: 17px;\n"
-                                    "    height: 34px;\n"
-                                    "    width: 34px;\n"
-                                    "    margin: 2px;\n"
-                                    "}\n"
-                                    "\n"
-                                    "#btn_edit:hover {\n"
-                                    "    background-color: #61876E;\n"
-                                    "}")
+        self.btn_edit.setStyleSheet('''
+                                    #btn_edit {
+                                        border-radius: 17px;
+                                        height: 34px;
+                                        width: 34px;
+                                        margin: 2px;
+                                        background-color: transparent;
+                                    }
+                                    
+                                    #btn_edit:hover {
+                                        background-color: #61876E;
+                                    }
+                                    ''')
         icon_edit = QtGui.QIcon()
         icon_edit.addPixmap(QtGui.QPixmap(path + "/icons/mode_edit.svg"),
                         QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -168,16 +171,19 @@ class DetailTanamanWindow(QMainWindow):
         self.horizontalLayout_16.setSpacing(0)
         self.horizontalLayout_16.setObjectName("horizontalLayout_16")
         self.btn_delete = QtWidgets.QPushButton(parent=self.frame_2)
-        self.btn_delete.setStyleSheet("#btn_delete {\n"
-                                      "    border-radius: 17px;\n"
-                                      "    height: 34px;\n"
-                                      "    width: 34px;\n"
-                                      "    margin: 2px;\n"
-                                      "}\n"
-                                      "\n"
-                                      "#btn_delete:hover {\n"
-                                      "    background-color: #61876E;\n"
-                                      "}")
+        self.btn_delete.setStyleSheet('''
+                                        #btn_delete {
+                                            border-radius: 17px;
+                                            height: 34px;
+                                            width: 34px;
+                                            margin: 2px;
+                                            background-color: transparent;
+                                        }
+                                      
+                                        #btn_delete:hover {
+                                            background-color: #61876E;
+                                        }
+                                      ''')
         self.btn_delete.setText("")
         icon_delete = QtGui.QIcon()
         icon_delete.addPixmap(QtGui.QPixmap(path + "icons/delete.svg"),
@@ -205,6 +211,7 @@ class DetailTanamanWindow(QMainWindow):
                                             width: 20px;
                                             margin: 5px;
                                             border-radius: 0px;
+                                            background-color: transparent;
                                          }
                                         
                                         /*  HANDLE BAR VERTICAL */
@@ -290,9 +297,14 @@ class DetailTanamanWindow(QMainWindow):
         self.widget_img.setObjectName("widget_img")
         
         image = self.detailTanaman[0]["gambar"]
-
-        self.widget_img.setStyleSheet(
-            f"#widget_img {{border-image: url({image}) 0 0 0 0 stretch stretch; background-attachment: fixed; border-radius:40px;}}")
+        
+        if image == None or not os.path.isfile(image):
+            self.widget_img.setStyleSheet(
+                "#widget_img {border-image: url(assets/images/tanaman/no_photo.png) 0 0 0 0 stretch stretch; background-attachment: fixed; border-radius:40px;}")
+        else:
+            self.widget_img.setStyleSheet(
+                    f"#widget_img {{border-image: url({image}) 0 0 0 0 stretch stretch; background-attachment: fixed; border-radius:40px;}}")
+       
         self.widget_img.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget_img)
@@ -318,6 +330,7 @@ class DetailTanamanWindow(QMainWindow):
                                             color: #3C6255;
                                             font-size: 28px;
                                             font-weight: 800;
+                                            background-color: transparent;
                                         }
                                         ''')
         self.label_name.setObjectName("label_name")
@@ -342,6 +355,7 @@ class DetailTanamanWindow(QMainWindow):
                                                 color: #3C6255;
                                                 font-size: 14px;
                                                 font-weight: 500;
+                                                background-color: transparent;
                                             }
                                             ''')
         self.text_desc_tanaman.setReadOnly(True)
@@ -389,6 +403,7 @@ class DetailTanamanWindow(QMainWindow):
                                         color: #3C6255;
                                         font-size: 24px;
                                         font-weight: 600;
+                                        background-color: transparent;
                                     }
                                     ''')
         self.label_tdl.setObjectName("label_tdl")
@@ -479,6 +494,7 @@ class DetailTanamanWindow(QMainWindow):
                                                 color: #3C6255;
                                                 font-size: 24px;
                                                 font-weight: 600;
+                                                background-color: transparent;
                                             }
                                             ''')
             self.label_no_tdl.setObjectName("label_no_tdl")
@@ -566,6 +582,7 @@ class DetailTanamanWindow(QMainWindow):
                                                     color: #F7F4D9;
                                                     font-size: 14px;
                                                     font-weight: 500;
+                                                    background-color: transparent;
                                                 }}
                                                 ''')
             self.label_desc_tdl.setText(self.listTDL[i]["deskripsi_tdl"])
@@ -588,9 +605,9 @@ class DetailTanamanWindow(QMainWindow):
             self.menu.setStyleSheet(
                 '''
                 QMenu{
-                    background-color: #3C6255;
                     color: #F7F4D9;
                     width: 87px;
+                    background-color: #3C6255;
                     }
 
                 QMenu::item {
@@ -818,6 +835,7 @@ class DetailTanamanWindow(QMainWindow):
                                                     color: #F7F4D9;
                                                     font-size: 20px;
                                                     font-weight: 600;
+                                                    background-color: #3C6255;
                                                 }}
                                                 ''')
             
@@ -901,6 +919,7 @@ class DetailTanamanWindow(QMainWindow):
                                                     color: #F7F4D9;
                                                     font-size: 14px;
                                                     font-weight: 500;
+                                                    background-color: #3C6255;
                                                 }}
                                                 ''')
             self.text_desc_jurnal.setObjectName(f"text_desc_jurnal_{i}")
@@ -932,7 +951,7 @@ class DetailTanamanWindow(QMainWindow):
     def setDetailTanaman(self, idTanaman):
         responseDetail = requests.get(f'http://127.0.0.1:3000/tanaman/{idTanaman}')
         responseTDL = requests.get(f'http://127.0.0.1:3000/todolist/byidtanaman/{idTanaman}')
-        responseJurnal = requests.get(f'http://127.0.0.1:3000/jurnal/{idTanaman}')
+        responseJurnal = requests.get(f'http://127.0.0.1:3000/jurnal/byidtanaman/{idTanaman}')
         
         if responseDetail.status_code == 200:
             self.detailTanaman = json.loads(responseDetail.text)
@@ -967,28 +986,37 @@ class DetailTanamanWindow(QMainWindow):
             self.delete_jurnal(idJurnal)
     
     def delete_tdl(self, idTDL):
-        response = requests.delete(f'http://127.0.0.1:3000/todolist/deletetodolist/{idTDL}')
-        if response.status_code == 204:
-            print("Todolist item deleted successfully.")
-            self.setUpDetailTanamanWindow()
-        else:
-            print(f"Failed to delete Todolist item with id {idTDL}. Status code: {response.status_code}")
+        confirm = QMessageBox.critical(self, "Delete Todolist Item", "Are you sure you want to delete this to do list?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        
+        if confirm == QMessageBox.StandardButton.Yes:
+            response = requests.delete(f'http://127.0.0.1:3000/todolist/deletetodolist/{idTDL}')
+            if response.status_code == 204:
+                print("Todolist item deleted successfully.")
+                self.setUpDetailTanamanWindow()
+            else:
+                print(f"Failed to delete Todolist item with id {idTDL}. Status code: {response.status_code}")
     
     def delete_jurnal(self, idJurnal):
-        response = requests.delete(f'http://127.0.0.1:3000/jurnal/deletejurnal/{idJurnal}')
-        if response.status_code == 204:
-            print("Jurnal item deleted successfully.")
-            self.setUpDetailTanamanWindow()
-        else:
-            print(f"Failed to delete Jurnal item with id {idJurnal}. Status code: {response.status_code}")
+        confirm = QMessageBox.critical(self, "Delete Todolist Item", "Are you sure you want to delete this jurnal?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        
+        if confirm == QMessageBox.StandardButton.Yes:
+            response = requests.delete(f'http://127.0.0.1:3000/jurnal/deletejurnal/{idJurnal}')
+            if response.status_code == 204:
+                print("Jurnal item deleted successfully.")
+                self.setUpDetailTanamanWindow()
+            else:
+                print(f"Failed to delete Jurnal item with id {idJurnal}. Status code: {response.status_code}")
     
     def delete_tanaman(self):
-        response = requests.delete(f'http://127.0.0.1:3000/tanaman/deletetanaman/{self.idTanaman}')
-        if response.status_code == 204:
-            print("Tanaman deleted successfully.")
-            self.channel.emit("data tanaman", None, None)
-        else:
-            print(f"Failed to delete Tanaman with id {self.idTanaman}. Status code: {response.status_code}")
+        confirm = QMessageBox.critical(self, "Delete Tanaman", "Are you sure you want to delete this tanaman?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        
+        if confirm == QMessageBox.StandardButton.Yes:
+            response = requests.delete(f'http://127.0.0.1:3000/tanaman/deletetanaman/{self.idTanaman}')
+            if response.status_code == 204:
+                print("Tanaman deleted successfully.")
+                self.channel.emit("data tanaman")
+            else:
+                print(f"Failed to delete Tanaman with id {self.idTanaman}. Status code: {response.status_code}")
     
     def edit_tanaman(self):
         self.channel.emit("form tanaman", self.idTanaman, None)

@@ -24,8 +24,8 @@ class TodolistModels:
     def getAllTodolist(cls):
         cursor = mysql.connection.cursor()
         cursor.execute('''
-                       SELECT * 
-                       FROM todolist NATURAL JOIN tanaman
+                       SELECT *
+                       FROM todolist
                        ORDER BY waktu ASC
                        ''')
 

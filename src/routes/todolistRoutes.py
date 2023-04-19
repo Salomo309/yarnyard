@@ -3,7 +3,6 @@ from controllers.todolistControllers import TodolistControllers
 
 todolistRoutes = Blueprint("todolistRoutes", __name__)
 
-# todolistRoutes.route("/", methods=["GET"])(TodolistControllers.getTodolist)
 @todolistRoutes.route("/", methods=["GET"])
 def get_todolists():
     return TodolistControllers.getTodolist()

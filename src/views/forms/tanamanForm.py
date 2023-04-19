@@ -2,7 +2,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
-import os, pathlib, requests, json
+import os, pathlib, requests, json, re, shutil
 
 class TanamanForm(QMainWindow):
     channel = pyqtSignal(str, int)
@@ -22,12 +22,13 @@ class TanamanForm(QMainWindow):
             self.deskripsi_tanaman.setPlainText(self.detailTanaman[0]["deskripsi_tanaman"])
             
             self.image_tanaman = self.detailTanaman[0]["gambar"]
-            self.widget_img.setStyleSheet(f'''
-                                            #widget_img {{
-                                                border-image: url({self.image_tanaman}) 0 0 0 0 stretch stretch;
-                                                border-radius:40px;
-                                            }}
-                                            ''')
+            
+            if self.image_tanaman == None or not os.path.isfile(self.image_tanaman):
+                pass
+            else:
+                self.widget_img.setStyleSheet(
+                        f"#widget_img {{border-image: url({self.image_tanaman}) 0 0 0 0 stretch stretch; background-attachment: fixed; border-radius:40px;}}")
+
         else:
             self.detailTanaman = []
             print("No Detail Tanaman Found")
@@ -383,8 +384,8 @@ class TanamanForm(QMainWindow):
 
     def on_btn_back_clicked(self):
         self.clear_data()
-        if (self.idTanaman == None):
-            self.channel.emit("data tanaman", None)
+        if (not self.fromDetailTanaman):
+            self.channel.emit("tdl", None)
         else:
             self.channel.emit("detail", self.idTanaman)
         
@@ -412,28 +413,52 @@ class TanamanForm(QMainWindow):
 
     def validate_input(self):
         if not self.is_nama_tanaman_null() and not self.is_nama_tanaman_too_long() and not self.is_deskripsi_tanaman_too_long():
+            dir_path = "assets/images/tanaman"
+            num_regex = re.compile(r"^\d+")
+            max_num = 0
+            
+            for filename in os.listdir(dir_path):
+                # Check if the filename matches the "*.png" pattern and starts with a number
+                if filename.endswith(".png") and num_regex.match(filename):
+                    num = int(num_regex.match(filename).group())
+
+                    if num > max_num:
+                        max_num = num
+            
+            imageFormat = f"assets/images/tanaman/{max_num + 1}.png"
+            
             if (self.idTanaman == None): # Insert
                 # masukin ke database dan balik ke data tanaman page
                 data = {
                     "nama_tanaman": self.nama_tanaman.toPlainText().strip(),
                     "deskripsi_tanaman": self.deskripsi_tanaman.toPlainText().strip(),
-                    "gambar": self.image_tanaman
+                    "gambar": imageFormat
                 }
                 response = requests.post(f'http://127.0.0.1:3000/tanaman/addtanaman', data=data)
                 if response.status_code == 201:
+                    shutil.copyfile(self.image_tanaman, imageFormat)
                     print("Tanaman added successfully.")
                     self.clear_data()
                     self.channel.emit("data tanaman", None)
                 else:
                     print(f"Failed to add Tanaman. Status code: {response.status_code}")
             else: # Edit
+                img = self.image_tanaman
+                file_name = os.path.basename(img)
+                dir_path = "assets/images/tanaman"
+                
+                if not os.path.exists(os.path.join(dir_path, file_name)):
+                    img = imageFormat
+                
                 data = {
                     "nama_tanaman": self.nama_tanaman.toPlainText().strip(),
                     "deskripsi_tanaman": self.deskripsi_tanaman.toPlainText().strip(),
-                    "gambar": self.image_tanaman
+                    "gambar": img
                 }
                 response = requests.put(f'http://127.0.0.1:3000/tanaman/edittanaman/{self.idTanaman}', data=data)
                 if response.status_code == 200:
+                    if (self.image_tanaman != img):
+                        shutil.copyfile(self.image_tanaman, img)
                     print("Tanaman updated successfully.")
                     self.clear_data()
                     self.channel.emit("detail", self.idTanaman)

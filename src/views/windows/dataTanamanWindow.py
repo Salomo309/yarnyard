@@ -281,13 +281,13 @@ class DataTanamanWindow(QMainWindow):
             
             image = self.listTanaman[i]["gambar"]
             idTanaman = self.listTanaman[i]["id_tanaman"]
-
-            self.widget_img.setStyleSheet(f'''
-                                        #widget_img_{idTanaman} {{
-                                            border-image: url({image}) 0 0 0 0 stretch stretch;
-                                            border-radius:30px;
-                                        }}
-                                        ''')
+            
+            if image == None or not os.path.isfile(image):
+                self.widget_img.setStyleSheet(
+                    f"#widget_img_{idTanaman} {{border-image: url(assets/images/tanaman/no_photo.png) 0 0 0 0 stretch stretch; background-attachment: fixed; border-radius:30px;}}")
+            else:
+                self.widget_img.setStyleSheet(
+                        f"#widget_img_{idTanaman} {{border-image: url({image}) 0 0 0 0 stretch stretch; background-attachment: fixed; border-radius:30px;}}")
 
             self.widget_img.setObjectName(f"widget_img_{idTanaman}")
             

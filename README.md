@@ -39,31 +39,34 @@ GUI : PyQt <br>
 
 Modul menu utama digunakan untuk menampilkan tampilan utama dari aplikasi
 
-![menu utama](doc/menu-utama.jpg)
+<img src="doc/menuPage.jpg"  width="600">
 
 ### Artikel
 
 Modul artikel digunakan untuk menampilkan artikel
 
-![artikel](doc/artikel.jpg)
+<img src="doc/artikelPage.jpg"  width="600">
 
 ### Tanaman
 
 Modul tanaman digunakan untuk menampilkan list tanaman, detail setiap tanaman, serta operasi CRUD terkait data tanaman
 
-![tanaman](doc/tanaman.jpg)
+<img src="doc/dataTanamanPage.jpg"  width="600">
+<img src="doc/formTanamanPage.jpg"  width="600">
 
 ### To Do List
 
 Modul to-do-list digunakan untuk menampilkan to–do-list semua tanaman, to-do-list setiap tanaman, serta operasi CRUD terkait data to-do-list
 
-![to-do-list](doc/to-do-list.jpg)
+<img src="doc/toDoListPage.jpg"  width="600">
+<img src="doc/formToDoListPage.jpg"  width="600">
 
 ### Jurnal
 
 Modul jurnal digunakan untuk menampilkan jurnal tanaman serta operasi CRUD terkait data jurnal
 
-![jurnal](doc/jurnal.jpg)
+<img src="doc/jurnalPage.jpg"  width="600">
+<img src="doc/formJurnalPage.jpg"  width="600">
 
 ## Daftar Basis Data
 

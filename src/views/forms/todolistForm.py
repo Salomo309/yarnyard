@@ -11,6 +11,13 @@ class TodolistForm(QMainWindow):
         super().__init__()
         self.setUpTodolistForm()
         self.idTDL = None
+        self.fromMenu = False
+
+    def setFromMenu(self):
+        self.fromMenu = True
+
+    def setFromDetail(self):
+        self.fromMenu = False
         
     def setUpFieldsAdd(self, idTanaman):
         self.idTanaman = idTanaman
@@ -336,8 +343,8 @@ class TodolistForm(QMainWindow):
 
     def on_btn_back_clicked(self):
         self.clear_data()
-        if (self.idTanaman == None):
-            self.channel.emit("main", None)
+        if (self.fromMenu):
+            self.channel.emit("tdl", None)
         else:
             self.channel.emit("detail", self.idTanaman)
         
@@ -369,8 +376,7 @@ class TodolistForm(QMainWindow):
                 response = requests.post(f'http://127.0.0.1:3000/todolist/addtodolist', data=data)
                 if response.status_code == 201:
                     print("To Do List added successfully.")
-                    self.clear_data()
-                    self.channel.emit("detail", self.idTanaman)
+                    self.nextPage(self.idTanaman)
                 else:
                     print(f"Failed to add To Do List. Status code: {response.status_code}")
             else: # Edit
@@ -386,7 +392,13 @@ class TodolistForm(QMainWindow):
                 response = requests.put(f'http://127.0.0.1:3000/todolist/edittodolist/{self.idTDL}', data=data)
                 if response.status_code == 200:
                     print("To Do List updated successfully.")
-                    self.clear_data()
-                    self.channel.emit("detail", self.todolist[0]["id_tanaman"])
+                    self.nextPage(self.jurnal[0]["id_tanaman"])
                 else:
                     print(f"Failed to update To Do List. Status code: {response.status_code}")
+
+    def nextPage(self, ids):
+        self.clear_data()
+        if (self.fromMenu):
+            self.channel.emit("tdl", None)
+        else:
+            self.channel.emit("detail", ids)

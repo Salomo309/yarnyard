@@ -2,14 +2,31 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
-import os, pathlib
+import os, pathlib, requests, json, datetime
 
 class JurnalForm(QMainWindow):
-    channel = pyqtSignal(str)
+    channel = pyqtSignal(str, int)
 
     def __init__(self):
         super().__init__()
         self.setUpJurnalForm()
+        self.idJurnal = None
+        
+    def setUpFieldsAdd(self, idTanaman):
+        self.idTanaman = idTanaman
+        
+    def setUpFieldsEdit(self, idJurnal):
+        responseJurnal = requests.get(f'http://127.0.0.1:3000/jurnal/byidjurnal/{idJurnal}')
+        if responseJurnal.status_code == 200:
+            self.jurnal = json.loads(responseJurnal.text)
+            
+            self.idJurnal = idJurnal
+            self.idTanaman = self.jurnal[0]["id_tanaman"]
+
+            self.deskripsi_jurnal.setPlainText(self.jurnal[0]["deskripsi_jurnal"])
+        else:
+            self.jurnal = []
+            print("No Jurnal Found")
     
     def setUpJurnalForm(self):
         self.resize(960, 600)
@@ -232,12 +249,13 @@ class JurnalForm(QMainWindow):
         self.setCentralWidget(self.centralwidget)
 
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
-        
+    
+    def clear_data(self):        
+        self.deskripsi_jurnal.clear()
+    
     def on_btn_back_clicked(self):
-        self.changePageToMain()
-
-    def changePageToMain(self):
-        self.channel.emit("main")
+        self.clear_data()
+        self.channel.emit("detail", self.idTanaman)
     
     def is_deskripsi_jurnal_null(self):
         return self.deskripsi_jurnal.toPlainText().strip() == ""
@@ -251,5 +269,27 @@ class JurnalForm(QMainWindow):
         elif self.is_deskripsi_jurnal_too_long():
             QMessageBox.warning(self, "Error", "Panjang deskripsi tanaman tidak boleh lebih dari 255 karakter.")
         else :
-            # masukin ke database dan balik ke data tanaman page
-            print("anjay masuk")
+            if (self.idJurnal == None): # Insert
+                # masukin ke database dan balik ke data tanaman page
+                data = {
+                    "id_tanaman": self.idTanaman,
+                    "deskripsi_jurnal": self.deskripsi_jurnal.toPlainText().strip()
+                }
+                response = requests.post(f'http://127.0.0.1:3000/jurnal/addjurnal', data=data)
+                if response.status_code == 201:
+                    print("Jurnal added successfully.")
+                    self.clear_data()
+                    self.channel.emit("detail", self.idTanaman)
+                else:
+                    print(f"Failed to add Jurnal. Status code: {response.status_code}")
+            else: # Edit
+                data = {
+                    "deskripsi_jurnal": self.deskripsi_jurnal.toPlainText().strip()
+                }
+                response = requests.put(f'http://127.0.0.1:3000/jurnal/editjurnal/{self.idJurnal}', data=data)
+                if response.status_code == 200:
+                    print("Jurnal updated successfully.")
+                    self.clear_data()
+                    self.channel.emit("detail", self.todolist[0]["id_tanaman"])
+                else:
+                    print(f"Failed to update Jurnal. Status code: {response.status_code}")

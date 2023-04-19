@@ -1,8 +1,8 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtGui import QGuiApplication, QCursor, QFontDatabase
-from PyQt6.QtCore import Qt, pyqtSignal
-import os, pathlib
+from PyQt6.QtWidgets import QMainWindow, QMessageBox
+from PyQt6.QtGui import QGuiApplication, QCursor, QFontDatabase, QIcon
+from PyQt6.QtCore import Qt, pyqtSignal, QDateTime
+import os, pathlib, requests, json, datetime
 
 class MenuWindow(QMainWindow):
     channel = pyqtSignal(str)
@@ -39,8 +39,6 @@ class MenuWindow(QMainWindow):
         self.setStyleSheet('''
             * {
                 border: none;
-                background-color: transparent;
-                background: transparent;
                 padding: 0;
                 margin: 0;
                 font-family: Poppins;
@@ -54,7 +52,7 @@ class MenuWindow(QMainWindow):
                 background-color: #F7F4D9;
             }
             
-            QPushButton {
+            #btn_tanaman {
                 padding: 5px 10px;
                 border-radius: 28px;
                 background: #3C6255;
@@ -65,7 +63,37 @@ class MenuWindow(QMainWindow):
                 font-weight: 600;
             }
             
-            QPushButton:hover {
+            #btn_tdl {
+                padding: 5px 10px;
+                border-radius: 28px;
+                background: #3C6255;
+                color: #F7F3D7;
+                height: 46px;
+                width: 243px;
+                font-size: 20px;
+                font-weight: 600;
+            }
+            
+            #btn_artikel {
+                padding: 5px 10px;
+                border-radius: 28px;
+                background: #3C6255;
+                color: #F7F3D7;
+                height: 46px;
+                width: 243px;
+                font-size: 20px;
+                font-weight: 600;
+            }
+            
+            #btn_tanaman:hover {
+                background-color: #23493C;
+            }
+            
+            #btn_tdl:hover {
+                background-color: #23493C;
+            }
+            
+            #btn_artikel:hover {
                 background-color: #23493C;
             }
         ''')
@@ -240,6 +268,10 @@ class MenuWindow(QMainWindow):
         self.btn_tdl.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         self.btn_artikel.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
     
+        self.notification_timer = QtCore.QTimer(self)
+        self.notification_timer.timeout.connect(self.check_notifications)
+        self.notification_timer.start(60000 * 5)
+    
     def on_btn_tanaman_clicked(self):
         self.channel.emit("data tanaman")
         
@@ -248,3 +280,20 @@ class MenuWindow(QMainWindow):
         
     def on_btn_artikel_clicked(self):
         self.channel.emit("artikel")
+        
+    def check_notifications(self):
+        # Get all idTDLs from your database
+        responseTDLs = requests.get('http://127.0.0.1:3000/todolist')
+        if responseTDLs.status_code == 200:
+            todolist = json.loads(responseTDLs.text)
+            deskripsi = todolist[0]["deskripsi_tdl"]
+            mysql_date_str = todolist[0]["waktu"]
+            deskripsi = todolist[0]["deskripsi_tdl"]
+            datetime_obj = datetime.datetime.strptime(mysql_date_str, "%a, %d %b %Y %H:%M:%S %Z")
+            current_time = datetime.datetime.now()
+            
+            time_diff = datetime_obj - current_time
+            
+            if time_diff <= datetime.timedelta(minutes=15):
+                QMessageBox.information(self, "Notif", f"Sudah saatnya kamu {deskripsi}")
+                    

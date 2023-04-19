@@ -41,8 +41,6 @@ class TodolistWindow(QMainWindow):
         self.setStyleSheet('''
                            *{
                                 border: none;
-                                background-color: transparent;
-                                background: transparent;
                                 padding: 0;
                                 margin: 0;
                                 font-family: Poppins;
@@ -139,6 +137,8 @@ class TodolistWindow(QMainWindow):
                                             width: 20px;
                                             margin: 5px;
                                             border-radius: 0px;
+                                            background-color: transparent;
+                                            background: transparent;
                                          }
                                         
                                         /*  HANDLE BAR VERTICAL */

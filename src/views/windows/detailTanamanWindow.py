@@ -1014,7 +1014,7 @@ class DetailTanamanWindow(QMainWindow):
             response = requests.delete(f'http://127.0.0.1:3000/tanaman/deletetanaman/{self.idTanaman}')
             if response.status_code == 204:
                 print("Tanaman deleted successfully.")
-                self.channel.emit("data tanaman")
+                self.channel.emit("data tanaman", None, None)
             else:
                 print(f"Failed to delete Tanaman with id {self.idTanaman}. Status code: {response.status_code}")
     

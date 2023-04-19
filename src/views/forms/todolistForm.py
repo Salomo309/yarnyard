@@ -21,6 +21,7 @@ class TodolistForm(QMainWindow):
             self.todolist = json.loads(responseTDL.text)
             
             self.idTDL = idTDL
+            self.idTanaman = self.todolist[0]["id_tanaman"]
             
             mysql_date_str = self.todolist[0]["waktu"]
             datetime_obj = datetime.datetime.strptime(mysql_date_str, "%a, %d %b %Y %H:%M:%S %Z")

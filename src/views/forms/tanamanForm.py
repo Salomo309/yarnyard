@@ -423,7 +423,7 @@ class TanamanForm(QMainWindow):
                 if response.status_code == 201:
                     print("Tanaman added successfully.")
                     self.clear_data()
-                    self.channel.emit("data tanaman")
+                    self.channel.emit("data tanaman", None)
                 else:
                     print(f"Failed to add Tanaman. Status code: {response.status_code}")
             else: # Edit

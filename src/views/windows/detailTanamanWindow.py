@@ -105,6 +105,7 @@ class DetailTanamanWindow(QMainWindow):
         self.btn_back.setObjectName("btn_back")
         self.btn_back.setText(" Kembali")
         self.btn_back.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_back.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         
         self.horizontalLayout_3.addWidget(self.btn_back, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.horizontalLayout.addWidget(self.frame_temp)
@@ -122,6 +123,8 @@ class DetailTanamanWindow(QMainWindow):
         self.logo.setPixmap(QtGui.QPixmap(path + "logo/logo_circle.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
+        self.logo.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
+        
         self.horizontalLayout_2.addWidget(self.logo)
         self.horizontalLayout.addWidget(self.frame_logo)
         self.frame_temp_2 = QtWidgets.QFrame(parent=self.header)
@@ -217,7 +220,7 @@ class DetailTanamanWindow(QMainWindow):
         self.frame_img.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_img.setObjectName("frame_img")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.frame_img)
-        self.verticalLayout_6.setContentsMargins(0, 18, 0, 0)
+        self.verticalLayout_6.setContentsMargins(9, 9, 9, 9)
         self.verticalLayout_6.setSpacing(0)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         
@@ -231,6 +234,7 @@ class DetailTanamanWindow(QMainWindow):
 
         self.widget_img.setStyleSheet(
             f"#widget_img {{border-image: url({image}) 0 0 0 0 stretch stretch; background-attachment: fixed; border-radius:40px;}}")
+        self.widget_img.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget_img)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -337,7 +341,7 @@ class DetailTanamanWindow(QMainWindow):
         self.frame_head_tdl_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_head_tdl_2.setObjectName("frame_head_tdl_2")
         self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.frame_head_tdl_2)
-        self.verticalLayout_8.setContentsMargins(-1, -1, 0, -1)
+        self.verticalLayout_8.setContentsMargins(-1, -1, 4, -1)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.btn_add_tdl = QtWidgets.QPushButton(parent=self.frame_head_tdl_2)
         self.btn_add_tdl.setMinimumSize(QtCore.QSize(170, 0))
@@ -362,6 +366,7 @@ class DetailTanamanWindow(QMainWindow):
         self.btn_add_tdl.setObjectName("btn_add_tdl")
         self.btn_add_tdl.setText("ADD TO DO LIST")
         self.btn_add_tdl.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_add_tdl.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
         
         self.verticalLayout_8.addWidget(self.btn_add_tdl, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.horizontalLayout_4.addWidget(self.frame_head_tdl_2)
@@ -433,7 +438,7 @@ class DetailTanamanWindow(QMainWindow):
             
             # Layout for frame
             self.horizontal_layout_temp = QtWidgets.QHBoxLayout(self.frame_tdl_temp)
-            self.horizontal_layout_temp.setContentsMargins(0, 9, 0, 0)
+            self.horizontal_layout_temp.setContentsMargins(0, 9, 4, 9)
             self.horizontal_layout_temp.setObjectName(f"horizontal_layout_temp_{i}")
             
             # Time frame
@@ -442,6 +447,7 @@ class DetailTanamanWindow(QMainWindow):
             self.frame_time_tdl.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
             self.frame_time_tdl.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
             self.frame_time_tdl.setObjectName(f"frame_time_tdl_{i}")
+            self.frame_time_tdl.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
             
             # Vert layout
             self.vertical_layout_time = QtWidgets.QVBoxLayout(self.frame_time_tdl)
@@ -487,6 +493,7 @@ class DetailTanamanWindow(QMainWindow):
             self.frame_desc.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
             self.frame_desc.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
             self.frame_desc.setObjectName(f"frame_desc_{i}")
+            self.frame_desc.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
             
             # Horizontal layout
             self.horizontal_layout_desc = QtWidgets.QHBoxLayout(self.frame_desc)
@@ -550,7 +557,7 @@ class DetailTanamanWindow(QMainWindow):
             self.horizontal_layout_desc.addWidget(self.btn_more_1, 0, QtCore.Qt.AlignmentFlag.AlignRight)
             self.horizontal_layout_temp.addWidget(self.frame_desc)
             self.verticalLayout_10.addWidget(self.frame_tdl_temp)
-                    
+                            
         # Spacer
         spacerItem = QtWidgets.QSpacerItem(0, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_10.addItem(spacerItem)
@@ -563,6 +570,7 @@ class DetailTanamanWindow(QMainWindow):
         self.frame_jurnal.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_jurnal.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_jurnal.setObjectName("frame_jurnal")
+        
         self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.frame_jurnal)
         self.verticalLayout_12.setContentsMargins(0, 0, 0, 36)
         self.verticalLayout_12.setSpacing(0)
@@ -604,7 +612,7 @@ class DetailTanamanWindow(QMainWindow):
         self.frame_head_jurnal_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_head_jurnal_2.setObjectName("frame_head_jurnal_2")
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.frame_head_jurnal_2)
-        self.horizontalLayout_10.setContentsMargins(-1, -1, 0, -1)
+        self.horizontalLayout_10.setContentsMargins(-1, -1, 4, -1)
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
         self.btn_add_jurnal = QtWidgets.QPushButton(parent=self.frame_head_jurnal_2)
         self.btn_add_jurnal.setMinimumSize(QtCore.QSize(170, 0))
@@ -627,6 +635,7 @@ class DetailTanamanWindow(QMainWindow):
         self.btn_add_jurnal.setObjectName("btn_add_jurnal")
         self.btn_add_jurnal.setText("ADD JURNAL")
         self.btn_add_jurnal.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_add_jurnal.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
         
         self.horizontalLayout_10.addWidget(self.btn_add_jurnal, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.horizontalLayout_9.addWidget(self.frame_head_jurnal_2)
@@ -708,11 +717,13 @@ class DetailTanamanWindow(QMainWindow):
                                                     color: #F7F4D9;
                                                     background-color: #3C6255;
                                                     border-radius: 30px;
+                                                    margin: 4px;
                                                 }}
                                                 ''')
             self.frame_jurnal_temp.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
             self.frame_jurnal_temp.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
             self.frame_jurnal_temp.setObjectName(f"frame_jurnal_temp_{i}")
+            self.frame_jurnal_temp.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
             
             # Layout for frame
             self.vertical_layout_jurnal = QtWidgets.QVBoxLayout(self.frame_jurnal_temp)
@@ -771,10 +782,12 @@ class DetailTanamanWindow(QMainWindow):
             self.btn_more_2 = QtWidgets.QPushButton(parent=self.frame_right)
             self.btn_more_2.setStyleSheet("")
             self.btn_more_2.setText("")
+            icon2 = QtGui.QIcon()
+            icon2.addPixmap(QtGui.QPixmap(path + "icons/more_vert.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
             self.btn_more_2.setIcon(icon2)
             self.btn_more_2.setIconSize(QtCore.QSize(20, 20))
             self.btn_more_2.setObjectName("btn_more_2")
-            
+
             self.btn_more_2.setStyleSheet("QPushButton::menu-indicator { width: 0px }")
             
             self.menu_2 = QtWidgets.QMenu()
@@ -862,13 +875,13 @@ class DetailTanamanWindow(QMainWindow):
         else:
             self.detailTanaman = []
             print("No Detail Tanaman Found")
-        
+
         if responseTDL.status_code == 200:
             self.listTDL = json.loads(responseTDL.text)
         else:
             self.listTDL = []
             print("No To Do List Found")
-            
+        
         if responseJurnal.status_code == 200:
             self.listJurnal = json.loads(responseJurnal.text)
         else:
@@ -911,4 +924,4 @@ class DetailTanamanWindow(QMainWindow):
         self.changePageToMain()
 
     def changePageToMain(self):
-        self.channel.emit("main")
+        self.channel.emit("data tanaman")

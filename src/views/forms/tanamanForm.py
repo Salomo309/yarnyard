@@ -48,6 +48,7 @@ class TanamanForm(QMainWindow):
                                     background: transparent;
                                     padding: 0;
                                     margin: 0;
+                                    font-family: Poppins;
                                 }
                                 ''')
         self.centralwidget = QtWidgets.QWidget(parent=self)
@@ -102,6 +103,7 @@ class TanamanForm(QMainWindow):
         self.btn_back.setObjectName("btn_back")
         self.btn_back.setText(" Kembali")
         self.btn_back.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_back.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         
         self.horizontalLayout_3.addWidget(self.btn_back, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.horizontalLayout.addWidget(self.frame_temp)
@@ -119,6 +121,8 @@ class TanamanForm(QMainWindow):
         self.logo.setPixmap(QtGui.QPixmap(path + "logo/logo_circle.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
+        self.logo.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
+        
         self.horizontalLayout_2.addWidget(self.logo)
         self.horizontalLayout.addWidget(self.frame_logo)
         self.frame_temp_2 = QtWidgets.QFrame(parent=self.header)
@@ -168,6 +172,7 @@ class TanamanForm(QMainWindow):
         self.label_title_form.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_title_form.setObjectName("label_title_form")
         self.label_title_form.setText("Form Tanaman")
+        self.label_title_form.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         
         self.horizontalLayout_4.addWidget(self.label_title_form, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.verticalLayout_2.addWidget(self.frame_title)
@@ -181,7 +186,8 @@ class TanamanForm(QMainWindow):
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.frame_3 = QtWidgets.QFrame(parent=self.frame_contents_1)
-        self.frame_3.setMaximumSize(QtCore.QSize(160, 200))
+        self.frame_3.setMinimumSize(QtCore.QSize(180, 0))
+        self.frame_3.setMaximumSize(QtCore.QSize(180, 210))
         self.frame_3.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_3.setObjectName("frame_3")
@@ -191,6 +197,7 @@ class TanamanForm(QMainWindow):
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.widget_img = QtWidgets.QPushButton(parent=self.frame_3)
         self.widget_img.setMinimumSize(QtCore.QSize(160, 200))
+        self.widget_img.setMaximumSize(QtCore.QSize(160, 200))
         
         image = "assets/images/tanaman/add_photo.png"
         self.widget_img.setStyleSheet(f'''
@@ -202,8 +209,9 @@ class TanamanForm(QMainWindow):
         
         self.widget_img.setObjectName("widget_img")
         self.widget_img.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.widget_img.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         
-        self.verticalLayout_4.addWidget(self.widget_img)
+        self.verticalLayout_4.addWidget(self.widget_img, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.verticalLayout_3.addWidget(self.frame_3, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.frame_2 = QtWidgets.QFrame(parent=self.frame_contents_1)
         self.frame_2.setMaximumSize(QtCore.QSize(370, 55))
@@ -211,7 +219,7 @@ class TanamanForm(QMainWindow):
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_2.setObjectName("frame_2")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.frame_2)
-        self.verticalLayout_5.setContentsMargins(0, 9, 0, 0)
+        self.verticalLayout_5.setContentsMargins(9, 0, 9, 0)
         self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.nama_tanaman = QtWidgets.QPlainTextEdit(parent=self.frame_2)
@@ -230,6 +238,7 @@ class TanamanForm(QMainWindow):
         self.nama_tanaman.setMaximumBlockCount(1)
         self.nama_tanaman.setObjectName("nama_tanaman")
         self.nama_tanaman.setPlaceholderText("Masukkan nama tanamanmu . . .")
+        self.nama_tanaman.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
         
         self.verticalLayout_5.addWidget(self.nama_tanaman, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.verticalLayout_3.addWidget(self.frame_2, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
@@ -239,7 +248,7 @@ class TanamanForm(QMainWindow):
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.frame)
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_6.setContentsMargins(9, 4, 9, 4)
         self.verticalLayout_6.setSpacing(0)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.deskripsi_jurnal = QtWidgets.QPlainTextEdit(parent=self.frame)
@@ -257,6 +266,7 @@ class TanamanForm(QMainWindow):
         self.deskripsi_jurnal.setOverwriteMode(True)
         self.deskripsi_jurnal.setObjectName("deskripsi_jurnal")
         self.deskripsi_jurnal.setPlaceholderText("Ceritakan tentang tanamanmu. . .")
+        self.deskripsi_jurnal.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
         
         self.verticalLayout_6.addWidget(self.deskripsi_jurnal)
         self.verticalLayout_3.addWidget(self.frame, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
@@ -266,7 +276,7 @@ class TanamanForm(QMainWindow):
         self.frame_description.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_description.setObjectName("frame_description")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.frame_description)
-        self.horizontalLayout_5.setContentsMargins(-1, 0, -1, -1)
+        self.horizontalLayout_5.setContentsMargins(-1, 4, -1, 4)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.btn_submit = QtWidgets.QPushButton(parent=self.frame_description)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
@@ -293,6 +303,7 @@ class TanamanForm(QMainWindow):
         self.btn_submit.setObjectName("btn_submit")
         self.btn_submit.setText("Submit")
         self.btn_submit.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_submit.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
         
         self.horizontalLayout_5.addWidget(self.btn_submit, 0, QtCore.Qt.AlignmentFlag.AlignTop)
         self.verticalLayout_2.addWidget(self.frame_description)

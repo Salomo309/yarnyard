@@ -287,6 +287,8 @@ class ArtikelWindow(QMainWindow):
             self.btn_prev.setObjectName("btn_prev")
             self.btn_prev.setCursor(Qt.CursorShape.PointingHandCursor)
             self.horizontalLayout_6.addWidget(self.btn_prev)
+            
+            self.btn_prev.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
 
         self.horizontalLayout_5.addWidget(
             self.frame_prev, 0, QtCore.Qt.AlignmentFlag.AlignRight)
@@ -343,6 +345,7 @@ class ArtikelWindow(QMainWindow):
             self.btn_next.setObjectName("btn_next")
             self.btn_next.setCursor(Qt.CursorShape.PointingHandCursor)
             self.horizontalLayout_7.addWidget(self.btn_next)
+            self.btn_next.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
 
         self.horizontalLayout_5.addWidget(
             self.frame_next, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
@@ -461,6 +464,9 @@ class ArtikelWindow(QMainWindow):
             self.vertical_layout_x.addWidget(self.frame_no_artikel)
 
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
+        self.label_title_artikel.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
+        self.widget_img.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
+        self.box_description_artikel.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
 
     def setArtikel(self):
         response = requests.get('http://127.0.0.1:3000/artikel/')

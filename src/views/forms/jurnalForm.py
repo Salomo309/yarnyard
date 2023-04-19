@@ -95,6 +95,7 @@ class JurnalForm(QMainWindow):
         self.btn_back.setObjectName("btn_back")
         self.btn_back.setText(" Kembali")
         self.btn_back.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_back.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
 
         self.horizontalLayout_3.addWidget(self.btn_back, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.horizontalLayout.addWidget(self.frame_temp)
@@ -112,6 +113,8 @@ class JurnalForm(QMainWindow):
         self.logo.setPixmap(QtGui.QPixmap(path + "logo/logo_circle.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
+        self.logo.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
+        
         self.horizontalLayout_2.addWidget(self.logo)
         self.horizontalLayout.addWidget(self.frame_logo)
         self.frame_temp_2 = QtWidgets.QFrame(parent=self.header)
@@ -160,6 +163,7 @@ class JurnalForm(QMainWindow):
         self.label_title_form.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_title_form.setObjectName("label_title_form")
         self.label_title_form.setText("Form Jurnal")
+        self.label_title_form.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         
         self.horizontalLayout_4.addWidget(self.label_title_form, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.verticalLayout_2.addWidget(self.frame_title)
@@ -190,6 +194,7 @@ class JurnalForm(QMainWindow):
         self.deskripsi_jurnal.setPlaceholderText(
             "Tulis jurnal kamu hari ini . . .")
         self.deskripsi_jurnal.setAlignment(Qt.AlignmentFlag.AlignJustify)
+        self.deskripsi_jurnal.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
         
         self.verticalLayout_9.addWidget(self.deskripsi_jurnal, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.verticalLayout_2.addWidget(self.frame_contents_1)
@@ -225,6 +230,7 @@ class JurnalForm(QMainWindow):
         self.btn_submit.setObjectName("btn_submit")
         self.btn_submit.setText("Submit")
         self.btn_submit.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_submit.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
         
         self.horizontalLayout_5.addWidget(self.btn_submit, 0, QtCore.Qt.AlignmentFlag.AlignTop)
         self.verticalLayout_2.addWidget(self.frame_description)

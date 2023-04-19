@@ -7,13 +7,25 @@ class TodolistModels:
         self.id_tanaman = id_tanaman
         self.waktu = waktu
         self.deskripsi_tdl = deskripsi_tdl
+        
+        cursor = mysql.connection.cursor()
+        query = '''
+            INSERT INTO todolist
+            (id_tdl, id_tanaman, waktu, deskripsi_tdl)
+            VALUES (NULL, %s, %s, %s)
+        '''
+        values = (self.id_tanaman, self.waktu, self.deskripsi_tdl)
+        cursor.execute(query, values)
+
+        mysql.connection.commit()
+        cursor.close()
 
     @classmethod
     def getAllTodolist(cls):
         cursor = mysql.connection.cursor()
         cursor.execute('''
                        SELECT * 
-                       FROM todolist 
+                       FROM todolist NATURAL JOIN tanaman
                        ORDER BY waktu ASC
                        ''')
 
@@ -41,7 +53,7 @@ class TodolistModels:
             return listTDL
 
     @classmethod
-    def getTodolist(cls, idTanaman):
+    def getTodolistByIdTanaman(cls, idTanaman):
         cursor = mysql.connection.cursor()
         query = '''
             SELECT * 
@@ -50,6 +62,39 @@ class TodolistModels:
             ORDER BY waktu ASC
         '''
         cursor.execute(query, (idTanaman,))
+        dataTDL = cursor.fetchall()
+
+        # If empty set
+        if len(dataTDL) == 0:
+            cursor.close()
+            return None
+        else:
+            listTDL = []
+            for data in dataTDL:
+                id_tdl, id_tanaman, waktu, deskripsi_tdl = data
+
+                # initialize class
+                self = cls.__new__(cls)
+                self.id_tdl = id_tdl
+                self.id_tanaman = id_tanaman
+                self.waktu = waktu
+                self.deskripsi_tdl = deskripsi_tdl
+
+                listTDL.append(self)
+
+            cursor.close()
+            return listTDL
+        
+    @classmethod
+    def getTodolistByIdTDL(cls, idTDL):
+        cursor = mysql.connection.cursor()
+        query = '''
+            SELECT * 
+            FROM todolist 
+            WHERE id_tdl = %s
+            ORDER BY waktu ASC
+        '''
+        cursor.execute(query, (idTDL,))
         dataTDL = cursor.fetchall()
 
         # If empty set
@@ -82,6 +127,24 @@ class TodolistModels:
                 WHERE id_tdl = %s
             '''
             cursor.execute(query, (idTDL,))
+            mysql.connection.commit()
+            cursor.close()
+        except Exception as e:
+            print("Error:", str(e))
+            mysql.connection.rollback()
+            
+    @classmethod
+    def editTodolist(cls, idTDL, waktu, deskripsi_tdl):
+        try:
+            cursor = mysql.connection.cursor()
+            query = '''
+                UPDATE todolist
+                SET waktu = %s,
+                    deskripsi_tdl = %s
+                WHERE id_tdl = %s
+            '''
+            values = (waktu, deskripsi_tdl, idTDL)
+            cursor.execute(query, values)
             mysql.connection.commit()
             cursor.close()
         except Exception as e:

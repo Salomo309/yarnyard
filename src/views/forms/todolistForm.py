@@ -2,15 +2,34 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
-import os
-import pathlib
+import os, pathlib, requests, json, datetime
 
 class TodolistForm(QMainWindow):
-    channel = pyqtSignal(str)
+    channel = pyqtSignal(str, int)
 
     def __init__(self):
         super().__init__()
         self.setUpTodolistForm()
+        self.idTDL = None
+        
+    def setUpFieldsAdd(self, idTanaman):
+        self.idTanaman = idTanaman
+        
+    def setUpFieldsEdit(self, idTDL):
+        responseTDL = requests.get(f'http://127.0.0.1:3000/todolist/byidtodolist/{idTDL}')
+        if responseTDL.status_code == 200:
+            self.todolist = json.loads(responseTDL.text)
+            
+            self.idTDL = idTDL
+            
+            mysql_date_str = self.todolist[0]["waktu"]
+            datetime_obj = datetime.datetime.strptime(mysql_date_str, "%a, %d %b %Y %H:%M:%S %Z")
+            
+            self.date_time_edit.setDateTime(datetime_obj)
+            self.deskripsi_tdl.setPlainText(self.todolist[0]["deskripsi_tdl"])
+        else:
+            self.todolist = []
+            print("No To Do List Found")
     
     def setUpTodolistForm(self):
         self.resize(960, 600)
@@ -309,12 +328,17 @@ class TodolistForm(QMainWindow):
         
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
         self.btn_submit.clicked.connect(self.validate_input)
+        
+    def clear_data(self):        
+        self.date_time_edit.setMinimumDateTime(QtCore.QDateTime.currentDateTime())
+        self.deskripsi_tdl.clear()
 
     def on_btn_back_clicked(self):
-        self.changePageToMain()
-
-    def changePageToMain(self):
-        self.channel.emit("main")
+        self.clear_data()
+        if (self.idTanaman == None):
+            self.channel.emit("main", None)
+        else:
+            self.channel.emit("detail", self.idTanaman)
         
     def is_todolist_null(self):
         return self.deskripsi_tdl.toPlainText().strip() == ""
@@ -328,4 +352,40 @@ class TodolistForm(QMainWindow):
         elif self.is_todolist_too_long():
             QMessageBox.warning(self, "Error", "Deskripsi To Do List Terlalu Panjang")
         else:
-            print('To Database')
+            if (self.idTDL == None): # Insert
+                # masukin ke database dan balik ke data tanaman page
+                
+                date_time = self.date_time_edit.dateTime()
+                date_time_str = date_time.toString()
+                date_obj = datetime.datetime.strptime(date_time_str, "%a %b %d %H:%M:%S %Y")
+                mysql_date_str = date_obj.strftime("%Y-%m-%d %H:%M:%S")
+                
+                data = {
+                    "id_tanaman": self.idTanaman,
+                    "waktu": mysql_date_str,
+                    "deskripsi_tdl": self.deskripsi_tdl.toPlainText().strip()
+                }
+                response = requests.post(f'http://127.0.0.1:3000/todolist/addtodolist', data=data)
+                if response.status_code == 201:
+                    print("To Do List added successfully.")
+                    self.clear_data()
+                    self.channel.emit("detail", self.idTanaman)
+                else:
+                    print(f"Failed to add To Do List. Status code: {response.status_code}")
+            else: # Edit
+                date_time = self.date_time_edit.dateTime()
+                date_time_str = date_time.toString()
+                date_obj = datetime.datetime.strptime(date_time_str, "%a %b %d %H:%M:%S %Y")
+                mysql_date_str = date_obj.strftime("%Y-%m-%d %H:%M:%S")
+                
+                data = {
+                    "waktu": mysql_date_str,
+                    "deskripsi_tdl": self.deskripsi_tdl.toPlainText().strip()
+                }
+                response = requests.put(f'http://127.0.0.1:3000/todolist/edittodolist/{self.idTDL}', data=data)
+                if response.status_code == 200:
+                    print("To Do List updated successfully.")
+                    self.clear_data()
+                    self.channel.emit("detail", self.todolist[0]["id_tanaman"])
+                else:
+                    print(f"Failed to update To Do List. Status code: {response.status_code}")

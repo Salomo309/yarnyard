@@ -5,7 +5,7 @@ from PyQt6.QtCore import Qt, pyqtSignal
 import os, pathlib, requests, json, datetime
 
 class DetailTanamanWindow(QMainWindow):
-    channel = pyqtSignal(str)
+    channel = pyqtSignal(str, int, int)
 
     def __init__(self, idTanaman=None):
         super().__init__()
@@ -751,7 +751,7 @@ class DetailTanamanWindow(QMainWindow):
                                             ''')
             self.label_no_jurnal.setObjectName("label_no_jurnal")
             self.label_no_jurnal.setText("No Jurnal Found")
-            
+
             self.vertical_layout_no_jurnal.addWidget(self.icon_no_jurnal, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
             self.vertical_layout_no_jurnal.addWidget(self.label_no_jurnal, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
             self.verticalLayout_13.addWidget(self.frame_no_jurnal)
@@ -923,13 +923,16 @@ class DetailTanamanWindow(QMainWindow):
         self.setCentralWidget(self.centralwidget)
         
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
-        # self.btn_edit.clicked.connect()
+        self.btn_edit.clicked.connect(self.edit_tanaman)
         self.btn_delete.clicked.connect(self.delete_tanaman)
+        
+        self.btn_add_tdl.clicked.connect(self.add_tdl)
+        self.btn_add_jurnal.clicked.connect(self.add_jurnal)
     
-    def setDetailTanaman(self, id):
-        responseDetail = requests.get(f'http://127.0.0.1:3000/tanaman/{id}')
-        responseTDL = requests.get(f'http://127.0.0.1:3000/todolist/{id}')
-        responseJurnal = requests.get(f'http://127.0.0.1:3000/jurnal/{id}')
+    def setDetailTanaman(self, idTanaman):
+        responseDetail = requests.get(f'http://127.0.0.1:3000/tanaman/{idTanaman}')
+        responseTDL = requests.get(f'http://127.0.0.1:3000/todolist/byidtanaman/{idTanaman}')
+        responseJurnal = requests.get(f'http://127.0.0.1:3000/jurnal/{idTanaman}')
         
         if responseDetail.status_code == 200:
             self.detailTanaman = json.loads(responseDetail.text)
@@ -952,17 +955,15 @@ class DetailTanamanWindow(QMainWindow):
     def handle_menu_tdl(self, action, obj_name):
         idTDL = int(obj_name.split("_")[-1])
         if (action == self.edit_action):
-            print(f"EDIT id = {idTDL}")
+            self.edit_tdl(idTDL)
         elif (action == self.delete_action):
-            print(f"DELETE id = {idTDL}")
             self.delete_tdl(idTDL)
             
     def handle_menu_jurnal(self, action, obj_name):
         idJurnal = int(obj_name.split("_")[-1])
         if (action == self.edit_action_2):
-            print(f"EDIT i = {idJurnal}")
+            self.edit_jurnal(idJurnal)
         elif (action == self.delete_action_2):
-            print(f"DELETE i = {idJurnal}")
             self.delete_jurnal(idJurnal)
     
     def delete_tdl(self, idTDL):
@@ -985,9 +986,26 @@ class DetailTanamanWindow(QMainWindow):
         response = requests.delete(f'http://127.0.0.1:3000/tanaman/deletetanaman/{self.idTanaman}')
         if response.status_code == 204:
             print("Tanaman deleted successfully.")
-            self.channel.emit("data tanaman")
+            self.channel.emit("data tanaman", None, None)
         else:
             print(f"Failed to delete Tanaman with id {self.idTanaman}. Status code: {response.status_code}")
     
+    def edit_tanaman(self):
+        self.channel.emit("form tanaman", self.idTanaman, None)
+    
+    # TDL
+    def add_tdl(self):
+        self.channel.emit("form tdl add", self.idTanaman, None)
+    
+    def edit_tdl(self, idTDL):
+        self.channel.emit("form tdl edit", None, idTDL)
+        
+    # Jurnal
+    def add_jurnal(self):
+        self.channel.emit("form jurnal add", self.idTanaman, None)
+        
+    def edit_jurnal(self, idJurnal):
+        self.channel.emit("form jurnal edit", None, idJurnal)
+    
     def on_btn_back_clicked(self):
-        self.channel.emit("data tanaman")
+        self.channel.emit("data tanaman", None, None)

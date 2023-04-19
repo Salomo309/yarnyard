@@ -15,3 +15,11 @@ def get_jurnal(idTanaman):
 @jurnalRoutes.route("/deletejurnal/<int:idJurnal>", methods=["DELETE"])
 def delete_todolist(idJurnal):
     return JurnalControllers.deleteJurnalByIdJurnal(idJurnal)
+
+@jurnalRoutes.route("/addjurnal", methods=["POST"])
+def post_jurnal():
+    return JurnalControllers.postJurnal()
+
+@jurnalRoutes.route("/editjurnal/<int:idJurnal>", methods=["PUT"])
+def edit_jurnal(idJurnal):
+    return JurnalControllers.editJurnal(idJurnal)

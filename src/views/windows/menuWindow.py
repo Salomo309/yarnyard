@@ -1,6 +1,6 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtGui import QGuiApplication, QCursor, QIcon, QFontDatabase
+from PyQt6.QtGui import QGuiApplication, QCursor, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os, pathlib
 
@@ -12,9 +12,7 @@ class MenuWindow(QMainWindow):
         self.setUpMenuWindow()
     
     def setUpMenuWindow(self):
-        self.setWindowTitle("yanyard - Main Menu")
         self.resize(960, 600)
-        # self.setFixedSize(960, 600)
         
         # Get the size and position of the user's screen
         primary_screen = QGuiApplication.primaryScreen()
@@ -27,9 +25,6 @@ class MenuWindow(QMainWindow):
         
         # Assets path
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
-        
-        # Logo
-        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
         
         # Fonts
         fonts_folder_path = path + 'fonts/'
@@ -117,6 +112,8 @@ class MenuWindow(QMainWindow):
         self.logo.setPixmap(QtGui.QPixmap(path + 'logo/logo_circle.png'))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
+        self.logo.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
+        
         self.horizontalLayout_3.addWidget(self.logo)
         self.horizontalLayout.addWidget(self.frame_logo)
         self.verticalLayout.addWidget(self.header, 0, QtCore.Qt.AlignmentFlag.AlignTop)
@@ -238,15 +235,16 @@ class MenuWindow(QMainWindow):
         self.verticalLayout_7.addWidget(self.frame)
         self.verticalLayout.addWidget(self.footer, 0, QtCore.Qt.AlignmentFlag.AlignBottom)
         self.setCentralWidget(self.centralwidget)
+        
+        self.btn_tanaman.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
+        self.btn_tdl.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
+        self.btn_artikel.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
     
     def on_btn_tanaman_clicked(self):
-        self.channel.emit("test")
+        self.channel.emit("data tanaman")
         
     def on_btn_tdl_clicked(self):
         self.channel.emit("todolist")
         
     def on_btn_artikel_clicked(self):
-        self.channel.emit("artikel")
-        
-    def changePageToArtikel(self):
         self.channel.emit("artikel")

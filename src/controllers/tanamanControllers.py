@@ -25,6 +25,7 @@ class TanamanControllers:
         except Exception as e:
             return str(e), 400
 
+    @staticmethod
     def getTanamanById(id):
         try:
             fetchedData = TanamanModels.getTanaman(id)
@@ -41,6 +42,30 @@ class TanamanControllers:
                                 "gambar": d.getGambarTanaman()})
 
                 return jsonify(res), 200
+
+        except Exception as e:
+            return str(e), 400
+
+    @staticmethod
+    def postTanaman():
+        try:
+            nama_tanaman = request.form.get("nama_tanaman")
+            deskripsi_tanaman = request.form.get("deskripsi_tanaman")
+            gambar = request.form.get("image_tanaman")
+            
+            TanamanModels(id_tanaman=None, nama_tanaman=nama_tanaman, tanggal_tanaman=None, deskripsi_tanaman=deskripsi_tanaman, gambar=gambar)
+            
+            return "Posted", 201
+
+        except Exception as e:
+            return str(e), 400
+    
+    @staticmethod
+    def deleteTanamanByIdTanaman(idTanaman):
+        try:
+            TanamanModels.deleteTanaman(idTanaman)
+
+            return "Tanaman Successfully Deleted", 204
 
         except Exception as e:
             return str(e), 400

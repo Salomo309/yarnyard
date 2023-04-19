@@ -24,6 +24,7 @@ class TodolistControllers:
         except Exception as e:
             return str(e), 400
 
+    @staticmethod
     def getTodolistByIdTanaman(idTanaman):
         try:
             fetchedData = TodolistModels.getTodolist(idTanaman)
@@ -43,6 +44,7 @@ class TodolistControllers:
         except Exception as e:
             return str(e), 400
 
+    @staticmethod
     def deleteTodolistByIdTDL(idTDL):
         try:
             TodolistModels.deleteTodolist(idTDL)

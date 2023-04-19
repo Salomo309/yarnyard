@@ -28,4 +28,5 @@ if __name__ == '__main__':
     
     window = QApplication(sys.argv)
     view = displayManager.PageController()
+    view.show()
     sys.exit(window.exec())

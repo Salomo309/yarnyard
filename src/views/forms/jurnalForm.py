@@ -1,6 +1,6 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
+from PyQt6.QtWidgets import QMainWindow, QMessageBox
+from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os, pathlib
 
@@ -12,9 +12,7 @@ class JurnalForm(QMainWindow):
         self.setUpJurnalForm()
     
     def setUpJurnalForm(self):
-        self.setWindowTitle("yanyard - Jurnal Form")
         self.resize(960, 600)
-        # self.setFixedSize(960, 600)
         
         # Get the size and position of the user's screen
         primary_screen = QGuiApplication.primaryScreen()
@@ -27,9 +25,6 @@ class JurnalForm(QMainWindow):
         
         # Assets path
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
-        
-        # Logo
-        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
         
         # Fonts
         fonts_folder_path = path + 'fonts/'
@@ -44,8 +39,6 @@ class JurnalForm(QMainWindow):
         self.setStyleSheet('''
                                 *{
                                     border: none;
-                                    background-color: transparent;
-                                    background: transparent;
                                     padding: 0;
                                     margin: 0;
                                     font-family: Poppins;
@@ -95,6 +88,7 @@ class JurnalForm(QMainWindow):
         self.btn_back.setObjectName("btn_back")
         self.btn_back.setText(" Kembali")
         self.btn_back.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_back.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
 
         self.horizontalLayout_3.addWidget(self.btn_back, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.horizontalLayout.addWidget(self.frame_temp)
@@ -112,6 +106,8 @@ class JurnalForm(QMainWindow):
         self.logo.setPixmap(QtGui.QPixmap(path + "logo/logo_circle.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
+        self.logo.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
+        
         self.horizontalLayout_2.addWidget(self.logo)
         self.horizontalLayout.addWidget(self.frame_logo)
         self.frame_temp_2 = QtWidgets.QFrame(parent=self.header)
@@ -160,6 +156,7 @@ class JurnalForm(QMainWindow):
         self.label_title_form.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_title_form.setObjectName("label_title_form")
         self.label_title_form.setText("Form Jurnal")
+        self.label_title_form.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         
         self.horizontalLayout_4.addWidget(self.label_title_form, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.verticalLayout_2.addWidget(self.frame_title)
@@ -190,6 +187,7 @@ class JurnalForm(QMainWindow):
         self.deskripsi_jurnal.setPlaceholderText(
             "Tulis jurnal kamu hari ini . . .")
         self.deskripsi_jurnal.setAlignment(Qt.AlignmentFlag.AlignJustify)
+        self.deskripsi_jurnal.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
         
         self.verticalLayout_9.addWidget(self.deskripsi_jurnal, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.verticalLayout_2.addWidget(self.frame_contents_1)
@@ -225,6 +223,8 @@ class JurnalForm(QMainWindow):
         self.btn_submit.setObjectName("btn_submit")
         self.btn_submit.setText("Submit")
         self.btn_submit.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_submit.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
+        self.btn_submit.clicked.connect(self.validate_input)
         
         self.horizontalLayout_5.addWidget(self.btn_submit, 0, QtCore.Qt.AlignmentFlag.AlignTop)
         self.verticalLayout_2.addWidget(self.frame_description)
@@ -238,3 +238,18 @@ class JurnalForm(QMainWindow):
 
     def changePageToMain(self):
         self.channel.emit("main")
+    
+    def is_deskripsi_jurnal_null(self):
+        return self.deskripsi_jurnal.toPlainText().strip() == ""
+        
+    def is_deskripsi_jurnal_too_long(self):
+        return len(self.deskripsi_jurnal.toPlainText().strip()) > 255
+
+    def validate_input(self):
+        if self.is_deskripsi_jurnal_null():
+            QMessageBox.warning(self, "Error", "Deskripsi jurnal tidak boleh kosong.")
+        elif self.is_deskripsi_jurnal_too_long():
+            QMessageBox.warning(self, "Error", "Panjang deskripsi tanaman tidak boleh lebih dari 255 karakter.")
+        else :
+            # masukin ke database dan balik ke data tanaman page
+            print("anjay masuk")

@@ -1,6 +1,6 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
+from PyQt6.QtGui import QGuiApplication, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os, pathlib, requests, json, datetime
 
@@ -13,10 +13,7 @@ class TodolistWindow(QMainWindow):
         self.setUpTodolistWindow()
 
     def setUpTodolistWindow(self):
-        self.setWindowTitle("yanyard - To Do List")
         self.resize(960, 600)
-
-        # self.setFixedSize(960, 600)
 
         # Get the size and position of the user's screen
         primary_screen = QGuiApplication.primaryScreen()
@@ -29,9 +26,6 @@ class TodolistWindow(QMainWindow):
 
         # Assets path
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
-
-        # Logo
-        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
 
         # Fonts
         fonts_folder_path = path + 'fonts/'
@@ -51,6 +45,7 @@ class TodolistWindow(QMainWindow):
                                 background: transparent;
                                 padding: 0;
                                 margin: 0;
+                                font-family: Poppins;
                             }
                             ''')
         
@@ -103,6 +98,7 @@ class TodolistWindow(QMainWindow):
         self.btn_back.setObjectName("btn_back")
         self.btn_back.setText(" Kembali")
         self.btn_back.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_back.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         
         self.horizontalLayout_3.addWidget(self.btn_back, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.horizontalLayout.addWidget(self.frame_temp)
@@ -120,6 +116,8 @@ class TodolistWindow(QMainWindow):
         self.logo.setPixmap(QtGui.QPixmap(path + "logo/logo_circle.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
+        self.logo.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
+        
         self.horizontalLayout_2.addWidget(self.logo)
         self.horizontalLayout.addWidget(self.frame_logo)
         self.frame_temp_2 = QtWidgets.QFrame(parent=self.header)
@@ -222,6 +220,7 @@ class TodolistWindow(QMainWindow):
                                             ''')
         self.label_title_tdl.setObjectName("label_title_tdl")
         self.label_title_tdl.setText("To Do List")
+        self.label_title_tdl.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         
         self.horizontalLayout_5.addWidget(self.label_title_tdl, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.verticalLayout_3.addWidget(self.frame_title)
@@ -307,6 +306,8 @@ class TodolistWindow(QMainWindow):
                 self.frame_time_tdl_1.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
                 self.frame_time_tdl_1.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
                 self.frame_time_tdl_1.setObjectName("frame_time_tdl_1")
+                self.frame_time_tdl_1.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
+                
                 self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.frame_time_tdl_1)
                 self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
                 self.verticalLayout_11.setSpacing(0)
@@ -324,6 +325,7 @@ class TodolistWindow(QMainWindow):
                                                     }}
                                                     ''')
                 self.label_time_tdl.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                
                 self.label_time_tdl.setObjectName(f"label_time_tdl_{count}")
                 str_time = tdl["waktu"]
                 date_time = datetime.datetime.strptime(str_time, "%a, %d %b %Y %H:%M:%S %Z")
@@ -345,6 +347,8 @@ class TodolistWindow(QMainWindow):
                 self.frame_desc_tdl.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
                 self.frame_desc_tdl.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
                 self.frame_desc_tdl.setObjectName("frame_desc_tdl")
+                self.frame_desc_tdl.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=12, xOffset=0, yOffset=0))
+                
                 self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.frame_desc_tdl)
                 self.horizontalLayout_8.setContentsMargins(0, 9, 0, 9)
                 self.horizontalLayout_8.setObjectName("horizontalLayout_8")
@@ -453,12 +457,10 @@ class TodolistWindow(QMainWindow):
                 
         else:
             self.listTodolist = []
+            self.groupsTDL = {}
             print("No To Do List Found")
             
     def on_btn_back_clicked(self):
-        self.changePageToMain()
-
-    def changePageToMain(self):
         self.channel.emit("main")
         
     def handle_menu_tdl(self, action, obj_name):

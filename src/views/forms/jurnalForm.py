@@ -12,9 +12,7 @@ class JurnalForm(QMainWindow):
         self.setUpJurnalForm()
     
     def setUpJurnalForm(self):
-        self.setWindowTitle("yanyard - Jurnal Form")
         self.resize(960, 600)
-        # self.setFixedSize(960, 600)
         
         # Get the size and position of the user's screen
         primary_screen = QGuiApplication.primaryScreen()
@@ -27,9 +25,6 @@ class JurnalForm(QMainWindow):
         
         # Assets path
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
-        
-        # Logo
-        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
         
         # Fonts
         fonts_folder_path = path + 'fonts/'

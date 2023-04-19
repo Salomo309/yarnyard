@@ -12,9 +12,7 @@ class TanamanForm(QMainWindow):
         self.setUpTanamanForm()
 
     def setUpTanamanForm(self):
-        self.setWindowTitle("yanyard - Tanaman Form")
         self.resize(960, 600)
-        # self.setFixedSize(960, 600)
 
         # Get the size and position of the user's screen
         primary_screen = QGuiApplication.primaryScreen()
@@ -27,9 +25,6 @@ class TanamanForm(QMainWindow):
 
         # Assets path
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
-
-        # Logo
-        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
 
         # Fonts
         fonts_folder_path = path + 'fonts/'

@@ -1,5 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal
 import os
@@ -13,7 +13,7 @@ class TodolistForm(QMainWindow):
         self.setUpTodolistForm()
     
     def setUpTodolistForm(self):
-        self.setWindowTitle("yanyard - ToDoList Form")
+        self.setWindowTitle("yanyard - To Do List Form")
         self.resize(960, 600)
         # self.setFixedSize(960, 600)
         
@@ -30,7 +30,7 @@ class TodolistForm(QMainWindow):
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
         
         # Logo
-        self.setWindowIcon(QIcon(path + 'logo/logo_circle.png'))
+        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
         
         # Fonts
         fonts_folder_path = path + 'fonts/'
@@ -49,43 +49,7 @@ class TodolistForm(QMainWindow):
                                 margin: 0;
                                 font-family: Poppins;
                             }
-                            
-                            QScrollBar:vertical {
-                                border: none;
-                                width: 12px;
-                                margin: 8px 0px 8px 5px;
-                                border-radius: 0px;
-                            }
-                            
-                            /*  HANDLE BAR VERTICAL */
-                            QScrollBar::handle:vertical {    
-                                background-color: #F7F4D9;
-                                min-height: 20px;
-                                border-radius: 3px;
-                            }
-                            
-                            QScrollBar::handle:vertical:hover{    
-                                background-color: #23493C;
-                            }
-                            
-                            /* BTN TOP - SCROLLBAR */
-                            QScrollBar::sub-line:vertical {
-                                height: 0px;
-                            }
-                            
-                            /* BTN BOTTOM - SCROLLBAR */
-                            QScrollBar::add-line:vertical {
-                                height: 0px;
-                            }
-                            
-                            /* RESET ARROW */
-                            QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
-                                background: none;
-                            }
-                            QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-                                background: none;
-                            }
-                            ''')
+                           ''')
         self.centralwidget = QtWidgets.QWidget(parent=self)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -94,19 +58,21 @@ class TodolistForm(QMainWindow):
         self.verticalLayout.setObjectName("verticalLayout")
         self.header = QtWidgets.QWidget(parent=self.centralwidget)
         self.header.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.MinimumExpanding, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.MinimumExpanding, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.header.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.header.sizePolicy().hasHeightForWidth())
         self.header.setSizePolicy(sizePolicy)
         self.header.setMinimumSize(QtCore.QSize(0, 60))
         self.header.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.header.setAutoFillBackground(False)
         self.header.setStyleSheet('''
-                                    #header {
-                                        background-color: #3C6255;
-                                    }
-                                    ''')
+                                  #header {
+                                      background-color: #3C6255;
+                                  }
+                                  ''')
         self.header.setObjectName("header")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.header)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -130,7 +96,8 @@ class TodolistForm(QMainWindow):
                                     }
                                     ''')
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(path + "icons/left_arrow.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap(path + "icons/left_arrow.svg"),
+                       QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btn_back.setIcon(icon)
         self.btn_back.setIconSize(QtCore.QSize(24, 24))
         self.btn_back.setAutoExclusive(False)
@@ -140,7 +107,8 @@ class TodolistForm(QMainWindow):
         self.btn_back.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_back.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=20, xOffset=0, yOffset=0))
         
-        self.horizontalLayout_3.addWidget(self.btn_back, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
+        self.horizontalLayout_3.addWidget(
+            self.btn_back, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.horizontalLayout.addWidget(self.frame_temp)
         self.frame_logo = QtWidgets.QFrame(parent=self.header)
         self.frame_logo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -167,20 +135,15 @@ class TodolistForm(QMainWindow):
         self.horizontalLayout.addWidget(self.frame_temp_2)
         self.verticalLayout.addWidget(self.header)
         self.main = QtWidgets.QWidget(parent=self.centralwidget)
-        self.main.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.MinimumExpanding, QtWidgets.QSizePolicy.Policy.MinimumExpanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.main.sizePolicy().hasHeightForWidth())
-        self.main.setSizePolicy(sizePolicy)
-        self.main.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.main.setStyleSheet('''
-                                #main {
+                                #body {
                                     background-color: #F7F4D9;
                                 }
                                 ''')
-        self.main.setObjectName("main")
+        self.main.setObjectName("body")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.main)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.frame_title = QtWidgets.QFrame(parent=self.main)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Maximum)
@@ -191,6 +154,7 @@ class TodolistForm(QMainWindow):
         self.frame_title.setObjectName("frame_title")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_title)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(-1, 18, -1, -1)
         self.label_title_form = QtWidgets.QLabel(parent=self.frame_title)
         self.label_title_form.setMinimumSize(QtCore.QSize(238, 68))
         self.label_title_form.setStyleSheet('''
@@ -232,45 +196,45 @@ class TodolistForm(QMainWindow):
         self.date_time_edit.setMinimumSize(QtCore.QSize(200, 35))
         self.date_time_edit.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.ArrowCursor))
         self.date_time_edit.setStyleSheet('''
-                                        QDateTimeEdit {
-                                            padding: 0px 0px 0px 12px;
-                                            border-radius: 17px;
-                                            background-color: #61876E;
-                                            color: #F7F3D7;
-                                            font-size: 14px;
-                                            font-weight: 600;
-                                            border: solid;
-                                        }
-                                        
-                                        QDateTimeEdit::drop-down{
-                                            image: url(assets/icons/event_note.svg);
-                                            width: 20px;
-                                            padding: 0px 12px 0px 8px;
-                                            border-top-right-radius: 17px;
-                                            border-bottom-right-radius: 17px;
-                                        }
-                                        
-                                        QDateTimeEdit::drop-down:hover{
-                                            background-color: #3C6255;
-                                        }
-                                        
-                                        QCalendarWidget QToolButton {
-                                            color: black;
-                                        }
-                                        
-                                        QCalendarWidget QToolButton:hover {
-                                            background-color: #61876E;
-                                        }
-                                        
-                                        QCalendarWidget QAbstractItemView:enabled {
-                                            color: #333;
-                                            selection-background-color: #61876E;
-                                            selection-color: #fff; 
-                                        }
-                                        ''')
-        self.date_time_edit.setCurrentSection(QtWidgets.QDateTimeEdit.Section.DaySection)
-        self.date_time_edit.setCalendarPopup(True)
+                                          QDateTimeEdit {
+                                              padding: 0px 0px 0px 12px;
+                                              border-radius: 17px;
+                                              background-color: #61876E;
+                                              color: #F7F3D7;
+                                              font-size: 14px;
+                                              font-weight: 600;
+                                              border: solid;
+                                          }
+                                          
+                                          QDateTimeEdit::drop-down{
+                                              image: url(assets/icons/event_note.svg);
+                                              width: 20px;
+                                              padding: 0px 12px 0px 8px;
+                                              border-top-right-radius: 17px;
+                                              border-bottom-right-radius: 17px;
+                                          }
+                                          
+                                          QDateTimeEdit::drop-down:hover{
+                                              background-color: #3C6255;
+                                          }
+                                          
+                                          QCalendarWidget QToolButton {
+                                              color: black;
+                                          }
+                                          
+                                          QCalendarWidget QToolButton:hover {
+                                              background-color: #61876E;
+                                          }
+                                          
+                                          QCalendarWidget QAbstractItemView:enabled {
+                                              selection-background-color: #61876E;
+                                              selection-color: #fff; 
+                                          }
+                                          ''')
+        self.date_time_edit.setCurrentSection(
+            QtWidgets.QDateTimeEdit.Section.DaySection)
         self.date_time_edit.setObjectName("date_time_edit")
+        self.date_time_edit.setCalendarPopup(True)
         self.date_time_edit.setDisplayFormat("dd-MM-yyyy h:mm AP")
         self.date_time_edit.setDateTime(QtCore.QDateTime.currentDateTime())
         self.date_time_edit.setMinimumDateTime(QtCore.QDateTime.currentDateTime())
@@ -292,15 +256,15 @@ class TodolistForm(QMainWindow):
         self.deskripsi_tdl.setMinimumSize(QtCore.QSize(0, 45))
         self.deskripsi_tdl.setMaximumSize(QtCore.QSize(330, 45))
         self.deskripsi_tdl.setStyleSheet('''
-                                        #deskripsi_tdl {
-                                            padding: 7px 12px;
-                                            border-radius: 20px;
-                                            background: #61876E;
-                                            color: #F7F3D7;
-                                            font-size: 14px;
-                                            font-weight: 600;
-                                        }
-                                        ''')
+                                         #deskripsi_tdl {
+                                             padding: 7px 12px;
+                                             border-radius: 20px;
+                                             background: #61876E;
+                                             color: #F7F3D7;
+                                             font-size: 14px;
+                                             font-weight: 600;
+                                         }
+                                         ''')
         self.deskripsi_tdl.setMaximumBlockCount(1)
         self.deskripsi_tdl.setObjectName("deskripsi_tdl")
         self.deskripsi_tdl.setPlaceholderText("Tuliskan ToDoList-mu yah . . .")
@@ -324,18 +288,18 @@ class TodolistForm(QMainWindow):
         self.btn_submit.setSizePolicy(sizePolicy)
         self.btn_submit.setMinimumSize(QtCore.QSize(130, 40))
         self.btn_submit.setStyleSheet('''
-                                    #btn_submit {
-                                        border-radius: 20px;
-                                        background: #3C6255;
-                                        color: #F7F3D7;
-                                        font-size: 16px;
-                                        font-weight: 600;
-                                    }
-                                    
-                                    #btn_submit:hover {
-                                        background-color: #23493C;
-                                    }
-                                    ''')
+                                      #btn_submit {
+                                          border-radius: 20px;
+                                          background: #3C6255;
+                                          color: #F7F3D7;
+                                          font-size: 16px;
+                                          font-weight: 600;
+                                      }
+                                      
+                                      #btn_submit:hover {
+                                          background-color: #23493C;
+                                      }
+                                      ''')
         self.btn_submit.setDefault(False)
         self.btn_submit.setFlat(False)
         self.btn_submit.setObjectName("btn_submit")
@@ -349,9 +313,24 @@ class TodolistForm(QMainWindow):
         self.setCentralWidget(self.centralwidget)
         
         self.btn_back.clicked.connect(self.on_btn_back_clicked)
+        self.btn_submit.clicked.connect(self.validate_input)
 
     def on_btn_back_clicked(self):
         self.changePageToMain()
 
     def changePageToMain(self):
         self.channel.emit("main")
+        
+    def is_todolist_null(self):
+        return self.deskripsi_tdl.toPlainText().strip() == ""
+
+    def is_todolist_too_long(self):
+        return len(self.deskripsi_tdl.toPlainText().strip()) > 255
+
+    def validate_input(self):
+        if self.is_todolist_null():
+            QMessageBox.critical(self, "Error", "Deskripsi To Do List Kosong")
+        elif self.is_todolist_too_long():
+            QMessageBox.critical(self, "Error", "Deskripsi To Do List Terlalu Panjang")
+        else:
+            print('To Database')

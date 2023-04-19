@@ -12,9 +12,7 @@ class MenuWindow(QMainWindow):
         self.setUpMenuWindow()
     
     def setUpMenuWindow(self):
-        self.setWindowTitle("yanyard - Main Menu")
         self.resize(960, 600)
-        # self.setFixedSize(960, 600)
         
         # Get the size and position of the user's screen
         primary_screen = QGuiApplication.primaryScreen()
@@ -27,12 +25,6 @@ class MenuWindow(QMainWindow):
         
         # Assets path
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
-        path2 = str(pathlib.Path(__file__).parent.absolute())
-        
-        print(path2)
-        
-        # Logo
-        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
         
         # Fonts
         fonts_folder_path = path + 'fonts/'

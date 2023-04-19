@@ -13,10 +13,7 @@ class TodolistWindow(QMainWindow):
         self.setUpTodolistWindow()
 
     def setUpTodolistWindow(self):
-        self.setWindowTitle("yanyard - To Do List")
         self.resize(960, 600)
-
-        # self.setFixedSize(960, 600)
 
         # Get the size and position of the user's screen
         primary_screen = QGuiApplication.primaryScreen()
@@ -29,9 +26,6 @@ class TodolistWindow(QMainWindow):
 
         # Assets path
         path = str(pathlib.Path(__file__).parent.absolute()) + '/../../../assets/'
-
-        # Logo
-        self.setWindowIcon(QIcon(path + 'logo/logo.ico'))
 
         # Fonts
         fonts_folder_path = path + 'fonts/'

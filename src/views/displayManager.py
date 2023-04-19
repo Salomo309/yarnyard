@@ -1,4 +1,5 @@
 from PyQt6 import QtWidgets
+from PyQt6.QtGui import QIcon
 import sys
 
 # Windows
@@ -13,17 +14,27 @@ from views.forms.jurnalForm import JurnalForm
 from views.forms.todolistForm import TodolistForm
 from views.forms.tanamanForm import TanamanForm
 
+# self.setWindowTitle("yanyard - Detail Tanaman")
+# self.setWindowTitle("yanyard - To Do List")
+# self.setWindowTitle("yanyard - Data Tanaman")
+# self.setWindowTitle("yanyard - Artikel")
+# self.setWindowTitle("yanyard - To Do List Form")
+# self.setWindowTitle("yanyard - Tanaman Form")
+# self.setWindowTitle("yanyard - Jurnal Form")
 
-class PageController:
+class PageController(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
+        self.setWindowTitle("yanyard - Main Menu")
+        self.setWindowIcon(QIcon("assets\logo\logo.ico"))
+
+        self.resize(960, 600)
         self.setUpPages()
         self.setUpListener()
         self.stackedWidget.show()
 
     def setUpPages(self):
-        self.stackedWidget = QtWidgets.QStackedWidget()
-        self.stackedWidget.resize(960, 600)
+        self.stackedWidget = QtWidgets.QStackedWidget(parent=self)
 
         self.menuWindow = MenuWindow()
         self.artikelWindow = ArtikelWindow()
@@ -45,6 +56,8 @@ class PageController:
         self.stackedWidget.addWidget(self.jurnalForm)           # 4
         self.stackedWidget.addWidget(self.todolistForm)         # 5
         self.stackedWidget.addWidget(self.tanamanForm)          # 6
+        
+        self.setCentralWidget(self.stackedWidget)
 
     def setUpListener(self):
         self.menuWindow.channel.connect(self.handleMenuWindow)
@@ -59,11 +72,11 @@ class PageController:
 
     def handleMenuWindow(self, page, idTanaman=None):
         if page == "artikel":
-            self.stackedWidget.setCurrentIndex(1)
+            self.stackedWidget.setCurrentIndex(4)
         elif page == "todolist":
-            self.stackedWidget.setCurrentIndex(2)
+            self.stackedWidget.setCurrentIndex(5)
         else:
-            self.stackedWidget.setCurrentIndex(3)
+            self.stackedWidget.setCurrentIndex(6)
             
     def handleArtikelWindow(self, page):
         if page == "main":
